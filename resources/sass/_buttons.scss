@@ -1,0 +1,18 @@
+@import '@style/_variables.scss';
+
+.btn {
+    display: block;
+    font-size: 0.9rem;
+    padding: $space-2 $space-4;
+    &.btn-primary {
+        background-color: $pink;
+        border-color: $pink;
+        display: block;
+        padding: $space-2 $space-4;
+        &:focus {
+            box-shadow: none;
+            background-color: $pink;
+            border-color: $pink;
+        }
+    }
+}

@@ -1,19 +1,25 @@
-// Body
-$body-bg: #f8fafc;
+@import '@style/_fonts.scss';
 
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$pink: #F2184F;
+$dark-gray: #555;
+$bright-gray: #CCCCCC;
+$orange: #ff853f;
 
-// Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
+$open-sans-regular: 'Open-Sans-Regular', sans-serif;
+$open-sans-light: 'Open-Sans-Light', sans-serif;
+$open-sans-semibold: 'Open-Sans-Semibold', sans-serif;
+
+$titilium-regular: 'TitilliumWeb-Regular', sans-serif;
+$titilium-semibold: 'TitilliumWeb-SemiBold', sans-serif;
+
+$raleway-regular: 'Raleway-Regular', sans-serif;
+$raleway-bold: 'Raleway-Bold', sans-serif;
+$raleway-light: 'Raleway-Light', sans-serif;
+$raleway-semibold: 'Raleway-SemiBold', sans-serif;
+
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-4: 1rem;
+$space-6: 1.5rem;
+$space-8: 2rem;
+

@@ -1,0 +1,76 @@
+@import '@style/_variables.scss';
+
+.resume-section-wrapper {
+    border: 1px solid #EEEEEE;
+    padding: $space-4;
+    max-width: 600px;
+    margin-left: 5rem;
+    h2 {
+        font-family: $open-sans-light;
+        font-size: 1.6rem;
+        margin-bottom: $space-8;
+        &::after {
+            display: block;
+            width: 60px;
+            background-color: $pink;
+            height: 2px;
+            content: "";
+            margin-top: $space-2;
+        }
+    }
+    textarea {
+        min-height: 115px;
+    }
+    .btn-primary {
+        margin-top: $space-8;
+        &.mt-6 {
+            margin-top: $space-6;
+        }
+        min-width: 160px;
+    }
+    .resume-section-item {
+        position: relative;
+        margin-bottom: $space-6;
+        &::after {
+            display: block;
+            margin-top: $space-6;
+            width: 10rem;
+            height: 2px;
+            background-color: $pink;
+            content: "";
+        }
+        &:last-of-type {
+            margin-bottom: 0;
+            &::after {
+                display: none;
+            }
+        }
+        .remove-section-item {
+            position: absolute;
+            right: 0;
+            top: -38px;
+            color: $pink;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    }
+    .single-items-form {
+        .form-group {
+            display: flex;
+            max-width: 350px;
+            .btn {
+                margin-top: 0;
+                max-width: 100px;
+                i {
+                    margin-right: $space-2;
+                }
+            }
+        }
+    }
+    .single-items-list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -$space-2;
+        margin-right: -$space-2;
+    }
+}

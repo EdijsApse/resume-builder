@@ -1,0 +1,33 @@
+@import '@style/_variables.scss';
+
+.mx-calendar {
+    width: 100%;
+}
+
+.mx-datepicker {
+    width: 100%;
+    height: 100%;
+    .mx-input-wrapper {
+        height: 100%;
+    }
+    .mx-calendar-content {
+        .cell {
+            &.active {
+                background-color: $pink;
+            }
+            &:hover {
+                background-color: rgba($pink, 0.03);
+                color: $pink;
+                &.active {
+                    background-color: $pink;
+                    color: #FFF;
+                }
+            }
+        }
+    }
+    .mx-btn {
+        &:hover {
+            color: $pink;
+        }
+    }
+}

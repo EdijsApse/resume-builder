@@ -1,0 +1,14 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+@import 'vue2-datepicker/index.css';
+
+@import '@style/_variables.scss';
+@import '@style/_buttons.scss';
+@import '@style/_forms.scss';
+@import '@style/_create_resume.scss';
+@import '@style/_calendar_override.scss';
+@import '@style/_animations.scss';
+
+body {
+    font-family: $open-sans-regular;
+    background-color: #FCFCFC;
+}
