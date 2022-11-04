@@ -19,6 +19,10 @@
                         <router-link to="/preview" class="nav-link">Preview</router-link>
                     </li>
                 </ul>
+                <div class="auth-action-box">
+                    <router-link :to="{ name: 'Login' }" class="btn btn-primary btn-transparent">Sign in</router-link>
+                    <router-link :to="{ name: 'Register' }" class="btn btn-primary">Create account</router-link>
+                </div>
             </div>
         </div>
     </nav>
@@ -38,6 +42,29 @@
             margin-right: 5rem;
             img {
                 width: 100%;
+            }
+        }
+        .navbar-collapse {
+            justify-content: space-between;
+            .auth-action-box {
+                display: flex;
+                margin-left: -$space-2;
+                margin-right: -$space-2;
+                .btn {
+                    margin-left: $space-2;
+                    margin-right: $space-2;
+                    min-width: 140px;
+                    &.btn-transparent {
+                        background-color: transparent;
+                        color: #FFF;
+                        border-color: #FFF;
+                        &:hover {
+                            background-color: #FFF;
+                            border-color: #FFF;
+                            color: $dark-gray;
+                        }
+                    }
+                }
             }
         }
         .navbar-nav {

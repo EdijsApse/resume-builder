@@ -1,0 +1,59 @@
+@import "@style/_variables.scss";
+.auth-container-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+    .auth-container {
+        width: 100%;
+        padding-left: $space-4;
+        padding-right: $space-4;
+        max-width: 585px;
+        .auth-header {
+            margin-bottom: $space-4;
+            h2 {
+                font-size: 1.1rem;
+                color: #808080;
+                margin-bottom: $space-6;
+                &::after {
+                    content: "";
+                    display: block;
+                    height: 1px;
+                    width: 100%;
+                    background-color: $bright-gray;
+                    margin-top: $space-6;
+                }
+            }
+            p {
+                margin-bottom: 0px;
+                color: $dark-gray;
+                font-size: 0.9rem;
+            }
+        }
+
+        .auth-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: $space-8;
+            a {
+                color: #202C45;
+                font-size: 0.8rem;
+                text-decoration: none;
+            }
+            .btn {
+                &.btn-sm {
+                    padding: 5px 17px;
+                }
+                font-size: 0.8rem;
+                background-color: #222222;
+                font-weight: 400;
+                &:hover {
+                    background-color: #000;
+                }
+                &:active {
+                    background-color: #000;
+                }
+            }
+        }
+    }
+}

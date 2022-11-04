@@ -2,10 +2,11 @@
 
 .form-control {
     display: block;
+    height: 45px;
     width: 100%;
     color: $dark-gray;
     font-family: $open-sans-regular;
-    padding: $space-2 $space-2;
+    padding: 6px 12px;
     border: 1px solid $bright-gray;
     outline: none;
     font-size: 0.9rem;
@@ -38,4 +39,10 @@ textarea {
 
 .form-group {
     margin-bottom: $space-4;
+    label {
+        font-size: 1.1rem;
+        font-family: $titilium-semibold;
+        margin-bottom: $space-4;
+        color: #666666;
+    }
 }
