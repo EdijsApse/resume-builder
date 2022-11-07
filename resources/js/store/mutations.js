@@ -26,3 +26,7 @@ export const SET_SKILLS_LIST = 'SET_SKILLS_LIST';
 
 export const ADD_HOBBY = 'ADD_HOBBY';
 export const SET_HOBBIES_LIST = 'SET_HOBBIES_LIST';
+
+export const ADD_USER = 'ADD_USER';
+export const ADD_TOKEN = 'ADD_TOKEN';
+export const ADD_AUTH_FORM_ERRORS = 'ADD_AUTH_FORM_ERRORS';

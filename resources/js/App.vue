@@ -5,6 +5,18 @@
     </div>
 </template>
 
-<script setup>
-    import Header from '@components/Header.vue'
+<script>
+    import Header from '@components/Header.vue';
+    import { mapActions } from 'vuex';
+    export default {
+        components: {
+            Header
+        },
+        methods: {
+            ...mapActions('auth', ['loginFromLocalStorage'])
+        },
+        created() {
+            this.loginFromLocalStorage();
+        }
+    }
 </script>

@@ -7,12 +7,14 @@ import profile from "@/store/modules/profile.js";
 import language from "@/store/modules/language.js";
 import skill from "@/store/modules/skill.js";
 import hobby from "@/store/modules/hobby.js";
+import auth from "@/store/modules/auth.js";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store(
     {
         modules: {
+            auth,
             education,
             experience,
             profile,

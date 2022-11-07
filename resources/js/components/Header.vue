@@ -19,14 +19,33 @@
                         <router-link to="/preview" class="nav-link">Preview</router-link>
                     </li>
                 </ul>
-                <div class="auth-action-box">
+                <div class="auth-action-box" v-if="!isSignedIn">
                     <router-link :to="{ name: 'Login' }" class="btn btn-primary btn-transparent">Sign in</router-link>
                     <router-link :to="{ name: 'Register' }" class="btn btn-primary">Create account</router-link>
+                </div>
+                <div class="user-profile-box" v-else>
+                    <router-link :to="{ name: 'Profile' }" class="nav-link">Profile</router-link>
+                    <button class="btn btn-primary btn-transparent" @click="logout">Logout</button>
                 </div>
             </div>
         </div>
     </nav>
 </template>
+
+<script>
+    import { mapState, mapActions } from 'vuex';
+    export default {
+        computed: {
+            ...mapState('auth', ['user']),
+            isSignedIn() {
+                return this.user !== null;
+            }
+        },
+        methods: {
+            ...mapActions('auth', ['logout'])
+        }
+    }
+</script>
 
 <style scoped lang="scss">
     @import '@style/_variables.scss';
@@ -64,6 +83,19 @@
                             color: $dark-gray;
                         }
                     }
+                }
+            }
+
+            .user-profile-box {
+                display: flex;
+                align-items: center;
+                .nav-link {
+                    color: #FFF;
+                    font-size: 0.9rem;
+                    padding: $space-2 $space-6;
+                }
+                .btn {
+                    margin-left: $space-4;
                 }
             }
         }

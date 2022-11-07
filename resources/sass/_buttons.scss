@@ -4,6 +4,8 @@
     display: block;
     font-size: 0.9rem;
     padding: $space-2 $space-4;
+    outline: none;
+    box-shadow: none !important;
     &.btn-primary {
         background-color: $pink;
         border-color: $pink;
