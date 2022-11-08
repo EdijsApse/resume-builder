@@ -8,12 +8,14 @@ import language from "@/store/modules/language.js";
 import skill from "@/store/modules/skill.js";
 import hobby from "@/store/modules/hobby.js";
 import auth from "@/store/modules/auth.js";
+import alert from "@/store/modules/alert.js";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store(
     {
         modules: {
+            alert,
             auth,
             education,
             experience,

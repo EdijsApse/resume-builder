@@ -5,12 +5,15 @@ import App from './App.vue'
 import BaseContainer from '@components/ui/BaseContainer.vue';
 import BaseResumeItem from '@components/ui/BaseResumeItem.vue';
 import BaseListItem from '@components/ui/BaseListItem.vue';
+import LoadingSpinner from '@components/LoadingSpinner.vue';
 import DatePicker from 'vue2-datepicker';
 
 Vue.component('base-container', BaseContainer);
 Vue.component('base-resume-item', BaseResumeItem);
 Vue.component('base-list-item', BaseListItem);
 Vue.component('date-picker', DatePicker);
+
+Vue.component('LoadingSpinner', LoadingSpinner);
 
 Vue.filter('toHumanReadable', function (date) {
     const newDate = new Date(date);

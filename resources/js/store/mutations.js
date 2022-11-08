@@ -29,4 +29,5 @@ export const SET_HOBBIES_LIST = 'SET_HOBBIES_LIST';
 
 export const ADD_USER = 'ADD_USER';
 export const ADD_TOKEN = 'ADD_TOKEN';
-export const ADD_AUTH_FORM_ERRORS = 'ADD_AUTH_FORM_ERRORS';
+
+export const ADD_ALERT_MESSAGE = 'ADD_ALERT_MESSAGE'

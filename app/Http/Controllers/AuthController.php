@@ -32,7 +32,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validatedDate = $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
@@ -49,7 +49,8 @@ class AuthController extends Controller
 
         return response()->json([
             'user' => new UserResource($user),
-            'token' => $token->plainTextToken
+            'token' => $token->plainTextToken,
+            'success' => true
         ]);
 
     }
