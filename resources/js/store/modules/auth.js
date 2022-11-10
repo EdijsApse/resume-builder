@@ -43,8 +43,8 @@ export default {
                     dispatch('authorizeUser', {user, token});
                 } else {
                     dispatch('alert/setErrorAlert', error, { root:true });
+                    return Promise.reject();
                 }
-                
             })
             .catch(error => {
                 return Promise.reject(error);

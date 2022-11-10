@@ -94,39 +94,43 @@
             ...mapState('profile', ['profile', 'profilePhoto'])
         },
         mounted() {
+            this.loadUserProfile();
             this.filePicker = this.$refs.filePicker;
-            if (this.profile) {
-                this.firstName = this.profile.firstName;
-                this.lastName = this.profile.lastName;
-                this.email = this.profile.email;
-                this.phone = this.profile.phone;
-                this.occupation = this.profile.occupation;
-                this.nationality = this.profile.nationality;
-                this.dateOfBirth = this.profile.dateOfBirth;
-                this.about = this.profile.about;
-                this.photo = this.profile.photo;
-                this.address = this.profile.address;
-                this.link = this.profile.link;
-            }
         },
         methods: {
             ...mapActions('profile', ['addBasicInformation', 'clearProfilePhoto', 'addProfilePhoto']),
-            save() {
-                this.addBasicInformation({
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    email: this.email,
-                    phone: this.phone,
-                    occupation: this.occupation,
-                    nationality: this.nationality,
-                    dateOfBirth: this.dateOfBirth,
-                    about: this.about,
-                    photo: this.photo,
-                    address: this.address,
-                    link: this.link
-                });
 
-                this.$emit('next-step', this.nextStep);
+            async loadUserProfile() {
+                await axios.get('/profile').then((response) => {
+                    const { profile } = response.data;
+                    this.userProfile = profile;
+                    console.log(profile)
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+
+            async save() {
+                const formData = new FormData();
+                
+                formData.append('name', this.firstName);
+                formData.append('surname', this.lastName);
+                formData.append('phone', this.phone);
+                formData.append('occupation', this.occupation);
+                formData.append('professional_summary', this.about);
+                formData.append('address', this.address);
+                formData.append('website', this.link);
+                formData.append('image', this.file);
+
+                await axios.post('/profile', formData).then(res => {
+                    console.log('Success')
+                    console.log(res);
+                }).catch((err) => {
+                    console.log('Error')
+                    console.log(err);
+                })
+                
+                //this.$emit('next-step', this.nextStep);
             },
             triggerFilePicker() {
                 this.filePicker.click();
@@ -136,6 +140,9 @@
                 if (!file) {
                     return;
                 }
+                
+                this.file = file;
+
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     this.addProfilePhoto(reader.result);
@@ -167,6 +174,7 @@
                 color: $pink;
                 font-size: 1.5rem;
                 cursor: pointer;
+                z-index: 1;
             }
         }
         .profile-image-selector {
