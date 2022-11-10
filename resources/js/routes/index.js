@@ -14,11 +14,16 @@ const guestOnlyMeta = {
     guestOnly: true
 }
 
+const userOnlyMeta = {
+    userOnly: true
+}
+
 const routes = [
     {
         name: 'CreateResume',
         path: '/create',
-        component: CreateResumePage
+        component: CreateResumePage,
+        meta: userOnlyMeta
     },
     {
         name: 'PreviewResume',

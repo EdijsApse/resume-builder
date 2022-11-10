@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <div id="app">
+        <div id="app" class="relative">
         </div>
         <script src="/js/app.js"></script>
         <script src="https://kit.fontawesome.com/6a0b98d024.js" crossorigin="anonymous"></script>

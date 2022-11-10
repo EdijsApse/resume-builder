@@ -91,7 +91,7 @@
             }
         },
         computed: {
-            ...mapState('profile', ['profile', 'profilePhoto'])
+            ...mapState('profile', ['profile'])
         },
         mounted() {
             this.loadUserProfile();
