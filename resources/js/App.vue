@@ -15,6 +15,7 @@
     export default {
         computed: {
             ...mapState('alert', ['message']),
+            ...mapState('auth', ['user']),
             hasAlertMessage() {
                 return this.message !== null
             }
@@ -27,7 +28,11 @@
             ...mapActions('auth', ['loginFromLocalStorage'])
         },
         created() {
-            this.loginFromLocalStorage();
+            this.loginFromLocalStorage().finally(() => {
+                if (this.$route.meta && this.$route.meta.guestOnly && this.user !== null) {
+                    this.$router.replace({name: 'Home'})
+                }
+            });
         }
     }
 </script>

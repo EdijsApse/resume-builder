@@ -61,6 +61,9 @@
                     email: this.email,
                     password: this.password
                 })
+                .then(() => {
+                    this.$router.replace({name: 'Home'})
+                })
                 .catch(error => {
                     const { response } = error;
                     if (response && response.status === FORM_ERROR_STATUS_CODE) {

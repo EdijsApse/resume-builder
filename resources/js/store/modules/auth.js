@@ -22,8 +22,8 @@ export default {
             const { user, token } = payload;
             axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
             localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
-            commit(ADD_TOKEN, user);
-            commit(ADD_USER, token);
+            commit(ADD_TOKEN, token);
+            commit(ADD_USER, user);
         },
         async register({ dispatch }, payload) {
             const { email, password, password_confirmation } = payload;
@@ -50,21 +50,20 @@ export default {
                 return Promise.reject(error);
             })
         },
-        async loginFromLocalStorage({ commit }) {
+        async loginFromLocalStorage({ dispatch }) {
             let token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
             if (!token) {
                 return;
             }
             axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-            axios.get('/user', {
+            await axios.get('/user', {
                 headers: {
                     'Accept': 'application/json'
                 }
             }).then((response) => {
                 const user = response;
-                commit(ADD_TOKEN, user);
-                commit(ADD_USER, token);
-            }).catch(() => {
+                dispatch('authorizeUser', {user, token});
+            }).catch((err) => {
                 localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
                 delete axios.defaults.headers.common['Authorization'];
             })
