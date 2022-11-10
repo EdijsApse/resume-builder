@@ -51,12 +51,16 @@ export default {
             })
         },
         async loginFromLocalStorage({ commit }) {
-            const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
+            let token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
             if (!token) {
                 return;
             }
             axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-            axios.get('/user').then((response) => {
+            axios.get('/user', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then((response) => {
                 const user = response;
                 commit(ADD_TOKEN, user);
                 commit(ADD_USER, token);
