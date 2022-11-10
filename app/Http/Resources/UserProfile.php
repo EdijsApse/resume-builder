@@ -22,6 +22,7 @@ class UserProfile extends JsonResource
             'phone' => $this->phone,
             'address' => $this->address,
             'photo' => $this->photo,
+            'website' => $this->website,
             'professional_summary' => $this->professional_summary,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

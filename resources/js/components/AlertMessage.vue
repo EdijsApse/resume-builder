@@ -5,8 +5,7 @@
         </span>
         <div class="alert-content">
             <div class="alert-image">
-                <img v-if="isSuccess" src="@images/success-alert.png" />
-                <img v-else src="@images/error-alert.png" />
+                <img :src="alertImage" />
             </div>
             <div class="content">
                 <h2>{{ alertTitle }}</h2>
@@ -33,7 +32,7 @@
                 return this.isSuccess === true ? 'Successful' : 'Attention'
             },
             alertImage() {
-                return this.isSuccess === true ? '@images/success-alert.png' : '@images/error-alert.png'
+                return this.isSuccess === true ? require('@images/success-alert.png') : require('@images/error-alert.png')
             }
         },
         methods: {

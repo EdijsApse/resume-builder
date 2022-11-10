@@ -1,136 +1,145 @@
 <template>
-    <div class="resume-section-wrapper">
-        <h2 class="mb-0">Basic information</h2>
+    <div class="resume-section-wrapper relative">
+        <transition name="fade">
+            <LoadingSpinner v-if="isLoading" />
+        </transition>
+        <h2>Basic information</h2>
         <form @submit.prevent="save">
-            <div class="profile-image-group">
-                <div class="center-block">
-                    <div class="profile-image-selector">
+            <div class="profile-image-group form-group">
+                <div class="profile-image-selector">
+                    <div class="selectable-image">
                         <transition name="fade" mode="out-in">
-                            <div class="selectable-image" v-if="!profilePhoto">
-                                <img src="@images/avatar.png" @click="triggerFilePicker" />
-                                <button type="button" class="btn btn-primary" @click="triggerFilePicker">Select photo</button>
-                            </div>
-                            <div class="removable-image" v-else>
-                                <img :src="profilePhoto" />
-                                <i class="fa-sharp fa-solid fa-circle-xmark remove-profile-photo" @click.stop="clearProfilePhoto"></i>
-                            </div>
+                            <img :src="photoUrl" @click="triggerFilePicker" />
                         </transition>
+                        <i class="fa-sharp fa-solid fa-circle-xmark remove-profile-photo" @click.stop="clearProfilePhoto" v-if="canRemoveSelectedPhoto"></i>
                     </div>
-                    <input type="file" class="form-control d-none" accept="image/png, image/jpeg" ref="filePicker" @change="prepareImage"/>
                 </div>
+                <input type="file" class="form-control d-none" accept="image/png, image/jpeg" ref="filePicker" @change="prepareImage"/>
+                <p v-if="errors['image']" class="form-error text-center">{{ errors['image'] }}</p>
             </div>
             <div class="form-group-row">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="First name" v-model.trim="firstName" />
+                    <label for="name">Name</label>
+                    <input id="name" type="text" class="form-control" v-model.trim="name" />
+                    <p v-if="errors['name']" class="form-error">{{ errors['name'] }}</p>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Last name" v-model.trim="lastName" />
+                    <label for="surname">Surname</label>
+                    <input id="surname" type="text" class="form-control" v-model.trim="surname" />
+                    <p v-if="errors['surname']" class="form-error">{{ errors['surname'] }}</p>
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Occupation" v-model.trim="occupation" />
+                <label for="occupation">Occupation</label>
+                <input id="occupation" type="text" class="form-control" v-model.trim="occupation" />
+                <p v-if="errors['occupation']" class="form-error">{{ errors['occupation'] }}</p>
             </div>
-            <!-- <div class="form-group-row">
-                <div class="form-group">
-                    <select class="form-control" v-model="nationality">
-                        <option selected value="null">Nationality</option>
-                        <option value="latvian">Latvian</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <date-picker
-                        v-model="dateOfBirth"
-                        type="date"
-                        placeholder="Date of birth"
-                        :popup-style="{ top: '100%', left: 0}"
-                        :append-to-body="false"
-                        format="DD/MM/YYYY"
-                        input-class="form-control"
-                    ></date-picker>
-                </div>
-            </div> -->
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Address" v-model.trim="address" />
+                <label for="address">Address (e.g Country and City of your location)</label>
+                <input id="address" type="text" class="form-control" v-model.trim="address" />
+                <p v-if="errors['address']" class="form-error">{{ errors['address'] }}</p>
             </div>
             <div class="form-group-row">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email address" v-model.trim="email" />
-                </div>
-                <div class="form-group">
-                    <input type="tel" class="form-control" placeholder="Phone" v-model.trim="phone" />
+                    <label for="phone">Phone</label>
+                    <input id="phone" type="tel" class="form-control" v-model.trim="phone" />
+                    <p v-if="errors['phone']" class="form-error">{{ errors['phone'] }}</p>
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Link" v-model.trim="link" />
+                <label for="link">Website (e.g link to LinkedIn profile)</label>
+                <input id="link" type="text" class="form-control" v-model.trim="website" />
+                <p v-if="errors['website']" class="form-error">{{ errors['website'] }}</p>
             </div>
             <div class="form-group">
-                <textarea class="form-control" placeholder="Short self description" v-model.trim="about"></textarea>
+                <label for="about">Tell your next employer about yourself</label>
+                <textarea id="about" class="form-control" v-model.trim="professional_summary"></textarea>
+                <p v-if="errors['professional_summary']" class="form-error">{{ errors['professional_summary'] }}</p>
             </div>
-            <button type="submit" class="btn btn-primary">Next</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions, mapState, mapGetters } from 'vuex';
+    import { FORM_ERROR_STATUS_CODE, mapInputErrors } from '@/helpers.js';
+
     export default {
         data() {
             return {
+                errors: {},
+                isLoading: false,
                 filePicker: null,
-                firstName: '',
-                lastName: '',
-                email: '',
+                file: null,
+                canRemoveSelectedPhoto: false,
+                selectedPhotoUrl: '',
+                preselectedPhoto: require('@images/avatar.png'),
+                name: '',
+                surname: '',
                 phone:'',
                 occupation: '',
-                nationality: null,
-                dateOfBirth: '',
                 address: '',
-                link: '',
-                about: '',
+                website: '',
+                professional_summary: '',
                 nextStep: 'Experience'
             }
         },
         computed: {
-            ...mapState('profile', ['profile'])
+            ...mapState('profile', ['profile']),
+            ...mapGetters('profile', ['hasProfileCreated']),
+            photoUrl() {
+                return this.selectedPhotoUrl ? this.selectedPhotoUrl : this.preselectedPhoto;
+            }
         },
         mounted() {
-            this.loadUserProfile();
+            this.loadData();
             this.filePicker = this.$refs.filePicker;
         },
         methods: {
-            ...mapActions('profile', ['addBasicInformation', 'clearProfilePhoto', 'addProfilePhoto']),
-
-            async loadUserProfile() {
-                await axios.get('/profile').then((response) => {
-                    const { profile } = response.data;
-                    this.userProfile = profile;
-                    console.log(profile)
-                }).catch(err => {
-                    console.log(err)
+            ...mapActions('profile', ['loadUserProfile', 'saveUserProfile']),
+            async loadData() {
+                this.isLoading = true;
+                await this.loadUserProfile().finally(() => {
+                    if (this.hasProfileCreated) {
+                        this.name = this.profile.name;
+                        this.surname = this.profile.surname;
+                        this.phone = this.profile.phone;
+                        this.occupation = this.profile.occupation;
+                        this.address = this.profile.address;
+                        this.website = this.profile.website;
+                        this.professional_summary = this.profile.professional_summary;
+                        this.preselectedPhoto = this.profile.photo;
+                    }
+                }).finally(() => {
+                    this.isLoading = false;
                 })
             },
 
             async save() {
-                const formData = new FormData();
-                
-                formData.append('name', this.firstName);
-                formData.append('surname', this.lastName);
-                formData.append('phone', this.phone);
-                formData.append('occupation', this.occupation);
-                formData.append('professional_summary', this.about);
-                formData.append('address', this.address);
-                formData.append('website', this.link);
-                formData.append('image', this.file);
-
-                await axios.post('/profile', formData).then(res => {
-                    console.log('Success')
-                    console.log(res);
-                }).catch((err) => {
-                    console.log('Error')
-                    console.log(err);
+                this.isLoading = true;
+                this.errors = {};
+                await this.saveUserProfile({
+                    name: this.name,
+                    surname: this.surname,
+                    phone: this.phone,
+                    occupation: this.occupation,
+                    address: this.address,
+                    website: this.website,
+                    professional_summary: this.professional_summary,
+                    file: this.file
                 })
-                
-                //this.$emit('next-step', this.nextStep);
+                .then(() => {
+                    this.$emit('next-step', this.nextStep);
+                })
+                .catch((error) => {
+                    const { response } = error;
+                    if (response && response.status === FORM_ERROR_STATUS_CODE) {
+                        this.errors = mapInputErrors(response.data.errors);
+                    }
+                }).finally(() => {
+                    this.isLoading = false;
+                })
             },
             triggerFilePicker() {
                 this.filePicker.click();
@@ -142,13 +151,19 @@
                 }
                 
                 this.file = file;
+                this.canRemoveSelectedPhoto = true;
 
                 const reader = new FileReader();
                 reader.onloadend = () => {
-                    this.addProfilePhoto(reader.result);
+                    this.selectedPhotoUrl = reader.result;
                 };
                 reader.readAsDataURL(file);
-            }
+            },
+            clearProfilePhoto() {
+                this.file = null;
+                this.canRemoveSelectedPhoto = false;
+                this.selectedPhotoUrl = '';
+            },
         }
     }
 </script>
@@ -160,12 +175,7 @@
         display: block;
         width: 100%;
         margin-bottom: $space-4;
-        .center-block {
-            max-width: 160px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .removable-image {
+        .selectable-image {
             position: relative;
             .remove-profile-photo {
                 position: absolute;
@@ -178,6 +188,9 @@
             }
         }
         .profile-image-selector {
+            max-width: 160px;
+            margin-left: auto;
+            margin-right: auto;
             cursor: pointer;
             img {
                 @include fixed-rounded-container(160px);
@@ -187,5 +200,8 @@
         .btn-primary {
             margin-top: $space-4;
         }
+    }
+    h2 {
+        margin-bottom: $space-4;
     }
 </style>

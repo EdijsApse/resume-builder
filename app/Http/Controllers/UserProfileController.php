@@ -19,17 +19,36 @@ class UserProfileController extends Controller
     public function store(Request $request)
     {
         $user = $request->user();
+        $hasProfile = $user->profile()->exists();
 
-        $validator = Validator::make($request->post(), [
+        $validationRules = [
             'name' => 'required',
             'surname' => 'required',
             'occupation' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'website' => 'url',
-            'image' => 'image|mimes:jpeg,png,jpg',
             'professional_summary' => 'required'
-        ]);
+        ];
+
+        $userProfile = [
+            'name' => $request->post('name'),
+            'surname' => $request->post('surname'),
+            'occupation' => $request->post('occupation'),
+            'phone' => $request->post('phone'),
+            'address' => $request->post('address'),
+            'professional_summary' => $request->post('professional_summary'),
+        ];
+
+        if ($request->post('website')) {
+            $validationRules['website'] = 'url';
+            $userProfile['website'] = $request->post('website');
+        }
+
+        if (!$hasProfile || $request->file('image')) {
+            $validationRules['image'] = 'image|mimes:jpeg,png,jpg';
+        }
+
+        $validator = Validator::make($request->post(), $validationRules);
 
         if ($validator->fails()) {
             return response()->json([
@@ -37,18 +56,18 @@ class UserProfileController extends Controller
                 'errors' => $validator->errors()
             ], 422);
         }
+        
+        if ($request->file('image')) {
+            $file = Storage::disk('public')->put($user->getPhotoStoragePath(), $request->file('image'));
+            $userProfile['photo'] = Storage::url($file);
+        }
 
-        $file = Storage::disk('public')->put($user->getPhotoStoragePath(), $request->file('image'));
-
-        $profile = $user->profile()->create([
-            'name' => $request->post('name'),
-            'surname' => $request->post('surname'),
-            'occupation' => $request->post('occupation'),
-            'phone' => $request->post('phone'),
-            'address' => $request->post('address'),
-            'photo' => Storage::url($file),
-            'professional_summary' => $request->post('professional_summary'),
-        ]);
+        $profile = $user->profile()->updateOrCreate(
+            [
+                'user_id' => $user->id
+            ],
+            $userProfile
+        );
 
         return response()->json([
             'success' => true,
@@ -64,9 +83,15 @@ class UserProfileController extends Controller
      */
     public function show(Request $request) {
         $user = $request->user();
-        
+        $profile = $user->profile;
+        $profileResource = null;
+
+        if ($profile) {
+            $profileResource = new UserProfileResource($profile);
+        }
+
         return response()->json([
-            'profile' => new UserProfileResource($user->profile)
+            'profile' => $profileResource
         ]);
     }
 }
