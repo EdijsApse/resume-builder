@@ -12,6 +12,11 @@
     font-size: 0.9rem;
     border-radius: 0px;
     transition: all 0.3s;
+    &.placeholder-dark {
+        &::placeholder {
+            color: $dark-gray;
+        }    
+    }
     &::placeholder {
         color: $bright-gray;
     }
@@ -47,7 +52,43 @@ textarea {
     }
     .form-error {
         margin-top: $space-2;
+        margin-bottom: 0;
         color: $danger;
         font-size: 0.9rem;
+    }
+    .form-check {
+        text-align: left;
+        .form-check-input {
+            width: 40px;
+            height: 20px;
+            border-color: $brightish-gray;
+            border-width: 2px;
+            transition: 0.3s;
+            cursor: pointer;
+            &:checked {
+                background-color: $pink;
+                border-color: $pink;
+            }
+            &:focus {
+                box-shadow: none;
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
+                &:checked {
+                    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+                }
+            }
+            &:active {
+                filter: none;
+            }
+        }
+        .form-check-label {
+            position: relative;
+            top: 4px;
+            font-size: 0.9rem;
+            font-family: $open-sans-regular;
+            margin-bottom: 0;
+            color: $darkish-gray;
+            margin-left: $space-4;
+            cursor: pointer;
+        }
     }
 }

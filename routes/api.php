@@ -21,5 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->post('profile', 'UserProfileController@store');
 Route::middleware('auth:sanctum')->get('profile', 'UserProfileController@show');
 
+Route::middleware('auth:sanctum')->get('/experiences', 'ExperienceController@index');
+Route::middleware('auth:sanctum')->post('/experience', 'ExperienceController@store');
+Route::middleware('auth:sanctum')->post('/experience/{id}', 'ExperienceController@update');
+Route::middleware('auth:sanctum')->delete('/experience/{id}', 'ExperienceController@destroy');
+
 Route::post('/signup', 'AuthController@register');
 Route::post('/login', 'AuthController@login');

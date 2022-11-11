@@ -1,21 +1,17 @@
 <template>
-    <base-resume-item @select-item="selectItem(experience.id)" @delete-item="deleteItem(experience.id)">
+    <base-resume-item @select-item="$emit('edit-experience', experience.id)" @delete-item="$emit('delete-experience', experience.id)">
         <div class="single-detail">
-            <h3><i class="fa-solid fa-briefcase"></i>{{ experience.jobtitle }} ({{ experience.date_from | toHumanReadable }} - {{ experience.date_to | toHumanReadable }})</h3>
+            <h3>{{ experience.jobtitle }} at {{ experience.employer }}</h3>
         </div>
-        <div class="single-detail">
-            <h3><i class="fa-solid fa-user-tie"></i>{{ experience.employer }}</h3>
+        <div class="single-detail secondary-detail">
+            <h3>{{ experience.from_converted }} - {{ !experience.is_current ? experience.to_converted : 'Current work' }}</h3>
         </div>
     </base-resume-item>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
-
     export default {
         props: ['experience'],
-        methods: {
-            ...mapActions('experience', ['selectItem', 'deleteItem'])
-        }
+        emits: ['edit-experience', 'delete-experience'],
     }
 </script>

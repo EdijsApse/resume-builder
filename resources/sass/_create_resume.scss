@@ -5,19 +5,6 @@
     padding: $space-4;
     max-width: 600px;
     margin-left: 5rem;
-    h2 {
-        font-family: $open-sans-light;
-        font-size: 1.6rem;
-        margin-bottom: $space-8;
-        &::after {
-            display: block;
-            width: 60px;
-            background-color: $pink;
-            height: 2px;
-            content: "";
-            margin-top: $space-2;
-        }
-    }
     textarea {
         min-height: 115px;
     }

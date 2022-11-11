@@ -1,56 +1,101 @@
 <template>
-    <form @submit.prevent="save">
-        <div class="resume-section-item">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Job title" v-model="jobtitle" />
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Employer" v-model="employer" />
-            </div>
-            <div class="form-group-row">
+    <div class="relative">
+        <transition name="fade">
+            <LoadingSpinner v-if="isLoading" />
+        </transition>
+        <form @submit.prevent="save">
+            <div class="resume-section-item">
                 <div class="form-group">
-                    <date-picker
-                        v-model="date_from"
-                        type="month"
-                        placeholder="Date from"
-                        :popup-style="{ top: '100%', left: 0}"
-                        :append-to-body="false"
-                        format="MMMM YYYY"
-                        input-class="form-control"
-                    ></date-picker>
+                    <label for="jobtitle">Jobtitle</label>
+                    <input id="jobtitle" type="text" class="form-control" v-model="jobtitle" />
+                    <p v-if="errors['jobtitle']" class="form-error">{{ errors['jobtitle'] }}</p>
                 </div>
                 <div class="form-group">
-                    <date-picker
-                        v-model="date_to"
-                        type="month"
-                        placeholder="Date to"
-                        :popup-style="{ top: '100%', left: 0}"
-                        :append-to-body="false"
-                        format="MMMM YYYY"
-                        input-class="form-control"
-                    ></date-picker>
+                    <label for="employer">Employer</label>
+                    <input id="employer" type="text" class="form-control" v-model="employer" />
+                    <p v-if="errors['employer']" class="form-error">{{ errors['employer'] }}</p>
+                </div>
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="from">Date from</label>
+                        <date-picker
+                            id="from"
+                            v-model="from"
+                            type="month"
+                            :popup-style="{ top: '100%', left: 0}"
+                            :append-to-body="false"
+                            format="MMMM YYYY"
+                            valueType="YYYY-MM-DD"
+                            input-class="form-control"
+                        ></date-picker>
+                        <p v-if="errors['from']" class="form-error">{{ errors['from'] }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="to">Date to</label>
+                        <date-picker
+                            id="to"
+                            v-model="to"
+                            @change="is_current = 0"
+                            :placeholder="is_current == true ? 'Current work' : ''"
+                            type="month"
+                            :popup-style="{ top: '100%', left: 0}"
+                            :append-to-body="false"
+                            format="MMMM YYYY"
+                            valueType="YYYY-MM-DD"
+                            input-class="form-control placeholder-dark"
+                            ref="dateToDatepicker"
+                        >
+                            <template #footer>
+                                <div class="current-employer">
+                                    <div class="form-check form-switch">
+                                        <input
+                                            id="current-employer"
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            v-model="is_current"
+                                            :checked="is_current == true"
+                                            @change="clearSelectedToDate"
+                                            true-value="1"
+                                            false-value="0"
+                                        >
+                                        <label class="form-check-label" for="current-employer">Currently work here</label>
+                                    </div>
+                                </div>
+                            </template>
+                        </date-picker>
+                        <p v-if="errors['to']" class="form-error">{{ errors['to'] }}</p>
+                        <p v-if="errors['is_current']" class="form-error">{{ errors['is_current'] }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="duties">Short list or summary about your duties</label>
+                    <textarea class="form-control" v-model="duties"></textarea>
+                    <p v-if="errors['duties']" class="form-error">{{ errors['duties'] }}</p>
                 </div>
             </div>
-            <div class="form-group">
-                <textarea placeholder="Short list of duties" class="form-control" v-model="duties"></textarea>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary mt-6">Save</button>
-    </form>
+            <button type="submit" class="btn btn-primary mt-6">Save</button>
+        </form>
+    </div>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex';
+    import { FORM_ERROR_STATUS_CODE, mapInputErrors } from '@/helpers.js';
+
     export default {
         data() {
             return {
+                isLoading: false,
                 jobtitle: '',
                 employer: '',
-                date_from: '',
-                date_to: '',
+                from: '',
+                to: '',
                 duties: '',
+                is_current: 0,
+                errors: {}
             }
         },
+        emits: ['show-list'],
         computed: {
             ...mapState('experience', ['selectedItem']),
             isUpdating() {
@@ -61,29 +106,59 @@
             if(this.isUpdating) {
                 this.jobtitle = this.selectedItem.jobtitle;
                 this.employer = this.selectedItem.employer;
-                this.date_from = this.selectedItem.date_from;
-                this.date_to = this.selectedItem.date_to;
+                this.from = this.selectedItem.from;
+                this.to = this.selectedItem.to;
                 this.duties = this.selectedItem.duties;
+                this.is_current = this.selectedItem.is_current;
             }
         },
+        beforeUnmount() {
+            this.clearSelectedItem();
+        },
         methods: {
-            ...mapActions('experience', ['addItem', 'updateItem']),
-            save() {
+            ...mapActions('experience', ['addItem', 'updateItem', 'clearSelectedItem']),
+            clearSelectedToDate() {
+                this.to = '';
+                this.$refs.dateToDatepicker.closePopup();
+                console.log(this.is_current)
+            },
+            async save() {
                 const exp = {
                     jobtitle: this.jobtitle,
                     employer: this.employer,
-                    date_from: this.date_from,
-                    date_to: this.date_to,
-                    duties: this.duties
+                    from: this.from,
+                    to: this.to,
+                    duties: this.duties,
+                    is_current: this.is_current
                 }
+
+                this.isLoading = true;
+                this.errors = {};
+
                 if (this.isUpdating) {
-                    const newExp = {...exp, id: this.selectedItem.id};
-                    this.updateItem({
-                        id: this.selectedItem.id,
-                        newItem: newExp
+                    await this.updateItem(exp).then(() => {
+                        this.clearSelectedItem();
+                        this.$emit('show-list');
+                    })
+                    .catch((error) => {
+                        const { response } = error;
+                        if (response && response.status === FORM_ERROR_STATUS_CODE) {
+                            this.errors = mapInputErrors(response.data.errors);
+                        }
+                    }).finally(() => {
+                        this.isLoading = false;
                     })
                 } else {
-                    this.addItem({...exp, id: Date.now()})
+                    await this.addItem(exp).then(() => {
+                        this.$emit('show-list');
+                    }).catch((error) => {
+                        const { response } = error;
+                        if (response && response.status === FORM_ERROR_STATUS_CODE) {
+                            this.errors = mapInputErrors(response.data.errors);
+                        }
+                    }).finally(() => {
+                        this.isLoading = false;
+                    })
                 }
             }
         }

@@ -6,10 +6,6 @@
 
 .mx-datepicker {
     width: 100%;
-    height: 100%;
-    .mx-input-wrapper {
-        height: 100%;
-    }
     .mx-calendar-content {
         .cell {
             &.active {
@@ -28,6 +24,14 @@
     .mx-btn {
         &:hover {
             color: $pink;
+        }
+    }
+    .mx-datepicker-footer {
+        .form-check {
+            .form-check-label {
+                font: 14px/1.5 "Helvetica Neue", Helvetica,Arial, "Microsoft Yahei", sans-serif;
+                color: #73879c;
+            }
         }
     }
 }

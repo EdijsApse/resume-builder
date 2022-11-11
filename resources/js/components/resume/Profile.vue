@@ -3,7 +3,7 @@
         <transition name="fade">
             <LoadingSpinner v-if="isLoading" />
         </transition>
-        <h2>Basic information</h2>
+        <base-resume-section-header :isCloseButtonVisible="false">Basic information</base-resume-section-header>
         <form @submit.prevent="save">
             <div class="profile-image-group form-group">
                 <div class="profile-image-selector">

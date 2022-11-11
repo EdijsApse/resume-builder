@@ -2,7 +2,7 @@
     <div class="single-resume-section-item">
         <div class="actions">
             <i class="fa-solid fa-pencil" @click="$emit('select-item')"></i>
-            <i class="fa-solid fa-trash" @click="$emit('delete-item')"></i>
+            <i class="fa-solid fa-trash remove-item" @click="$emit('delete-item')"></i>
         </div>
         <slot></slot>
     </div>
@@ -19,7 +19,7 @@
     .single-resume-section-item {
         position: relative;
         background-color: #FFF;
-        padding: $space-2;
+        padding: $space-4;
         border-radius: 5px;
         box-shadow: 0px 0px 3px 0px $bright-gray;
         margin-bottom: $space-4;
@@ -29,29 +29,34 @@
                 margin-bottom: 0;
             }
         }
-        h3 {
-            font-size: 0.8rem;
-            font-family: $open-sans-semibold;
-            margin-bottom: 0px;
-            i {
-                color: $pink;
-                font-size: 1rem;
-                margin-right: $space-4;
+        .secondary-detail {
+            h3 {
+                font-size: 0.9rem;
+                color: $darkish-gray;
             }
+        }
+        h3 {
+            font-size: 1.1rem;
+            font-family: $open-sans-regular;
+            margin-bottom: 0px;
         }
         .actions {
             display: flex;
+            flex-direction: column;
             position: absolute;
-            right: 10px;
-            top: 10px;
+            right: 15px;
+            top: 15px;
             i {
                 font-size: 1rem;
-                color: $pink;
+                color: $darkish-gray;
                 cursor: pointer;
-                margin-left: $space-4;
-                &:first-of-type {
-                    margin-left: 0;
+                transition: all 0.3s;
+                &:hover {
+                    color: $pink;
                 }
+            }
+            .remove-item {
+                margin-top: $space-4;
             }
         }
     }

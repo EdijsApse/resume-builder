@@ -18,24 +18,37 @@
         align-items: center;
         padding: $space-2 $space-2;
         border-radius: 5px;
-        border: 2px dashed rgba($pink, 0.3);
+        border: 2px dashed rgba($pink, 0.4);
         margin-top: $space-4;
+        height: 74px;
+        justify-content: center;
         cursor: pointer;
         transition: all 0.3s;
         &:hover {
             background-color: #FFF;
             border-color: $pink;
+            p {
+                opacity: 1;
+            }
+            i {
+                opacity: 1;
+            }
         }
         p {
-            font-family: $open-sans-semibold;
-            font-size: 1rem;
+            position: relative;
+            top: 1px;
+            font-size: 1.1rem;
             margin-bottom: 0;
             color: $dark-gray;
+            opacity: 0.7;
+            transition: all 0.3s;
         }
         i {
             margin-right: $space-2;
             color: $pink;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            opacity: 0.4;
+            transition: all 0.3s;
         }
     }
 </style>
