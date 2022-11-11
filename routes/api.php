@@ -36,5 +36,7 @@ Route::middleware('auth:sanctum')->post('/certificates', 'CertificateController@
 Route::middleware('auth:sanctum')->post('/certificate/{id}', 'CertificateController@update');
 Route::middleware('auth:sanctum')->delete('/certificate/{id}', 'CertificateController@destroy');
 
+Route::get('/select-lists', 'PublicController@selectLists');
+
 Route::post('/signup', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
