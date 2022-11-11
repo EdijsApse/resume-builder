@@ -1,13 +1,22 @@
 <template>
-    <div class="resume-section-wrapper">
-        <h2>Education</h2>
+    <div class="resume-section-wrapper relative">
+        <transition name="fade">
+            <LoadingSpinner v-if="isLoading" />
+        </transition>
+        <base-resume-section-header @close-form="closeForm" :isCloseButtonVisible="!isListVisible">Education</base-resume-section-header>
         <Transition name="fade" mode="out-in">
-            <div v-if="isListVisible">
-                <EducationItem v-for="education in items" :key="education.id" :education="education" />
-                <AddItemPlaceholder @add-item="addListVisibilityState(false)" />
-                <button class="btn btn-primary" @click="save">Next</button>
+            <div v-if="isListVisible" class="mt-8">
+                <EducationItem
+                    v-for="education in items"
+                    :key="education.id"
+                    :education="education"
+                    @edit-education="selectEducationForUpdate"
+                    @delete-education="deleteEducation"
+                />
+                <AddItemPlaceholder @add-item="isListVisible = false" />
+                <button class="btn btn-primary" @click="navigateToNextStep">Next</button>
             </div>
-            <EducationForm v-else />
+            <EducationForm v-else @show-list="isListVisible = true" />
         </Transition>
     </div>
 </template>
@@ -21,20 +30,42 @@
     export default {
         data() {
             return {
-                nextStep: 'Certificate'
+                nextStep: 'Certificate',
+                isLoading: false,
+                isListVisible: true
             }
         },
         computed: {
-            ...mapState('education', ['items', 'isListVisible'])
+            ...mapState('education', ['items'])
         },
         methods: {
-            ...mapActions('education', ['addListVisibilityState', 'clearSelectedItem']),
-            save() {
+            ...mapActions('education', ['loadItems', 'selectItem', 'clearSelectedItem', 'deleteItem']),
+            async loadEducations() {
+                this.isLoading = true;
+                await this.loadItems().finally(() => {
+                    this.isLoading = false;
+                })
+            },
+            async deleteEducation(id) {
+                this.isLoading = true;
+                await this.deleteItem(id).finally(() => {
+                    this.isLoading = false;
+                });
+            },
+            selectEducationForUpdate(id) {
+                this.selectItem(id);
+                this.isListVisible = false;
+            },
+            navigateToNextStep() {
                 this.$emit('next-step', this.nextStep);
+            },
+            closeForm() {
+                this.isListVisible = true;
+                this.clearSelectedItem();
             }
         },
-        beforeUnmount() {
-            this.clearSelectedItem();
+        mounted() {
+            this.loadEducations();
         },
         components: {
             EducationForm,

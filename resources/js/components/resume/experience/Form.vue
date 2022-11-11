@@ -27,6 +27,7 @@
                             format="MMMM YYYY"
                             valueType="YYYY-MM-DD"
                             input-class="form-control"
+                            :disabled-date="disabledDate"
                         ></date-picker>
                         <p v-if="errors['from']" class="form-error">{{ errors['from'] }}</p>
                     </div>
@@ -36,30 +37,29 @@
                             id="to"
                             v-model="to"
                             @change="is_current = 0"
-                            :placeholder="is_current == true ? 'Current work' : ''"
+                            :placeholder="is_current == true ? 'Present' : ''"
                             type="month"
                             :popup-style="{ top: '100%', left: 0}"
                             :append-to-body="false"
                             format="MMMM YYYY"
                             valueType="YYYY-MM-DD"
                             input-class="form-control placeholder-dark"
+                            :disabled-date="disabledDate"
                             ref="dateToDatepicker"
                         >
                             <template #footer>
-                                <div class="current-employer">
-                                    <div class="form-check form-switch">
-                                        <input
-                                            id="current-employer"
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            v-model="is_current"
-                                            :checked="is_current == true"
-                                            @change="clearSelectedToDate"
-                                            true-value="1"
-                                            false-value="0"
-                                        >
-                                        <label class="form-check-label" for="current-employer">Currently work here</label>
-                                    </div>
+                                <div class="form-check form-switch">
+                                    <input
+                                        id="current-employer"
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        v-model="is_current"
+                                        :checked="is_current == true"
+                                        @change="clearSelectedToDate"
+                                        true-value="1"
+                                        false-value="0"
+                                    >
+                                    <label class="form-check-label" for="current-employer">Currently work here</label>
                                 </div>
                             </template>
                         </date-picker>
@@ -117,10 +117,12 @@
         },
         methods: {
             ...mapActions('experience', ['addItem', 'updateItem', 'clearSelectedItem']),
+            disabledDate(date) {
+                return date > new Date();
+            },
             clearSelectedToDate() {
                 this.to = '';
                 this.$refs.dateToDatepicker.closePopup();
-                console.log(this.is_current)
             },
             async save() {
                 const exp = {

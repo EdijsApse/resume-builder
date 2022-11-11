@@ -26,5 +26,10 @@ Route::middleware('auth:sanctum')->post('/experience', 'ExperienceController@sto
 Route::middleware('auth:sanctum')->post('/experience/{id}', 'ExperienceController@update');
 Route::middleware('auth:sanctum')->delete('/experience/{id}', 'ExperienceController@destroy');
 
+Route::middleware('auth:sanctum')->get('/education', 'EducationController@index');
+Route::middleware('auth:sanctum')->post('/education', 'EducationController@store');
+Route::middleware('auth:sanctum')->post('/education/{id}', 'EducationController@update');
+Route::middleware('auth:sanctum')->delete('/education/{id}', 'EducationController@destroy');
+
 Route::post('/signup', 'AuthController@register');
 Route::post('/login', 'AuthController@login');

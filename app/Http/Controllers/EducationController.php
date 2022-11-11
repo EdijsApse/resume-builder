@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Experience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Resources\Experience as ExperienceResource;
-use App\Http\Resources\ExperienceCollection;
+use App\Education;
+use App\Http\Resources\EducationCollection;
+use App\Http\Resources\Education as EducationResource;
 
-class ExperienceController extends Controller
+class EducationController extends Controller
 {
     /**
      * Validates post request data
@@ -18,8 +18,8 @@ class ExperienceController extends Controller
     protected function validateInputs(Request $request)
     {
         $rules = [
-            'jobtitle' => 'required',
-            'employer' => 'required',
+            'school' => 'required',
+            'degree' => 'required',
             'from' => 'required|date',
             'is_current' => 'boolean',
         ];
@@ -46,7 +46,7 @@ class ExperienceController extends Controller
         $user = $request->user();
 
         return response()->json([
-            'experiences' => new ExperienceCollection($user->experiences)
+            'educations' => new EducationCollection($user->educations)
         ]);
     }
 
@@ -69,11 +69,11 @@ class ExperienceController extends Controller
             ], 422);
         }
 
-        $exp = $user->experiences()->create($request->post());
+        $education = $user->educations()->create($request->post());
 
         return response()->json([
             'success' => true,
-            'experience' => new ExperienceResource($exp)
+            'education' => new EducationResource($education)
         ]);
     }
 
@@ -88,15 +88,15 @@ class ExperienceController extends Controller
     {
         $user = $request->user();
 
-        $experience = Experience::where([
+        $education = Education::where([
             'user_id' => $user->id,
             'id' => $id
         ])->first();
         
-        if (!$experience) {
+        if (!$education) {
             return response()->json([
                 'success' => false,
-                'error' => 'Experience record not found!'
+                'error' => 'Education record not found!'
             ], 404);
         }
 
@@ -109,11 +109,11 @@ class ExperienceController extends Controller
             ], 422);
         }
 
-        $experience->update($request->post());
+        $education->update($request->post());
 
         return response()->json([
             'success' => true,
-            'experience' => new ExperienceResource($experience)
+            'education' => new EducationResource($education)
         ]);
     }
 
@@ -127,20 +127,20 @@ class ExperienceController extends Controller
     {
         $user = $request->user();
         
-        $experience = Experience::where([
+        $education = Education::where([
             'user_id' => $user->id,
             'id' => $id
         ])->first();
 
-        if (!$experience) {
+        if (!$education) {
             return response()->json([
                 'success' => false,
-                'error' => 'Experience record not found!'
+                'error' => 'Education record not found!'
             ]);
         }
 
         return response()->json([
-            'success' => $experience->delete()
+            'success' => $education->delete()
         ]);
     }
 }

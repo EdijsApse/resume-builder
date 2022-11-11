@@ -4,7 +4,7 @@
             <h3>{{ experience.jobtitle }} at {{ experience.employer }}</h3>
         </div>
         <div class="single-detail secondary-detail">
-            <h3>{{ experience.from_converted }} - {{ !experience.is_current ? experience.to_converted : 'Current work' }}</h3>
+            <h3>{{ experience.from_converted }} - {{ !experience.is_current ? experience.to_converted : 'Present' }}</h3>
         </div>
     </base-resume-item>
 </template>

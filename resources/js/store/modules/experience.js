@@ -56,8 +56,7 @@ export default {
                 const { success, error } = response.data;
                 if (success === true) {
                     const newList = state.items.filter(exp => exp.id != id);
-                    console.log(newList)
-                    dispatch('alert/setSuccessAlert', 'Job experience removed!', { root:true });
+                    dispatch('alert/setSuccessAlert', 'Job experience removed from resume!', { root:true });
                     commit(SET_EXPERIENCE_LIST, newList);
                 } else if (error) {
                     dispatch('alert/setErrorAlert', error, { root:true });

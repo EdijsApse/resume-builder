@@ -5,7 +5,7 @@
         </transition>
         <base-resume-section-header @close-form="closeForm" :isCloseButtonVisible="!isListVisible">Work experience</base-resume-section-header>
         <Transition name="fade" mode="out-in">
-            <div class="mt-8" v-if="isListVisible">
+            <div v-if="isListVisible" class="mt-8">
                 <ExperienceItem
                     v-for="experience in items"
                     :key="experience.id"
@@ -16,7 +16,7 @@
                 <AddItemPlaceholder @add-item="isListVisible = false" />
                 <button class="btn btn-primary" @click="navigateToNextStep">Next</button>
             </div>
-            <ExperienceForm @show-list="isListVisible = true" v-else />
+            <ExperienceForm v-else @show-list="isListVisible = true" />
         </Transition>
     </div>
 </template>

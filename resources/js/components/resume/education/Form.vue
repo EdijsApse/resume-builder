@@ -1,48 +1,109 @@
 <template>
-    <form @submit.prevent="save">
-        <div class="resume-section-item">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Degree" v-model="degree" />
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Name of school" v-model="school" />
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Field of study" v-model="field" />
-            </div>
-            <!-- <div class="form-group">
-                <input type="text" class="form-control" placeholder="Location" v-model="location" />
-            </div>
-            <div class="form-group-row">
-                <div class="form-group">
-                    <input type="date" class="form-control" placeholder="Start date" v-model="date_from" />
+    <div class="relative">
+        <transition name="fade">
+            <LoadingSpinner v-if="isLoading" />
+        </transition>
+        <form @submit.prevent="save">
+            <div class="resume-section-item">
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="school">Name of school</label>
+                        <input id="school" type="text" class="form-control" v-model="school" />
+                        <p v-if="errors['school']" class="form-error">{{ errors['school'] }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="degree">Degree (e.g Bachelor's Degree)</label>
+                        <input id="degree" type="text" class="form-control" v-model="degree" />
+                        <p v-if="errors['degree']" class="form-error">{{ errors['degree'] }}</p>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="date" class="form-control" placeholder="Graduation year" v-model="date_to" />
+                    <label for="field">Field (e.g Computer Science)</label>
+                    <input id="field" type="text" class="form-control" v-model="field" />
+                    <p v-if="errors['field']" class="form-error">{{ errors['field'] }}</p>
+                </div>
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="from">Date from</label>
+                        <date-picker
+                            id="from"
+                            v-model="from"
+                            type="month"
+                            :popup-style="{ top: '100%', left: 0}"
+                            :append-to-body="false"
+                            format="MMMM YYYY"
+                            valueType="YYYY-MM-DD"
+                            input-class="form-control"
+                            :disabled-date="disabledDate"
+                        ></date-picker>
+                        <p v-if="errors['from']" class="form-error">{{ errors['from'] }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="to">Date to</label>
+                        <date-picker
+                            id="to"
+                            v-model="to"
+                            @change="is_current = 0"
+                            :placeholder="is_current == true ? 'Present' : ''"
+                            type="month"
+                            :popup-style="{ top: '100%', left: 0}"
+                            :append-to-body="false"
+                            format="MMMM YYYY"
+                            valueType="YYYY-MM-DD"
+                            input-class="form-control placeholder-dark"
+                            :disabled-date="disabledDate"
+                            ref="dateToDatepicker"
+                        >
+                            <template #footer>
+                                <div class="form-check form-switch">
+                                    <input
+                                        id="current-school"
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        v-model="is_current"
+                                        :checked="is_current == true"
+                                        @change="clearSelectedToDate"
+                                        true-value="1"
+                                        false-value="0"
+                                    >
+                                    <label class="form-check-label" for="current-school">Currently study here</label>
+                                </div>
+                            </template>
+                        </date-picker>
+                        <p v-if="errors['to']" class="form-error">{{ errors['to'] }}</p>
+                        <p v-if="errors['is_current']" class="form-error">{{ errors['is_current'] }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="summary">Short summary</label>
+                    <textarea class="form-control" v-model="summary"></textarea>
+                    <p v-if="errors['summary']" class="form-error">{{ errors['summary'] }}</p>
                 </div>
             </div>
-            <div class="form-group">
-                <textarea placeholder="Short description" class="form-control" v-model="description"></textarea>
-            </div> -->
-        </div>
-        <button type="submit" class="btn btn-primary mt-6">Save</button>
-    </form>
+            <button type="submit" class="btn btn-primary mt-6">Save</button>
+        </form>
+    </div>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex';
+    import { FORM_ERROR_STATUS_CODE, mapInputErrors } from '@/helpers.js';
+
     export default {
         data() {
             return {
                 degree: '',
                 school: '',
                 field: '',
-                location: '',
-                date_from: '',
-                date_to: '',
-                description: ''
+                from: '',
+                to: '',
+                summary: '',
+                is_current: 0,
+                errors: {},
+                isLoading: false
             }
         },
+        emits: ['show-list'],
         computed: {
             ...mapState('education', ['selectedItem']),
             isUpdating() {
@@ -54,32 +115,62 @@
                 this.degree = this.selectedItem.degree;
                 this.school = this.selectedItem.school;
                 this.field = this.selectedItem.field;
-                this.location = this.selectedItem.location;
-                this.date_from = this.selectedItem.date_from;
-                this.date_to = this.selectedItem.date_to;
-                this.description = this.selectedItem.description;
+                this.from = this.selectedItem.from;
+                this.to = this.selectedItem.to;
+                this.summary = this.selectedItem.summary;
+                this.is_current = this.selectedItem.is_current; 
             }
         },
+        beforeUnmount() {
+            this.clearSelectedItem();
+        },
         methods: {
-            ...mapActions('education', ['addItem', 'updateItem']),
-            save() {
+            ...mapActions('education', ['addItem', 'updateItem', 'clearSelectedItem']),
+            disabledDate(date) {
+                return date > new Date();
+            },
+            clearSelectedToDate() {
+                this.to = '';
+                this.$refs.dateToDatepicker.closePopup();
+            },
+            async save() {
                 const edu = {
                     degree: this.degree,
                     school: this.school,
                     field: this.field,
-                    location: this.location,
-                    date_from: this.date_from,
-                    date_to: this.date_to,
-                    description: this.description
-                }
+                    from: this.from,
+                    to: this.to,
+                    summary: this.summary,
+                    is_current: this.is_current
+                };
+
+                this.isLoading = true;
+                this.errors = {};
+
                 if (this.isUpdating) {
-                    const newEducation = {...edu, id: this.selectedItem.id};
-                    this.updateItem({
-                        id: this.selectedItem.id,
-                        newItem: newEducation
+                    await this.updateItem(edu).then(() => {
+                        this.clearSelectedItem();
+                        this.$emit('show-list');
+                    })
+                    .catch((error) => {
+                        const { response } = error;
+                        if (response && response.status === FORM_ERROR_STATUS_CODE) {
+                            this.errors = mapInputErrors(response.data.errors);
+                        }
+                    }).finally(() => {
+                        this.isLoading = false;
                     })
                 } else {
-                    this.addItem({...edu, id: Date.now()})
+                    await this.addItem(edu).then(() => {
+                        this.$emit('show-list');
+                    }).catch((error) => {
+                        const { response } = error;
+                        if (response && response.status === FORM_ERROR_STATUS_CODE) {
+                            this.errors = mapInputErrors(response.data.errors);
+                        }
+                    }).finally(() => {
+                        this.isLoading = false;
+                    })
                 }
             }
         }
