@@ -89,8 +89,7 @@ export default {
                         return edu;
                     });
                     commit(SET_EDUCATION_LIST, educations);
-                    commit(ADD_SELECTED_EDUCATION, null);
-                    dispatch('alert/setSuccessAlert', 'Education updated updated!', { root:true });
+                    dispatch('alert/setSuccessAlert', 'Education updated!', { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);

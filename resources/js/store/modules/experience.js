@@ -88,7 +88,6 @@ export default {
                         return exp;
                     });
                     commit(SET_EXPERIENCE_LIST, experiences);
-                    commit(ADD_SELECTED_EXPERIENCE, null);
                     dispatch('alert/setSuccessAlert', 'Experience updated!', { root:true });
                 }
             }).catch(error => {

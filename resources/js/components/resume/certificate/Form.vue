@@ -1,36 +1,58 @@
 <template>
-    <form @submit.prevent="save">
-        <div class="resume-section-item">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Name of certificate" v-model="name" />
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Issuing organization" v-model="organization" />
-            </div>
-            <!-- <div class="form-group-row">
+    <div class="relative">
+        <transition name="fade">
+            <LoadingSpinner v-if="isLoading" />
+        </transition>
+        <form @submit.prevent="save">
+            <div class="resume-section-item">
                 <div class="form-group">
-                    <input type="date" class="form-control" placeholder="Issue date" v-model="date_from" />
+                    <label for="name">Name of certificate</label>
+                    <input id="name" type="text" class="form-control" v-model="name" />
+                    <p v-if="errors['name']" class="form-error">{{ errors['name'] }}</p>
+                </div>
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="organization">Issuing organization</label>
+                        <input id="organization" type="text" class="form-control" v-model="organization" />
+                        <p v-if="errors['organization']" class="form-error">{{ errors['organization'] }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="issued">Issued</label>
+                        <date-picker
+                            id="issued"
+                            v-model="issued"
+                            type="month"
+                            :popup-style="{ top: '100%', left: 0}"
+                            :append-to-body="false"
+                            format="MMMM YYYY"
+                            valueType="YYYY-MM-DD"
+                            input-class="form-control"
+                            :disabled-date="disabledDate"
+                        ></date-picker>
+                        <p v-if="errors['issued']" class="form-error">{{ errors['issued'] }}</p>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <textarea placeholder="Short description" class="form-control" v-model="description"></textarea>
-            </div> -->
-        </div>
-        <button type="submit" class="btn btn-primary mt-6">Save</button>
-    </form>
+            <button type="submit" class="btn btn-primary mt-6">Save</button>
+        </form>
+    </div>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex';
+    import { FORM_ERROR_STATUS_CODE, mapInputErrors } from '@/helpers.js';
+
     export default {
         data() {
             return {
                 name: '',
                 organization: '',
-                date_from: '',
-                description: ''
+                issued: '',
+                errors: {},
+                isLoading: false
             }
         },
+        emits: ['show-list'],
         computed: {
             ...mapState('certificate', ['selectedItem']),
             isUpdating() {
@@ -41,27 +63,51 @@
             if(this.isUpdating) {
                 this.name = this.selectedItem.name;
                 this.organization = this.selectedItem.organization;
-                this.date_from = this.selectedItem.date_from;
-                this.description = this.selectedItem.description;                
+                this.issued = this.selectedItem.issued;
             }
         },
+        beforeUnmount() {
+            this.clearSelectedItem();
+        },
         methods: {
-            ...mapActions('certificate', ['addItem', 'updateItem']),
-            save() {
+            ...mapActions('certificate', ['addItem', 'updateItem', 'clearSelectedItem']),
+            disabledDate(date) {
+                return date > new Date();
+            },
+            async save() {
                 const cert = {
                     name: this.name,
                     organization: this.organization,
-                    date_from: this.date_from,
-                    description: this.description
-                }
+                    issued: this.issued
+                };
+
+                this.isLoading = true;
+                this.errors = {};
+
                 if (this.isUpdating) {
-                    const newCertificate = {...cert, id: this.selectedItem.id};
-                    this.updateItem({
-                        id: this.selectedItem.id,
-                        newItem: newCertificate
+                    await this.updateItem(cert).then(() => {
+                        this.clearSelectedItem();
+                        this.$emit('show-list');
+                    })
+                    .catch((error) => {
+                        const { response } = error;
+                        if (response && response.status === FORM_ERROR_STATUS_CODE) {
+                            this.errors = mapInputErrors(response.data.errors);
+                        }
+                    }).finally(() => {
+                        this.isLoading = false;
                     })
                 } else {
-                    this.addItem({...cert, id: Date.now()})
+                    await this.addItem(cert).then(() => {
+                        this.$emit('show-list');
+                    }).catch((error) => {
+                        const { response } = error;
+                        if (response && response.status === FORM_ERROR_STATUS_CODE) {
+                            this.errors = mapInputErrors(response.data.errors);
+                        }
+                    }).finally(() => {
+                        this.isLoading = false;
+                    })
                 }
             }
         }

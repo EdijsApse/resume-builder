@@ -1,21 +1,17 @@
 <template>
-    <base-resume-item @select-item="selectItem(certificate.id)" @delete-item="deleteItem(certificate.id)">
+    <base-resume-item @select-item="$emit('edit-certificate', certificate.id)" @delete-item="$emit('delete-certificate', certificate.id)">
         <div class="single-detail">
-            <h3><i class="fa-solid fa-graduation-cap"></i>{{ certificate.name }}</h3>
+            <h3>{{ certificate.name }} / {{ certificate.organization }}</h3>
         </div>
-        <div class="single-detail">
-            <h3><i class="fa-solid fa-house"></i>{{ certificate.organization }}</h3>
+        <div class="single-detail secondary-detail">
+            <h3>{{ certificate.issued_converted }}</h3>
         </div>
     </base-resume-item>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
-
     export default {
         props: ['certificate'],
-        methods: {
-            ...mapActions('certificate', ['selectItem', 'deleteItem'])
-        }
+        emits: ['edit-certificate', 'delete-certificate']
     }
 </script>
