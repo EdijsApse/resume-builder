@@ -16,11 +16,7 @@ export const ADD_LANGUAGE = 'ADD_LANGUAGE';
 export const SET_LANGUAGE_LIST = 'SET_LANGUAGE_LIST';
 export const ADD_SELECTED_LANGUAGE = 'ADD_SELECTED_LANGUAGE';
 
-export const ADD_SKILL = 'ADD_SKILL';
-export const SET_SKILLS_LIST = 'SET_SKILLS_LIST';
-
-export const ADD_HOBBY = 'ADD_HOBBY';
-export const SET_HOBBIES_LIST = 'SET_HOBBIES_LIST';
+export const SET_RESUME_SKILLS = 'SET_RESUME_SKILLS';
 
 export const ADD_USER = 'ADD_USER';
 export const ADD_TOKEN = 'ADD_TOKEN';

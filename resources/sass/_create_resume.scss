@@ -41,19 +41,6 @@
             cursor: pointer;
         }
     }
-    .single-items-form {
-        .form-group {
-            display: flex;
-            max-width: 350px;
-            .btn {
-                margin-top: 0;
-                max-width: 100px;
-                i {
-                    margin-right: $space-2;
-                }
-            }
-        }
-    }
     .single-items-list {
         display: flex;
         flex-wrap: wrap;

@@ -41,6 +41,9 @@ Route::middleware('auth:sanctum')->post('/resume-language', 'ResumeLanguageContr
 Route::middleware('auth:sanctum')->post('/resume-language/{id}', 'ResumeLanguageController@update');
 Route::middleware('auth:sanctum')->delete('/resume-language/{id}', 'ResumeLanguageController@destroy');
 
+Route::middleware('auth:sanctum')->get('/skills', 'SkillsController@index');
+Route::middleware('auth:sanctum')->post('/skills', 'SkillsController@store');
+
 Route::get('/select-lists', 'PublicController@selectLists');
 
 Route::post('/signup', 'AuthController@register');

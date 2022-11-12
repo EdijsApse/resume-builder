@@ -55,12 +55,11 @@
     import Certificate from '@components/resume/Certificate.vue';
     import Language from '@components/resume/Language.vue';
     import Skill from '@components/resume/Skill.vue';
-    import Hobby from '@components/resume/Hobby.vue';
 
     export default {
         data() {
             return {
-                activeComponent: 'Language'//'Profile'
+                activeComponent: 'Skill'//'Profile'
             }
         },
         methods: {
@@ -74,8 +73,7 @@
             Education,
             Certificate,
             Language,
-            Skill,
-            Hobby
+            Skill
         }
     }
 </script>

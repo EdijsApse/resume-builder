@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ResumeLanguage::class);
     }
+
+    public function skills()
+    {
+        return $this->hasOne(Skills::class);
+    }
 }

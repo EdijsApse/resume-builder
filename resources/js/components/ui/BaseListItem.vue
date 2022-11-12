@@ -1,15 +1,18 @@
 <template>
-    <div class="single-list-item">
-        <i class="fa-sharp fa-solid fa-circle-xmark remove-btn" @click="removeItem"></i>
-        <span>
-            <slot></slot>
-        </span>
+    <div class="single-list-item" @click="$emit('item-clicked')">
+        <i v-if="canRemove" class="fa-sharp fa-solid fa-circle-xmark remove-btn" @click.stop="removeItem"></i>
+        <slot></slot>
     </div>
 </template>
 
 <script>
     export default {
-        emits: ['remove-item'],
+        emits: ['remove-item', 'item-clicked'],
+        props: {
+            canRemove: {
+                default: true
+            }
+        },
         methods: {
             removeItem() {
                 this.$emit('remove-item');
@@ -22,24 +25,28 @@
     @import '@style/_variables.scss';
     .single-list-item {
         position: relative;
-        margin: $space-2;
-        margin-bottom: 0;
-        border: 2px solid $pink;
-        background-color: #FFF;
-        color: $dark-gray;
+        margin: $space-1;
+        font-family: $open-sans-semibold;
+        background-color: $brightish-gray;
+        color: $darkish-gray;
+        padding: $space-2 $space-4;
         border-radius: 50px;
-        font-size: 0.9rem;
-        min-width: 60px;
-        text-align: center;
-        padding: $space-1 $space-4;
-        font-family: $open-sans-light;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            background-color: rgba($pink, 0.1);
+            color: $pink;
+        }
         .remove-btn {
             position: absolute;
-            right: -4px;
-            top: -5px;
-            color: $dark-gray;
-            cursor: pointer;
-            font-size: 0.8rem;
+            top: 0;
+            right: 0;
+        }
+        .fa-plus {
+            position: relative;
+            top: 1px;
+            margin-left: $space-2;
         }
     }
 </style>

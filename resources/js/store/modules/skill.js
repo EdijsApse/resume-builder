@@ -1,25 +1,44 @@
-import { ADD_SKILL, SET_SKILLS_LIST } from '@/store/mutations.js';
+import { SET_RESUME_SKILLS } from '@/store/mutations.js';
+import axios from '@/axios.js';
 
 export default {
     namespaced: true,
     state: {
-        items: [],
+        skills: null,
     },
     mutations: {
-        [ADD_SKILL](state, skill) {
-            state.items.push(skill);
-        },
-        [SET_SKILLS_LIST](state, list) {
-            state.items = list;
+        [SET_RESUME_SKILLS](state, skills) {
+            state.skills = skills;
         },
     },
     actions: {
-        addItem({commit}, skill) {
-            commit(ADD_SKILL, skill)
+        async loadItems({ commit, getters }) {
+            if (getters.hasSkills) {
+                return Promise.resolve();
+            }
+            await axios.get('/skills').then((response) => {
+                const { skills } = response.data;
+                if (skills) {
+                    commit(SET_RESUME_SKILLS, skills)
+                }
+            })
         },
-        removeItem({commit, state}, id) {
-            const skills = state.items.filter(skill => skill.id !== id);
-            commit(SET_SKILLS_LIST, skills);
+        async saveItems({ commit, dispatch }, items) {
+            await axios.post('/skills', { list: items })
+            .then((response) => {
+                const { success, skills } = response.data;
+                if (success) {
+                    commit(SET_RESUME_SKILLS, skills)
+                    dispatch('alert/setSuccessAlert', 'Skills list saved!', { root:true });
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        },
+    },
+    getters: {
+        hasSkills(state) {
+            return state.skills !== null
         }
     }
 }
