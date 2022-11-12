@@ -1,5 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 @import 'vue2-datepicker/index.css';
+@import "vue-select/dist/vue-select.css";
 
 @import '@style/_variables.scss';
 @import '@style/_buttons.scss';
@@ -7,6 +8,7 @@
 @import '@style/_create_resume.scss';
 @import '@style/pages/index.scss';
 @import '@style/_calendar_override.scss';
+@import '@style/_vselect_override.scss';
 @import '@style/_animations.scss';
 
 body {

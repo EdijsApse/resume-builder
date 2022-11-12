@@ -36,6 +36,11 @@ Route::middleware('auth:sanctum')->post('/certificates', 'CertificateController@
 Route::middleware('auth:sanctum')->post('/certificate/{id}', 'CertificateController@update');
 Route::middleware('auth:sanctum')->delete('/certificate/{id}', 'CertificateController@destroy');
 
+Route::middleware('auth:sanctum')->get('/resume-languages', 'ResumeLanguageController@index');
+Route::middleware('auth:sanctum')->post('/resume-language', 'ResumeLanguageController@store');
+Route::middleware('auth:sanctum')->post('/resume-language/{id}', 'ResumeLanguageController@update');
+Route::middleware('auth:sanctum')->delete('/resume-language/{id}', 'ResumeLanguageController@destroy');
+
 Route::get('/select-lists', 'PublicController@selectLists');
 
 Route::post('/signup', 'AuthController@register');

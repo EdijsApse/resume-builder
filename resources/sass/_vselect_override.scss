@@ -1,0 +1,60 @@
+@import '@style/_variables.scss';
+
+
+
+.v-select {
+    .vs__dropdown-toggle {
+        border-radius: 0;
+        height: 45px;
+        padding: 6px 12px;
+        border: 1px solid $bright-gray;
+        font-size: 0.9rem;
+        font-family: $open-sans-regular;
+        color: $dark-gray;
+    }
+    .vs__selected-options {
+        padding: 0;
+    }
+    .vs__selected {
+        padding: 0;
+        margin: 0;
+    }
+    .vs__search {
+        padding: 0;
+        margin: 0;
+    }
+    .vs__actions {
+        padding: 0;
+        .vs__clear {
+            fill: $bright-gray;
+            position: relative;
+            top: -2px;
+        }
+        .vs__open-indicator {
+            fill: $bright-gray;
+        }
+    }
+    .vs--single {
+        &.vs--open {
+            .vs__selected {
+                position: relative;
+            }
+        }
+    }
+    .vs__dropdown-menu {
+        li {
+            color: $dark-gray;
+            font-size: 0.9rem;
+            font-family: $open-sans-light;
+            padding: $space-2 0.75rem;
+            &.vs__dropdown-option--selected {
+                background-color: $pink !important;
+                color: #FFF !important;
+            }
+            &.vs__dropdown-option--highlight {
+                background-color: $brightish-gray;
+                color: $dark-gray;
+            }
+        }
+    }
+}

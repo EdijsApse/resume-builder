@@ -34,9 +34,14 @@
         },
         methods: {
             ...mapActions('auth', ['loginFromLocalStorage']),
+            ...mapActions('lists', ['loadLanguagesWithLevels']),
             async prepareApp() {
                 this.isLoading = true;
-                await this.loginFromLocalStorage().finally(() => {
+                await this.loginFromLocalStorage()
+                .then(() => {
+                    return this.loadLanguagesWithLevels()
+                })
+                .finally(() => {
                     if (this.$route.meta.guestOnly && this.user !== null) {
                         this.$router.replace({name: 'Home'})
                     } else if (this.$route.meta.userOnly && this.user === null) {

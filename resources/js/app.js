@@ -8,12 +8,15 @@ import BaseListItem from '@components/ui/BaseListItem.vue';
 import BaseResumeSectionHeader from '@components/ui/BaseResumeSectionHeader.vue';
 import LoadingSpinner from '@components/LoadingSpinner.vue';
 import DatePicker from 'vue2-datepicker';
+import vSelect from 'vue-select';
 
 Vue.component('base-container', BaseContainer);
 Vue.component('base-resume-item', BaseResumeItem);
 Vue.component('base-list-item', BaseListItem);
 Vue.component('base-resume-section-header', BaseResumeSectionHeader);
+
 Vue.component('date-picker', DatePicker);
+Vue.component('v-select', vSelect);
 
 Vue.component('LoadingSpinner', LoadingSpinner);
 

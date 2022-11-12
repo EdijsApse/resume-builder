@@ -1,39 +1,11 @@
-import { ADD_LANGUAGE, ADD_IS_LANGUAGE_LIST_VISIBLE, SET_LANGUAGE_LIST, ADD_SELECTED_LANGUAGE } from '@/store/mutations.js';
+import { ADD_LANGUAGE, SET_LANGUAGE_LIST, ADD_SELECTED_LANGUAGE } from '@/store/mutations.js';
+import axios from '@/axios.js';
 
 export default {
     namespaced: true,
     state: {
         items: [],
-        selectedItem: null,
-        isListVisible: false,
-        languages: [
-            {
-                value: 'lv',
-                title: 'Latvian'
-            },
-            {
-                value: 'eng',
-                title: 'English'
-            },
-        ],
-        levels: [
-            {
-                value: 'intermediate',
-                title: 'Intermediate (B1)'
-            },
-            {
-                value: 'advanced',
-                title: 'Advanced'
-            },
-            {
-                value: 'fluent',
-                title: 'Proficient/Fluent (C2)'
-            },
-            {
-                value: 'native',
-                title: 'Native or bilingual'
-            }
-        ],
+        selectedItem: null
     },
     mutations: {
         [ADD_LANGUAGE](state, language) {
@@ -44,46 +16,80 @@ export default {
         },
         [SET_LANGUAGE_LIST](state, list) {
             state.items = list;
-        },
-        [ADD_IS_LANGUAGE_LIST_VISIBLE](state, visibilityState) {
-            state.isListVisible = visibilityState;
         }
     },
     actions: {
-        addItem({commit}, language) {
-            commit(ADD_LANGUAGE, language);
-            commit(ADD_IS_LANGUAGE_LIST_VISIBLE, true);
+        async loadItems({ commit, state }) {
+            if (state.items.length) {
+                return Promise.resolve();
+            }
+            await axios.get('/resume-languages').then(res => {
+                const { languages } = res.data;
+                commit(SET_LANGUAGE_LIST, languages)
+            })
         },
-        addListVisibilityState({commit}, visibilityState) {
-            commit(ADD_IS_LANGUAGE_LIST_VISIBLE, visibilityState);
-        },
-        deleteItem({commit, state}, id) {
-            const newList = state.items.filter(lang => lang.id !== id);
-            commit(SET_LANGUAGE_LIST, newList);
-        },
-        updateItem({state, commit}, payload) {
-            const { id, newItem } = payload;
-            let newList = state.items.map((item) => {
-                if (item.id === id) {
-                    return newItem;
-                }
-                return item
-            });
+        async addItem({ commit, dispatch }, language) {
+            const data = {
+                language_id: language.language_id,
+                level_id: language.level_id,
+            };
 
-            commit(SET_LANGUAGE_LIST, newList);
-            commit(ADD_IS_LANGUAGE_LIST_VISIBLE, true);
-            commit(ADD_SELECTED_LANGUAGE, null);
+            await axios.post('/resume-language', data).then((response) => {
+                const { success, language } = response.data;
+                if (success === true) {
+                    commit(ADD_LANGUAGE, language);
+                    dispatch('alert/setSuccessAlert', 'Language added to your resume!', { root:true });
+                }
+            }).catch(error => {
+                return Promise.reject(error);
+            })
+        },
+        async deleteItem({commit, state, dispatch}, id) {
+            await axios.delete(`/resume-language/${id}`).then((response) => {
+                const { success, error } = response.data;
+                if (success === true) {
+                    const newList = state.items.filter(lang => lang.id != id);
+                    dispatch('alert/setSuccessAlert', 'Language record removed from resume!', { root:true });
+                    commit(SET_LANGUAGE_LIST, newList);
+                } else if (error) {
+                    dispatch('alert/setErrorAlert', error, { root:true });
+                }
+            }).catch(err => {
+                dispatch('alert/setErrorAlert', 'Ooops, error occured! Please try again later!', { root:true });
+            });
+        },
+        async updateItem({ state, commit, dispatch }, language) {
+            const data = {
+                language_id: language.language_id,
+                level_id: language.level_id,
+            };
+            
+            const selectedId = state.selectedItem.id;
+
+            await axios.post(`/resume-language/${selectedId}`, data).then((response) => {
+                const { success, language } = response.data;
+                if (success === true) {
+                    const languages = state.items.map(lang => {
+                        if (lang.id === selectedId) {
+                            return language
+                        }
+                        return lang;
+                    });
+                    commit(SET_LANGUAGE_LIST, languages);
+                    dispatch('alert/setSuccessAlert', 'Language record updated!', { root:true });
+                }
+            }).catch(error => {
+                return Promise.reject(error);
+            })
         },
         selectItem({ state, commit }, id) {
             const language = state.items.find(lang => lang.id === id);
             if (language) {
                 commit(ADD_SELECTED_LANGUAGE, language);
-                commit(ADD_IS_LANGUAGE_LIST_VISIBLE, false);
             }
         },
         clearSelectedItem({ commit }) {
             commit(ADD_SELECTED_LANGUAGE, null);
-            commit(ADD_IS_LANGUAGE_LIST_VISIBLE, true);
         }
     }
 }

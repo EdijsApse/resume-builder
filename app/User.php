@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Certificate::class);
     }
+
+    public function languages()
+    {
+        return $this->hasMany(ResumeLanguage::class);
+    }
 }
