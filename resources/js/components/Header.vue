@@ -15,7 +15,7 @@
                     <li class="nav-item" v-if="isSignedIn">
                         <router-link to="/create" class="nav-link">Create</router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="isSignedIn">
                         <router-link to="/preview" class="nav-link">Preview</router-link>
                     </li>
                 </ul>

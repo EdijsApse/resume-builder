@@ -1,6 +1,6 @@
 <template>
     <div class="container resume-layout-container">
-        <div class="row" v-if="hasProfileInfo && profilePhoto">
+        <div class="row">
             <div class="col-4">
                 <div class="resume-photo-wrapper h-100">
                     <div class="resume-photo">

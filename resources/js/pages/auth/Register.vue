@@ -69,7 +69,7 @@
                     password: this.password,
                     password_confirmation: this.password_confirmation
                 }).then(() => {
-                    this.$router.replace({name: 'Home'})
+                    this.$router.replace({name: 'CreateResume'})
                 }).catch(error => {
                     const { response } = error;
                     if (response && response.status === FORM_ERROR_STATUS_CODE) {

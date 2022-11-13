@@ -8,35 +8,32 @@
                         <div class="left-sidebar">
                             <h3>Sections</h3>
                             <ul>
-                                <li @click="activeComponent = 'Profile'" :class="{'selected-section': activeComponent === 'Profile'}">
+                                <li @click="activeComponent = 'Profile'" :class="{'selected-section': activeComponent === 'Profile', 'completed': hasProfileCreated}">
                                     <i class="fa-regular fa-square-check"></i>
                                     <span>Basic information</span>
                                 </li>
-                                <li @click="activeComponent = 'Experience'" :class="{'selected-section': activeComponent === 'Experience'}">
+                                <li @click="activeComponent = 'Experience'" :class="{'selected-section': activeComponent === 'Experience', 'completed': hasExperiences}">
                                     <i class="fa-regular fa-square-check"></i>
                                     <span>Work experience</span>
                                 </li>
-                                <li @click="activeComponent = 'Education'" :class="{'selected-section': activeComponent === 'Education'}">
+                                <li @click="activeComponent = 'Education'" :class="{'selected-section': activeComponent === 'Education', 'completed': hasEducations}">
                                     <i class="fa-regular fa-square-check"></i>
                                     <span>Education</span>
                                 </li>
-                                <li @click="activeComponent = 'Certificate'" :class="{'selected-section': activeComponent === 'Certificate'}">
+                                <li @click="activeComponent = 'Certificate'" :class="{'selected-section': activeComponent === 'Certificate', 'completed': hasCertificates}">
                                     <i class="fa-regular fa-square-check"></i>
                                     <span>Certificate</span>
                                 </li>
-                                <li @click="activeComponent = 'Language'" :class="{'selected-section': activeComponent === 'Language'}">
+                                <li @click="activeComponent = 'Language'" :class="{'selected-section': activeComponent === 'Language', 'completed': hasLanguages}">
                                     <i class="fa-regular fa-square-check"></i>
                                     <span>Languages</span>
                                 </li>
-                                <li @click="activeComponent = 'Skill'" :class="{'selected-section': activeComponent === 'Skill'}">
+                                <li @click="activeComponent = 'Skill'" :class="{'selected-section': activeComponent === 'Skill', 'completed': hasSkills}">
                                     <i class="fa-regular fa-square-check"></i>
                                     <span>Skills</span>
                                 </li>
-                                <!-- <li @click="activeComponent = 'Hobby'" :class="{'selected-section': activeComponent === 'Hobby'}">
-                                    <i class="fa-regular fa-square-check"></i>
-                                    <span>Hobbies</span>
-                                </li> -->
                             </ul>
+                            <button class="btn btn-secondary mt-4 w-100" @click="$router.push({ name: 'PreviewResume' })">Preview Resume</button>
                         </div>
                     </div>
                     <div class="col-9">
@@ -55,12 +52,39 @@
     import Certificate from '@components/resume/Certificate.vue';
     import Language from '@components/resume/Language.vue';
     import Skill from '@components/resume/Skill.vue';
+    import { mapGetters, mapState } from 'vuex';
 
     export default {
         data() {
             return {
-                activeComponent: 'Skill'//'Profile'
+                activeComponent: 'Profile'
             }
+        },
+        created() {
+            const activeComponent = this.$route.params.activeComponent;
+            if (activeComponent) {
+                this.activeComponent = activeComponent;
+            }
+        },
+        computed: {
+            ...mapState('education', { educations: 'items' }),
+            ...mapState('experience', { experiences: 'items' }),
+            ...mapState('language', { languages: 'items' }),
+            ...mapState('certificate', { certificates: 'items' }),
+            ...mapGetters('profile', ['hasProfileCreated']),
+            ...mapGetters('skill', ['hasSkills']),
+            hasEducations() {
+                return !!this.educations.length;
+            },
+            hasExperiences() {
+                return !!this.experiences.length;
+            },
+            hasLanguages() {
+                return !!this.languages.length;
+            },
+            hasCertificates() {
+                return !!this.certificates.length;
+            },
         },
         methods: {
             nextStep(nextComponent) {
@@ -83,47 +107,5 @@
     .container {
         margin-top: 4rem;
         margin-bottom: 4rem;
-    }
-    .left-sidebar {
-        padding-top: $space-4;
-        padding-right: $space-4;
-        h3 {
-            font-size: 0.9rem;
-            color: $dark-gray;
-            margin-bottom: $space-6;
-            &::after {
-                display: block;
-                width: 40px;
-                margin-top: $space-1;
-                background-color: $dark-gray;
-                content: "";
-                height: 2px;
-            }
-        }
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            li {
-                display: flex;
-                align-items: center;
-                margin: 0;
-                padding: 0;
-                padding-bottom: $space-2;
-                margin-bottom: $space-2;
-                font-size: 0.8rem;
-                color: $dark-gray;
-                border-bottom: 1px dashed $bright-gray;
-                cursor: pointer;
-                i {
-                    font-size: 1.1rem;
-                    margin-right: $space-4;
-                    color: $dark-gray;
-                }
-                &.selected-section {
-                    color: $pink;
-                }
-            }
-        }
     }
 </style>

@@ -1,0 +1,59 @@
+@import '@style/_variables.scss';
+
+.page {
+    .left-sidebar {
+        padding-top: $space-4;
+        padding-right: $space-4;
+        h3 {
+            font-size: 0.9rem;
+            color: $dark-gray;
+            margin-bottom: $space-6;
+            &::after {
+                display: block;
+                width: 40px;
+                margin-top: $space-1;
+                background-color: $dark-gray;
+                content: "";
+                height: 2px;
+            }
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li {
+                display: flex;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+                padding-bottom: $space-2;
+                margin-bottom: $space-2;
+                font-size: 0.8rem;
+                color: $dark-gray;
+                border-bottom: 1px dashed $bright-gray;
+                cursor: pointer;
+                &.completed {
+                    i {
+                        color: $pink;
+                    }
+                }
+                i {
+                    font-size: 1.1rem;
+                    margin-right: $space-4;
+                    color: $dark-gray;
+                    min-width: 20px;
+                    text-align: center;
+                    &.created {
+                        color: $success;
+                    }
+                    &.need-to-create {
+                        color: $orange;   
+                    }
+                }
+                &.selected-section {
+                    color: $pink;
+                }
+            }
+        }
+    }
+}
