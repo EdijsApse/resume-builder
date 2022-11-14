@@ -1,6 +1,7 @@
 <template>
     <div class="spinner-wrapper" ref="spinner">
         <div class="spinner-grow"></div>
+        <slot></slot>
     </div>
 </template>
 
@@ -9,6 +10,7 @@
     .spinner-wrapper {
         position: absolute;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         top: 0;
@@ -19,6 +21,7 @@
         z-index: 1;
     }
     .spinner-grow {
+        min-height: 2rem;
         animation-duration: 0.7s;
         color: $pink;
     }

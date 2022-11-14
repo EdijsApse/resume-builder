@@ -28,7 +28,8 @@ const routes = [
     {
         name: 'PreviewResume',
         path: '/preview',
-        component: PreviewResumePage
+        component: PreviewResumePage,
+        meta: userOnlyMeta
     },
     {
         name: 'Home',

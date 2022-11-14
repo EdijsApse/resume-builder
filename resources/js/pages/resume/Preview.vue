@@ -54,6 +54,22 @@
                             <button class="btn btn-secondary mt-4 w-100" @click="$router.push({ name: 'CreateResume' })">Update Resume</button>
                         </div>
                     </div>
+                    <div class="col-9">
+                        <div class="preview-wrapper relative">
+                            <transition name="fade">
+                                <LoadingSpinner v-if="isLoading">
+                                    <transition name="fade" mode="out-in">
+                                        <h3 class="mt-2 loading-text" :key="loadingText">{{ loadingText }}</h3>
+                                    </transition>
+                                </LoadingSpinner>
+                            </transition>
+                            <Layout1 v-if="hasProfileCreated && !isLoading" />
+                            <div v-else-if="!hasProfileCreated && !isLoading" class="no-resume-box">
+                                <h3 class="no-resume-text">Please fill "Basic information" in Create page!</h3>
+                                <router-link :to="{ name: 'CreateResume', params: {activeComponent: 'Profile'} }" class="btn btn-primary mt-2">Add details</router-link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </template>
@@ -91,7 +107,7 @@
             },
             hasCertificates() {
                 return !!this.certificates.length;
-            },
+            }
         },
         mounted() {
             this.loadResume();
@@ -139,10 +155,28 @@
         margin-top: 4rem;
         margin-bottom: 4rem;
     }
-    .single-section-icon {
-        color: $danger;
-        &.has-filled {
-            color: $success;
+    .preview-wrapper {
+        min-height: 10rem;
+        max-width: 800px;
+        border: 1px solid #EEEEEE;
+        padding: $space-4;
+        margin-left: 5rem;
+    }
+    .loading-text {
+        color: $bright-gray;
+        font-family: $open-sans-light;
+    }
+
+    .no-resume-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .no-resume-text {
+            color: $dark-gray;
+            margin-top: $space-4;
+            font-family: $open-sans-light;
+            text-align: center;
         }
     }
 </style>
