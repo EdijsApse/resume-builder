@@ -105,5 +105,10 @@ export default {
         clearSelectedItem({ commit }) {
             commit(ADD_SELECTED_EDUCATION, null);
         }
+    },
+    getters: {
+        hasEducations(state) {
+            return state.items.length;
+        }
     }
 }

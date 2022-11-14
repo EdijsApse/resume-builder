@@ -93,5 +93,10 @@ export default {
         clearSelectedItem({ commit }) {
             commit(ADD_SELECTED_CERTIFICATE, null);
         }
+    },
+    getters: {
+        hasCertificates(state) {
+            return state.items.length;
+        }
     }
 }

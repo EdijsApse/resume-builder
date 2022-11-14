@@ -56,17 +56,22 @@
                     </div>
                     <div class="col-9">
                         <div class="preview-wrapper relative">
-                            <transition name="fade">
-                                <LoadingSpinner v-if="isLoading">
-                                    <transition name="fade" mode="out-in">
-                                        <h3 class="mt-2 loading-text" :key="loadingText">{{ loadingText }}</h3>
-                                    </transition>
-                                </LoadingSpinner>
-                            </transition>
-                            <Layout1 v-if="hasProfileCreated && !isLoading" />
-                            <div v-else-if="!hasProfileCreated && !isLoading" class="no-resume-box">
-                                <h3 class="no-resume-text">Please fill "Basic information" in Create page!</h3>
-                                <router-link :to="{ name: 'CreateResume', params: {activeComponent: 'Profile'} }" class="btn btn-primary mt-2">Add details</router-link>
+                            <div class="resume-preview">
+                                <transition name="fade">
+                                    <LoadingSpinner v-if="isLoading">
+                                        <transition name="fade" mode="out-in">
+                                            <h3 class="mt-2 loading-text" :key="loadingText">{{ loadingText }}</h3>
+                                        </transition>
+                                    </LoadingSpinner>
+                                </transition>
+                                <Layout1 v-if="hasProfileCreated && !isLoading" />
+                                <div v-else-if="!hasProfileCreated && !isLoading" class="no-resume-box">
+                                    <h3 class="no-resume-text">Please fill "Basic information" in Create page!</h3>
+                                    <router-link :to="{ name: 'CreateResume', params: {activeComponent: 'Profile'} }" class="btn btn-primary mt-2">Add details</router-link>
+                                </div>
+                            </div>
+                            <div v-if="hasProfileCreated && !isLoading" class="mt-6">
+                                <button class="btn btn-primary" @click="download">Download resume</button>
                             </div>
                         </div>
                     </div>
@@ -141,6 +146,9 @@
                     this.loadingText = '';
                     this.isLoading = false;
                 })
+            },
+            download() {
+                
             }
         },
         components: {
@@ -156,11 +164,13 @@
         margin-bottom: 4rem;
     }
     .preview-wrapper {
-        min-height: 10rem;
         max-width: 800px;
-        border: 1px solid #EEEEEE;
-        padding: $space-4;
         margin-left: 5rem;
+        .resume-preview {
+            border: 1px solid #EEEEEE;
+            min-height: 10rem;
+            padding: $space-4;
+        }
     }
     .loading-text {
         color: $bright-gray;

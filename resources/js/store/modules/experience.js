@@ -103,5 +103,10 @@ export default {
         clearSelectedItem({ commit }) {
             commit(ADD_SELECTED_EXPERIENCE, null);
         }
+    },
+    getters: {
+        hasExperiences(state) {
+            return state.items.length;
+        }
     }
 }

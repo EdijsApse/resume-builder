@@ -1,108 +1,20 @@
 <template>
     <div class="container resume-layout-container">
-        <div class="row">
-            <div class="col-4">
-                <div class="resume-photo-wrapper h-100">
-                    <div class="resume-photo">
-                        <img :src="profilePhoto" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="profile-section h-100">
-                    <h1>{{ fullName }}</h1>
-                    <h2>{{ profile.occupation }}</h2>
-                    <p>{{ profile.about }}</p>
-                </div>
-            </div>
-        </div>
+        <Header v-if="hasProfileCreated" />
         <div class="row margin-top-6">
-            <div class="col-4" v-if="hasProfileInfo">
-                <div class="contact-section">
-                    <h2>Contact</h2>
-                    <ul>
-                        <li>
-                            <div class="single-contact">
-                                <p class="contact-type">Mobile</p>
-                                <p class="contact-value">{{ profile.phone }}</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="single-contact">
-                                <p class="contact-type">Email</p>
-                                <p class="contact-value">{{ profile.email }}</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="single-contact">
-                                <p class="contact-type">Website</p>
-                                <p class="contact-value">Portfolio can be viewed <a :href="profile.link">here</a></p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="single-contact">
-                                <p class="contact-type">Address</p>
-                                <p class="contact-value">{{ profile.address }}</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            <div class="col-4" v-if="hasProfileCreated">
+                <Contacts v-if="hasProfileCreated" class="mt-6" />
             </div>
             <div class="col-8">
-                <div class="experience-section" v-if="hasExperiences">
-                    <h2>Work experience</h2>
-                    <ul>
-                        <li v-for="exp in experiences" :key="exp.id">
-                            <div class="single-experience">
-                                <p class="jobtitle">{{ exp.jobtitle }}</p>
-                                <p class="employer">{{ exp.employer }} | {{ exp.date_from | toHumanReadable }} - {{ exp.date_to | toHumanReadable }}</p>
-                                <p class="duties">{{ exp.duties }}</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="experience-section margin-top-6" v-if="hasEducation">
-                    <h2>Education</h2>
-                    <ul>
-                        <li v-for="edu in educations" :key="edu.id">
-                            <div class="single-experience">
-                                <p class="jobtitle">{{ edu.school }}</p>
-                                <p class="employer mb-0">{{ edu.degree }} | {{ edu.field }}</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="experience-section margin-top-6" v-if="hasCertificates">
-                    <h2>Additional educations</h2>
-                    <ul>
-                        <li v-for="cert in certificates" :key="cert.id">
-                            <div class="single-experience">
-                                <p class="jobtitle">{{ cert.organization }}</p>
-                                <p class="employer mb-0">Certificate | {{ cert.name }}</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="experience-section border-bottom-none" v-if="hasSkills && hasLanguages">
-                    <div class="grouped-section">
-                        <div class="skills">
-                            <h2>Skills</h2>
-                            <ul>
-                                <li v-for="skill in skills" :key="skill.id">- {{ skill.value }}</li>
-                            </ul>
-                        </div>
-                        <div class="languages">
-                            <h2>Languages</h2>
-                            <ul>
-                                <li v-for="language in resumeLangauges" :key="language.id">
-                                    <div class="single-experience">
-                                        <p class="jobtitle">{{ getLanguageTitle(language.lang) }}:</p>
-                                        <p class="employer mb-0">Proficiency: <span class="regular">{{ getLevelTitle(language.level) }}</span></p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                <Experience v-if="hasExperiences" class="mt-6" />
+
+                <Education v-if="hasEducations" class="mt-6" />
+                
+                <Certificate v-if="hasCertificates" class="mt-6" />
+
+                <div class="grouped-section" v-if="hasSkills || hasLanguages">
+                    <Skill v-if="hasSkills" class="single-group" />
+                    <Language v-if="hasLanguages" class="single-group" />
                 </div>
             </div>
         </div>
@@ -110,58 +22,42 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapGetters } from 'vuex';
+    import Header from '@components/preview/Header.vue';
+    import Contacts from '@components/preview/Contacts.vue';
+    import Experience from '@components/preview/Experience.vue';
+    import Certificate from '@components/preview/Certificate.vue';
+    import Education from '@components/preview/Education.vue';
+    import Skill from '@components/preview/Skill.vue';
+    import Language from '@components/preview/Language.vue';
 
     export default {
         computed: {
-            ...mapState('profile', ['profile', 'profilePhoto']),
-            ...mapState('certificate', {certificates: 'items'}),
-            ...mapState('education', {educations: 'items'}),
-            ...mapState('experience', {experiences: 'items'}),
-            ...mapState('hobby', {hobbies: 'items'}),
-            ...mapState('language', {resumeLangauges: 'items', levels: 'levels', languages: 'languages'}),
-            ...mapState('skill', {skills: 'items'}),
-            fullName() {
-                return `${this.profile.firstName} ${this.profile.lastName}` 
-            },
-            hasProfileInfo() {
-                return this.profile !== null;
-            },
-            hasExperiences() {
-                return this.experiences.length;
-            },
-            hasEducation() {
-                return this.educations.length;
-            },
-            hasCertificates() {
-                return this.certificates.length;
-            },
-            hasSkills() {
-                return this.skills.length;
-            },
-            hasLanguages() {
-                return this.languages.length;
-            }
+            ...mapGetters('profile', ['hasProfileCreated']),
+            ...mapGetters('skill', ['hasSkills']),
+            ...mapGetters('certificate', ['hasCertificates']),
+            ...mapGetters('education', ['hasEducations']),
+            ...mapGetters('experience', ['hasExperiences']),
+            ...mapGetters('language', ['hasLanguages'])
         },
-        methods: {
-            getLevelTitle(levelId) {
-                const selectedLevel = this.levels.find(level => level.value === levelId);
-                return selectedLevel ? selectedLevel.title : '';
-            },
-            getLanguageTitle(langId) {
-                const selectedLanguage = this.languages.find(lang => lang.value === langId);
-                return selectedLanguage ? selectedLanguage.title : '';
-            }
+        components: {
+            Header,
+            Contacts,
+            Experience,
+            Certificate,
+            Skill,
+            Language,
+            Education
         }
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     @import '@style/_variables.scss';
     @import '@style/_mixins.scss';
 
-    $layout-color-blue: #2dbabd;
     $layout-color-dark-gray: #313744;
+    $layout-color-blue: #2dbabd;
 
     .resume-layout-container {
         padding: 50px;
@@ -169,6 +65,10 @@
         color: $layout-color-dark-gray;
         .resume-photo-wrapper {
             padding: 0 $space-6 $space-6 $space-6;
+            border-bottom: 1px solid $layout-color-dark-gray;
+        }
+        .basic-details-wrapper {
+            padding-top: $space-4;
             border-bottom: 1px solid $layout-color-dark-gray;
         }
         .resume-photo {
@@ -179,10 +79,6 @@
                 height: 100%;
                 object-fit: cover;
             }
-        }
-        .profile-section {
-            padding-top: $space-4;
-            border-bottom: 1px solid $layout-color-dark-gray;
         }
         h1 {
             color: $layout-color-blue;
@@ -196,13 +92,60 @@
         p {
             font-size: 0.8rem;
         }
-        .margin-top-6 {
-            margin-top: $space-6;
+        .single-section {
+            border-bottom: 1px solid $layout-color-dark-gray;
+            padding-bottom: $space-4;
+            .section-title {
+                margin-bottom: $space-4;
+            }
         }
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        .single-list-item {
+            ul {
+                li {
+                    margin-bottom: $space-2;
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+            .item-title {
+                color: $layout-color-blue;
+                font-family: $raleway-semibold;
+                font-size: 0.8rem;
+                margin-bottom: 0;
+            }
+            .item-subtitle {
+                font-family: $raleway-bold;
+                font-size: 0.8rem;
+                margin-bottom: $space-1;
+                .regular {
+                    font-family: $raleway-regular;
+                }
+            }
+            .item-description {
+                white-space: pre-wrap;
+                font-size: 0.7rem;
+                margin-bottom: 0;
+            }
+        }
+        .grouped-section {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            .single-group {
+                &:nth-child(2) {
+                    padding-left: $space-6;
+                    border-left: 1px solid $layout-color-dark-gray;
+                }
+                h2 {
+                    margin-top: $space-6;
+                }
+                ul {
+                    li {
+                        font-size: 0.8rem;
+                        margin-bottom: 0;
+                    }
+                }
+            }
         }
         .contact-section {
             h2 {
@@ -228,63 +171,6 @@
                 }
             }
         }
-        .experience-section {
-            border-bottom: 1px solid $layout-color-dark-gray;
-            padding-bottom: $space-4;
-            &.border-bottom-none {
-                border-bottom: none;
-            }
-            h2 {
-                margin-bottom: $space-4;
-            }
-            ul {
-                li {
-                    margin-bottom: $space-2;
-                    &:last-of-type {
-                        margin-bottom: 0;
-                    }
-                }
-            }
-            .jobtitle {
-                color: $layout-color-blue;
-                font-family: $raleway-semibold;
-                font-size: 0.8rem;
-                margin-bottom: 0;
-            }
-            .employer {
-                font-family: $raleway-bold;
-                font-size: 0.8rem;
-                margin-bottom: $space-1;
-                .regular {
-                    font-family: $raleway-regular;
-                }
-            }
-            .duties {
-                white-space: pre-wrap;
-                font-size: 0.7rem;
-                margin-bottom: 0;
-            }
-            .grouped-section {
-                display: grid;
-                grid-template-columns: 50% 50%;
-                .skills {
-                    border-right: 1px solid $layout-color-dark-gray;
-                    ul {
-                        li {
-                            font-size: 0.8rem;
-                            margin-bottom: 0;
-                        }
-                    }
-                }
-                h2 {
-                    margin-top: $space-6;
-                }
-                .languages {
-                    padding-left: $space-6;
-                }
-            }
-        }
-        
     }
 
 </style>

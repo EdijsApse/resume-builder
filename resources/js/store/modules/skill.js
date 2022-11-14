@@ -39,6 +39,9 @@ export default {
     getters: {
         hasSkills(state) {
             return state.skills !== null
+        },
+        skillList(state) {
+            return state.skills.list ?? [];
         }
     }
 }

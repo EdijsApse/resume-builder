@@ -52,7 +52,7 @@
     import Certificate from '@components/resume/Certificate.vue';
     import Language from '@components/resume/Language.vue';
     import Skill from '@components/resume/Skill.vue';
-    import { mapGetters, mapState } from 'vuex';
+    import { mapGetters } from 'vuex';
 
     export default {
         data() {
@@ -67,24 +67,12 @@
             }
         },
         computed: {
-            ...mapState('education', { educations: 'items' }),
-            ...mapState('experience', { experiences: 'items' }),
-            ...mapState('language', { languages: 'items' }),
-            ...mapState('certificate', { certificates: 'items' }),
+            ...mapGetters('education', ['hasEducations']),
+            ...mapGetters('experience', ['hasExperiences']),
+            ...mapGetters('language', ['hasLanguages']),
+            ...mapGetters('certificate', ['hasCertificates']),
             ...mapGetters('profile', ['hasProfileCreated']),
-            ...mapGetters('skill', ['hasSkills']),
-            hasEducations() {
-                return !!this.educations.length;
-            },
-            hasExperiences() {
-                return !!this.experiences.length;
-            },
-            hasLanguages() {
-                return !!this.languages.length;
-            },
-            hasCertificates() {
-                return !!this.certificates.length;
-            },
+            ...mapGetters('skill', ['hasSkills'])
         },
         methods: {
             nextStep(nextComponent) {

@@ -91,5 +91,10 @@ export default {
         clearSelectedItem({ commit }) {
             commit(ADD_SELECTED_LANGUAGE, null);
         }
+    },
+    getters: {
+        hasLanguages(state) {
+            return state.items.length;
+        }
     }
 }
