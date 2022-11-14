@@ -17,6 +17,7 @@ class User extends JsonResource
         return [
             'id' => $this->id,
             'email' => $this->email,
+            'resume_link' => route('resume.preview', ['hash' => $this->hash]),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

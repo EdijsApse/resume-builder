@@ -12,6 +12,8 @@
 @import '@style/_vselect_override.scss';
 @import '@style/_animations.scss';
 
+@import '@style/layouts/_index.scss';
+
 body {
     font-family: $open-sans-regular;
     background-color: #FFF;

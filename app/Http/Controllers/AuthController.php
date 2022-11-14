@@ -18,6 +18,7 @@ class AuthController extends Controller
 
         $user = User::create([
             'email' => $validatedDate['email'],
+            'hash' => str_replace('/', '-', Hash::make($validatedDate['email'] . time())),
             'password' => Hash::make($validatedDate['password']),
         ]);
         
@@ -52,6 +53,12 @@ class AuthController extends Controller
             'token' => $token->plainTextToken,
             'success' => true
         ]);
+    }
 
+    public function refreshUser(Request $request)
+    {
+        return response()->json([
+            'user' => new UserResource($request->user()),
+        ]);
     }
 }

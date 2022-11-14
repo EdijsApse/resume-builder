@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->get('/user', 'AuthController@refreshUser');
 
 Route::middleware('auth:sanctum')->post('profile', 'UserProfileController@store');
 Route::middleware('auth:sanctum')->get('profile', 'UserProfileController@show');

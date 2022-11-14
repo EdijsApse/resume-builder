@@ -93,6 +93,7 @@
             }
         },
         computed: {
+            ...mapState('auth', ['user']),
             ...mapState('profile', ['profile']),
             ...mapState('education', { educations: 'items' }),
             ...mapState('experience', { experiences: 'items' }),
@@ -124,6 +125,7 @@
             ...mapActions('language', { loadLanguages: 'loadItems'}),
             ...mapActions('certificate', { loadCertificates: 'loadItems'}),
             ...mapActions('skill', { loadSkills: 'loadItems'}),
+            ...mapActions('alert', ['setErrorAlert']),
             async loadResume() {
                 this.isLoading = true;
                 this.loadingText = 'Loading profile!';
@@ -148,7 +150,13 @@
                 })
             },
             download() {
-                
+                const hrefEl = document.createElement('a');
+                hrefEl.setAttribute('href', this.user.resume_link);
+                hrefEl.setAttribute('target', '_BLANK');
+                hrefEl.style.display = 'none';
+                document.body.appendChild(hrefEl);
+                hrefEl.click();
+                console.log(this.user);
             }
         },
         components: {

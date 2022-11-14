@@ -43,7 +43,7 @@ export default {
                     dispatch('authorizeUser', {user, token});
                 } else {
                     dispatch('alert/setErrorAlert', error, { root:true });
-                    return Promise.reject();
+                    return Promise.reject({});
                 }
             })
             .catch(error => {
@@ -61,7 +61,7 @@ export default {
                     'Accept': 'application/json'
                 }
             }).then((response) => {
-                const user = response;
+                const { user } = response.data;
                 dispatch('authorizeUser', {user, token});
             }).catch((err) => {
                 localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
