@@ -26,7 +26,7 @@
         justify-content: flex-start;
         align-items: center;
         min-height: 100vh;
-        background-image: url('@images/bg5.png');
+        background-image: url('/images/bg5.png');
         background-size: cover;
     }
     .btn {

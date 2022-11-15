@@ -14,7 +14,7 @@
     @import '@style/_variables.scss';
 
     .page-header {
-        background-image: url('@images/bg5.png');
+        background-image: url('/images/bg5.png');
         background-position: center;
         background-size: cover;
         padding-bottom: $space-4;

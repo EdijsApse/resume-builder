@@ -32,7 +32,7 @@
                 return this.isSuccess === true ? 'Successful' : 'Attention'
             },
             alertImage() {
-                return this.isSuccess === true ? require('@images/success-alert.png') : require('@images/error-alert.png')
+                return this.isSuccess === true ? '/images/success-alert.png' : '/images/error-alert.png'
             }
         },
         methods: {

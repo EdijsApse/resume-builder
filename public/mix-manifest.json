@@ -1,4 +1,22 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/style.css": "/css/style.css"
+    "/css/style.css": "/css/style.css",
+    "/fonts/OpenSans-Bold.ttf": "/fonts/OpenSans-Bold.ttf",
+    "/fonts/OpenSans-Light.ttf": "/fonts/OpenSans-Light.ttf",
+    "/fonts/OpenSans-Regular.ttf": "/fonts/OpenSans-Regular.ttf",
+    "/fonts/OpenSans-Semibold.ttf": "/fonts/OpenSans-Semibold.ttf",
+    "/fonts/Raleway-Bold.ttf": "/fonts/Raleway-Bold.ttf",
+    "/fonts/Raleway-Light.ttf": "/fonts/Raleway-Light.ttf",
+    "/fonts/Raleway-Regular.ttf": "/fonts/Raleway-Regular.ttf",
+    "/fonts/Raleway-SemiBold.ttf": "/fonts/Raleway-SemiBold.ttf",
+    "/fonts/TitilliumWeb-Bold.ttf": "/fonts/TitilliumWeb-Bold.ttf",
+    "/fonts/TitilliumWeb-Light.ttf": "/fonts/TitilliumWeb-Light.ttf",
+    "/fonts/TitilliumWeb-Regular.ttf": "/fonts/TitilliumWeb-Regular.ttf",
+    "/fonts/TitilliumWeb-SemiBold.ttf": "/fonts/TitilliumWeb-SemiBold.ttf",
+    "/images/avatar.png": "/images/avatar.png",
+    "/images/bg5-full.png": "/images/bg5-full.png",
+    "/images/bg5.png": "/images/bg5.png",
+    "/images/error-alert.png": "/images/error-alert.png",
+    "/images/logo.png": "/images/logo.png",
+    "/images/success-alert.png": "/images/success-alert.png"
 }

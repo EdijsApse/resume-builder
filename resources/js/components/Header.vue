@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <router-link to="/" class="brand">
-                <img src="@images/logo.png" alt="My Resume logo" />
+                <img src="/images/logo.png" alt="My Resume logo" />
             </router-link>
             <button class="navbar-toggler">
                 <span class="navbar-toggler-icon"></span>

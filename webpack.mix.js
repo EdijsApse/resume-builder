@@ -16,12 +16,9 @@ mix.alias({
     '@': path.join(__dirname, 'resources/js'),
     '@style': path.join(__dirname, 'resources/sass'),
     '@components': path.join(__dirname, 'resources/js/components'),
-    '@fonts': path.join(__dirname, 'resources/assets/fonts'),
-    '@images': path.join(__dirname, 'resources/assets/images'),
 });
 
+mix.sass('resources/sass/style.scss', 'public/css').options({processCssUrls: false});
 mix.js('resources/js/app.js', 'public/js').vue();
-mix.sass('resources/sass/style.scss', 'public/css');
-
-
-
+mix.copyDirectory('resources/assets/fonts', 'public/fonts');
+mix.copyDirectory('resources/assets/images', 'public/images');

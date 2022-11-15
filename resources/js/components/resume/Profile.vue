@@ -74,7 +74,7 @@
                 file: null,
                 canRemoveSelectedPhoto: false,
                 selectedPhotoUrl: '',
-                preselectedPhoto: require('@images/avatar.png'),
+                preselectedPhoto: '/images/avatar.png',
                 name: '',
                 surname: '',
                 phone:'',
