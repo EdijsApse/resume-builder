@@ -1,12 +1,12 @@
 @if (count($educations))
     <div class="single-section mt-6">
-        <h2>Education</h2>
+        <p class="heading-2 regular">Education</p>
         <ul>
             @foreach ($educations as $edu)
                 <li>
                     <div class="single-list-item">
-                        <p class="item-title">{{ $edu->school }}</p>
-                        <p class="item-subtitle">{{ $edu->degree }} | {{ $edu->field }}</p>
+                        <p class="item-title semi-bold text-small ">{{ $edu->school }}</p>
+                        <p class="item-subtitle semi-bold text-small ">{{ $edu->degree }} | {{ $edu->field }}</p>
                     </div>
                 </li>
             @endforeach

@@ -12,9 +12,9 @@
                 <td class="spacer"></td>
                 <td class="pdf-col-8 section-border-bottom">
                     <div class="basic-details-wrapper no-border">
-                        <h1 class="tests">{{ $profile->name }} {{ $profile->surname }}</h1>
-                        <h2>{{ $profile->occupation }}</h2>
-                        <p>{{ $profile->professional_summary }}</p>
+                        <p class="heading-1 regular">{{ $profile->name }} {{ $profile->surname }}</p>
+                        <p class="heading-2 regular">{{ $profile->occupation }}</p>
+                        <p class="light text-small">{{ $profile->professional_summary }}</p>
                     </div>
                 </td>
             </tr>

@@ -6,7 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $profile->name }} {{ $profile->surname }} - Resume</title>
     <link rel="stylesheet" href="{{ public_path('css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        .semi-bold {
+            font-family: 'Raleway', sans-serif !important;
+            font-weight: 600 !important;
+        }
+        .regular {
+            font-family: 'Raleway', sans-serif !important;
+            font-weight: 400 !important;
+        }
+        .light {
+            font-family: 'Raleway', sans-serif !important;
+            font-weight: 300 !important;
+        }
         .layout-1 {
             width: 703px;
             padding: 0 !important;
@@ -42,6 +57,18 @@
         .border-left {
             padding-left: 1.5rem;
             border-left: 1px solid #313744;
+        }
+        .heading-1 {
+            font-size: 1.4rem !important;
+            color: #2dbabd !important;
+            margin-bottom: 1rem !important;
+        }
+        .heading-2 {
+            font-size: 1.3rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        .text-small {
+            font-size: 0.8rem !important;
         }
     </style>
 </head>

@@ -34,6 +34,9 @@
                                 </li>
                             </ul>
                             <button class="btn btn-secondary mt-4 w-100" @click="$router.push({ name: 'PreviewResume' })">Preview Resume</button>
+                            <div v-if="hasProfileCreated" class="mt-6">
+                                <a :href="user.resume_link" target="_BLANK" class="btn btn-primary">Download resume</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-9">
@@ -52,7 +55,7 @@
     import Certificate from '@components/resume/Certificate.vue';
     import Language from '@components/resume/Language.vue';
     import Skill from '@components/resume/Skill.vue';
-    import { mapGetters } from 'vuex';
+    import { mapGetters, mapState } from 'vuex';
 
     export default {
         data() {
@@ -67,6 +70,7 @@
             }
         },
         computed: {
+            ...mapState('auth', ['user']),
             ...mapGetters('education', ['hasEducations']),
             ...mapGetters('experience', ['hasExperiences']),
             ...mapGetters('language', ['hasLanguages']),
