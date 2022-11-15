@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                             <div v-if="hasProfileCreated && !isLoading" class="mt-6">
-                                <button class="btn btn-primary" @click="download">Download resume</button>
+                                <a :href="user.resume_link" target="_BLANK" class="btn btn-primary d-inline">Download resume</a>
                             </div>
                         </div>
                     </div>
@@ -148,15 +148,6 @@
                     this.loadingText = '';
                     this.isLoading = false;
                 })
-            },
-            download() {
-                const hrefEl = document.createElement('a');
-                hrefEl.setAttribute('href', this.user.resume_link);
-                hrefEl.setAttribute('target', '_BLANK');
-                hrefEl.style.display = 'none';
-                document.body.appendChild(hrefEl);
-                hrefEl.click();
-                console.log(this.user);
             }
         },
         components: {

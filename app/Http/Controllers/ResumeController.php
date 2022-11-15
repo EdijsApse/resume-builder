@@ -15,14 +15,14 @@ class ResumeController extends Controller
     public function index($hash)
     {
         $user = User::where(['hash' => $hash])->first();
-
+        $profile = $user->profile;
         if (!$user) {
             return redirect('/');
         }
         
         $pdf = Pdf::loadView('resume-layouts.Layout-1', [
             'user' => $user,
-            'profile' => $user->profile,
+            'profile' => $profile,
             'experiences' => $user->experiences,
             'educations' => $user->educations,
             'certificates' => $user->certificates,
@@ -30,6 +30,6 @@ class ResumeController extends Controller
             'languages' => $user->languages()->with(['language', 'level'])->get()
         ]);
 
-        return $pdf->download('invoice.pdf');
+        return $pdf->download($profile->name.' '.$profile->surname.'-Resume.pdf');
     }
 }
