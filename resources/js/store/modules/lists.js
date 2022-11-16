@@ -36,15 +36,23 @@ export default {
             await axios.get('select-lists').then(response => {
                 const { languages, language_levels } = response.data;
                 if (languages) {
-                    const languageList = vueSelectOptionList(languages);
-                    commit(ADD_LANGUAGES_LIST, languageList);
+                    commit(ADD_LANGUAGES_LIST, languages);
                 }
 
                 if (language_levels) {
-                    const levelList = vueSelectOptionList(language_levels);
-                    commit(ADD_LANGUAGE_LEVELS_LIST, levelList);
+                    commit(ADD_LANGUAGE_LEVELS_LIST, language_levels);
                 }
             });
         },
+    },
+    getters: {
+        languagesForSelect(state) {
+            const list = vueSelectOptionList(state.languages);
+            return list;
+        },
+        levelsForSelect(state) {
+            const list = vueSelectOptionList(state.language_levels);
+            return list;
+        }
     }
 }

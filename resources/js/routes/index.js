@@ -10,6 +10,8 @@ import RegisterPage from '@/pages/auth/Register.vue';
 import CreateResumePage from '@/pages/resume/Create.vue';
 import PreviewResumePage from '@/pages/resume/Preview.vue';
 
+import AdminLanguagesPage from '@/pages/admin/Languages.vue';
+
 const guestOnlyMeta = {
     guestOnly: true
 }
@@ -52,6 +54,11 @@ const routes = [
         component: RegisterPage,
         meta: guestOnlyMeta
     },
+    {
+        name: 'AdminLanguages',
+        path: '/admin/languages',
+        component: AdminLanguagesPage,
+    }
 ];
 
 const router = new VueRouter({

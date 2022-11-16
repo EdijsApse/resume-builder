@@ -18,6 +18,9 @@
                     <li class="nav-item" v-if="isSignedIn">
                         <router-link to="/preview" class="nav-link">Preview</router-link>
                     </li>
+                    <li class="nav-item" v-if="isSignedIn">
+                        <router-link to="/admin/languages" class="nav-link">Admin</router-link>
+                    </li>
                 </ul>
                 <div class="auth-action-box" v-if="!isSignedIn">
                     <router-link :to="{ name: 'Login' }" class="btn btn-primary btn-transparent">Sign in</router-link>

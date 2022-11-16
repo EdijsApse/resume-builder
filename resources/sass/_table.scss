@@ -1,0 +1,14 @@
+@import '@style/_variables.scss';
+
+.table {
+    td {
+        color: $darkish-gray;
+        vertical-align: middle;
+    }
+    th {
+        color: $dark-gray;
+    }
+    .action-cell {
+        max-width: 45px;
+    }
+}

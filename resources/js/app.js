@@ -6,6 +6,7 @@ import BaseContainer from '@components/ui/BaseContainer.vue';
 import BaseResumeItem from '@components/ui/BaseResumeItem.vue';
 import BaseListItem from '@components/ui/BaseListItem.vue';
 import BaseResumeSectionHeader from '@components/ui/BaseResumeSectionHeader.vue';
+import BaseAdminPage from '@components/ui/BaseAdminPage.vue';
 import LoadingSpinner from '@components/LoadingSpinner.vue';
 import DatePicker from 'vue2-datepicker';
 import vSelect from 'vue-select';
@@ -14,6 +15,7 @@ Vue.component('base-container', BaseContainer);
 Vue.component('base-resume-item', BaseResumeItem);
 Vue.component('base-list-item', BaseListItem);
 Vue.component('base-resume-section-header', BaseResumeSectionHeader);
+Vue.component('base-admin-page', BaseAdminPage);
 
 Vue.component('date-picker', DatePicker);
 Vue.component('v-select', vSelect);

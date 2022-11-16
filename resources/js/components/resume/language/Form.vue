@@ -32,7 +32,7 @@
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions, mapState, mapGetters } from 'vuex';
     import { FORM_ERROR_STATUS_CODE, mapInputErrors } from '@/helpers.js';
 
     export default {
@@ -47,7 +47,7 @@
         emits: ['show-list'],
         computed: {
             ...mapState('language', ['selectedItem']),
-            ...mapState('lists', ['languages', 'language_levels']),
+            ...mapGetters('lists', ['languagesForSelect', 'levelsForSelect']),
             isUpdating() {
                 return this.selectedItem !== null;
             }
