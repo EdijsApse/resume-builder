@@ -23,10 +23,21 @@
         border-radius: 5px;
         box-shadow: 0px 0px 3px 0px $bright-gray;
         margin-bottom: $space-4;
+        padding-right: 40px;
         .single-detail {
             margin-bottom: $space-2;
             &:last-of-type {
                 margin-bottom: 0;
+            }
+        }
+        .description-details {
+            font-size: 0.7rem;
+            font-weight: 300;
+            color: $darkish-gray;
+            p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
         .secondary-detail {

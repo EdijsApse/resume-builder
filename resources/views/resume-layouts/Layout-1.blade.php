@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ public_path('css/style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         html {
             padding: 0px !important;
@@ -23,7 +23,7 @@
         }
         .semi-bold {
             font-family: 'Raleway', sans-serif !important;
-            font-weight: 600 !important;
+            font-weight: 700 !important;
         }
         .regular {
             font-family: 'Raleway', sans-serif !important;

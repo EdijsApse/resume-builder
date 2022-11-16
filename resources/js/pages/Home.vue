@@ -6,16 +6,17 @@
                 <HomeFeatureList />
                 <router-link to="/create" class="btn btn-primary">Create resume</router-link>
             </div>
-            <div class="intro-form-wrapper">
-                <HomeForm />
-            </div>
         </div>
     </div>
 </template>
 
-<script setup>
-    import HomeForm from '@/components/HomeForm.vue';
+<script>
     import HomeFeatureList from '@/components/HomeFeatureList.vue';
+    export default {
+        components: {
+            HomeFeatureList        
+        }
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -31,9 +32,6 @@
     }
     .btn {
         display: inline-block;
-    }
-    .intro-form-wrapper {
-        margin-left: auto;
     }
     .intro {
         display: grid;

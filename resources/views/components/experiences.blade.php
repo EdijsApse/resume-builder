@@ -8,7 +8,7 @@
                         <p class="item-title semi-bold text-small ">{{ $exp->jobtitle }}</p>
                         <p class="item-subtitle semi-bold text-small ">{{ $exp->employer }} | {{ $exp->from }} - {{ $exp->to }}</p>
                         @if ($exp->duties)
-                            <p class="item-description light text-small ">{{ $exp->duties }}</p>
+                            <p class="item-description light text-small mb-2">{{ $exp->duties }}</p>
                         @endif
                     </div>
                 </li>

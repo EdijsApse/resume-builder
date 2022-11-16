@@ -6,6 +6,9 @@
         <div class="single-detail secondary-detail">
             <h3>{{ education.from_converted }} - {{ !education.is_current ? education.to_converted : 'Present' }}</h3>
         </div>
+        <div class="description-details" v-if="education.summary">
+            <p class="mb-0">{{ education.summary }}</p>
+        </div>
     </base-resume-item>
 </template>
 
