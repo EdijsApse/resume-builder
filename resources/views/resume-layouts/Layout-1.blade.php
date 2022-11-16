@@ -10,6 +10,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        html {
+            padding: 0px !important;
+            margin: 0 !important;
+        }
+        body {
+            padding: 50px !important;
+            margin: 0 !important;
+        }
+        .layout-1 {
+            padding: 0 !important;
+        }
         .semi-bold {
             font-family: 'Raleway', sans-serif !important;
             font-weight: 600 !important;
@@ -22,11 +33,6 @@
             font-family: 'Raleway', sans-serif !important;
             font-weight: 300 !important;
         }
-        .layout-1 {
-            width: 703px;
-            padding: 0 !important;
-            overflow: hidden
-        }
         .pdf-block {
             display: block !important;
         }
@@ -34,10 +40,11 @@
             width: 190px !important;
         }
         .pdf-col-8 {
-            width: 493px !important;
+            width: 484px !important;
+            max-width: 484px !important;
         }
         .w-50 {
-            width: 230px !important;
+            width: 242px !important;
         }
         .spacer {
             width: 20px;
@@ -54,9 +61,13 @@
         .grouped-section {
             display: block;
         }
+        .grouped-section .heading-2 {
+            margin-top: 1rem;
+        }
         .border-left {
-            padding-left: 1.5rem;
+            padding-left: 20px;
             border-left: 1px solid #313744;
+            width: 222px !important;
         }
         .heading-1 {
             font-size: 1.4rem !important;
@@ -86,7 +97,25 @@
                     <td class="pdf-col-8">
                         @component('components/experiences', ['experiences' => $experiences])@endcomponent
                         @component('components/educations', ['educations' => $educations])@endcomponent
+                    </td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td class="pdf-col-4"></td>
+                    <td class="spacer"></td>
+                    <td class="pdf-col-8">
                         @component('components/certificates', ['certificates' => $certificates])@endcomponent
+                    </td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td class="pdf-col-4"></td>
+                    <td class="spacer"></td>
+                    <td class="pdf-col-8">
                         <div class="grouped-section">
                             <table>
                                 <tr class="align-top">
