@@ -8,7 +8,6 @@
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Code</th>
-                        <th scope="col" class="action-cell"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -16,9 +15,6 @@
                         <td>{{ language.id }}</td>
                         <td>{{ language.name }}</td>
                         <td>{{ language.code }}</td>
-                        <td class="action-cell">
-                            <button class="btn btn-secondary btn-sm w-100">Edit</button>
-                        </td>
                     </tr>
                 </tbody>
             </table>

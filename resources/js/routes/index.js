@@ -11,6 +11,7 @@ import CreateResumePage from '@/pages/resume/Create.vue';
 import PreviewResumePage from '@/pages/resume/Preview.vue';
 
 import AdminLanguagesPage from '@/pages/admin/Languages.vue';
+import AdminLanguageLevels from '@/pages/admin/Levels.vue';
 
 const guestOnlyMeta = {
     guestOnly: true
@@ -58,6 +59,11 @@ const routes = [
         name: 'AdminLanguages',
         path: '/admin/languages',
         component: AdminLanguagesPage,
+    },
+    {
+        name: 'AdminLanguageLevels',
+        path: '/admin/levels',
+        component: AdminLanguageLevels,
     }
 ];
 
