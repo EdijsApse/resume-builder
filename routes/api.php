@@ -13,34 +13,37 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', 'AuthController@refreshUser');
+    
+    Route::post('profile', 'UserProfileController@store');
+    Route::get('profile', 'UserProfileController@show');
 
-Route::middleware('auth:sanctum')->get('/user', 'AuthController@refreshUser');
+    Route::get('/experiences', 'ExperienceController@index');
+    Route::post('/experience', 'ExperienceController@store');
+    Route::post('/experience/{id}', 'ExperienceController@update');
+    Route::delete('/experience/{id}', 'ExperienceController@destroy');
 
-Route::middleware('auth:sanctum')->post('profile', 'UserProfileController@store');
-Route::middleware('auth:sanctum')->get('profile', 'UserProfileController@show');
+    Route::get('/education', 'EducationController@index');
+    Route::post('/education', 'EducationController@store');
+    Route::post('/education/{id}', 'EducationController@update');
+    Route::delete('/education/{id}', 'EducationController@destroy');
 
-Route::middleware('auth:sanctum')->get('/experiences', 'ExperienceController@index');
-Route::middleware('auth:sanctum')->post('/experience', 'ExperienceController@store');
-Route::middleware('auth:sanctum')->post('/experience/{id}', 'ExperienceController@update');
-Route::middleware('auth:sanctum')->delete('/experience/{id}', 'ExperienceController@destroy');
+    Route::get('/certificates', 'CertificateController@index');
+    Route::post('/certificates', 'CertificateController@store');
+    Route::post('/certificate/{id}', 'CertificateController@update');
+    Route::delete('/certificate/{id}', 'CertificateController@destroy');
 
-Route::middleware('auth:sanctum')->get('/education', 'EducationController@index');
-Route::middleware('auth:sanctum')->post('/education', 'EducationController@store');
-Route::middleware('auth:sanctum')->post('/education/{id}', 'EducationController@update');
-Route::middleware('auth:sanctum')->delete('/education/{id}', 'EducationController@destroy');
+    Route::get('/resume-languages', 'ResumeLanguageController@index');
+    Route::post('/resume-language', 'ResumeLanguageController@store');
+    Route::post('/resume-language/{id}', 'ResumeLanguageController@update');
+    Route::delete('/resume-language/{id}', 'ResumeLanguageController@destroy');
 
-Route::middleware('auth:sanctum')->get('/certificates', 'CertificateController@index');
-Route::middleware('auth:sanctum')->post('/certificates', 'CertificateController@store');
-Route::middleware('auth:sanctum')->post('/certificate/{id}', 'CertificateController@update');
-Route::middleware('auth:sanctum')->delete('/certificate/{id}', 'CertificateController@destroy');
+    Route::get('/skills', 'SkillsController@index');
+    Route::post('/skills', 'SkillsController@store');
 
-Route::middleware('auth:sanctum')->get('/resume-languages', 'ResumeLanguageController@index');
-Route::middleware('auth:sanctum')->post('/resume-language', 'ResumeLanguageController@store');
-Route::middleware('auth:sanctum')->post('/resume-language/{id}', 'ResumeLanguageController@update');
-Route::middleware('auth:sanctum')->delete('/resume-language/{id}', 'ResumeLanguageController@destroy');
-
-Route::middleware('auth:sanctum')->get('/skills', 'SkillsController@index');
-Route::middleware('auth:sanctum')->post('/skills', 'SkillsController@store');
+    Route::post('/admin/language', 'AdminController@language');
+});
 
 Route::get('/select-lists', 'PublicController@selectLists');
 

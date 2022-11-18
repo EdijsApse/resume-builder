@@ -23,7 +23,6 @@
         },
         computed: {
             ...mapState('alert', ['message']),
-            ...mapState('auth', ['user']),
             hasAlertMessage() {
                 return this.message !== null
             }
@@ -37,16 +36,8 @@
             ...mapActions('lists', ['loadLanguagesWithLevels']),
             async prepareApp() {
                 this.isLoading = true;
-                await this.loginFromLocalStorage()
-                .then(() => {
-                    return this.loadLanguagesWithLevels()
-                })
+                await this.loadLanguagesWithLevels()
                 .finally(() => {
-                    if (this.$route.meta.guestOnly && this.user !== null) {
-                        this.$router.replace({name: 'Home'})
-                    } else if (this.$route.meta.userOnly && this.user === null) {
-                        this.$router.replace({name: 'Login'})
-                    }
                     this.isLoading = false;
                 })
             }

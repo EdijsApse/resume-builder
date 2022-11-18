@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Language;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\Language as LanguageResource;
+
+class AdminController extends Controller
+{
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function language(Request $request)
+    {
+        if (!Gate::allows('update-lists')) {
+            return response()->json([
+                'success' => false,
+                'error' => 'You are not administrator!'
+            ], 401);
+        }
+
+        $validator = Validator::make($request->post(), [
+            'name' => 'required',
+            'code' => 'required|unique:languages'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $lang = Language::create($request->post());
+
+        return response()->json([
+            'success' => true,
+            'language' => new LanguageResource($lang)
+        ]);
+    }
+}

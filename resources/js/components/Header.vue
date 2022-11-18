@@ -18,7 +18,7 @@
                     <li class="nav-item" v-if="isSignedIn">
                         <router-link to="/preview" class="nav-link">Preview</router-link>
                     </li>
-                    <li class="nav-item" v-if="isSignedIn">
+                    <li class="nav-item" v-if="isAdmin">
                         <router-link to="/admin/languages" class="nav-link" :class="[{'router-link-exact-active': isAdminPage}]">Admin</router-link>
                     </li>
                 </ul>
@@ -36,13 +36,11 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex';
+    import { mapState, mapActions, mapGetters } from 'vuex';
     export default {
         computed: {
             ...mapState('auth', ['user']),
-            isSignedIn() {
-                return this.user !== null;
-            },
+            ...mapGetters('auth', ['isSignedIn', 'isAdmin']),
             isAdminPage() {
                 return this.$route.path.includes('/admin');
             }

@@ -1,7 +1,7 @@
 <template>
     <div class="modal" @click="$emit('close-modal')">
         <div class="modal-dialog">
-            <div class="modal-content" @click.stop>
+            <div class="modal-content relative" @click.stop>
                 <div class="modal-header">
                     <h2 class="modal-title">
                         <slot name="title"></slot>

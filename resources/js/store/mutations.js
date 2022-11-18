@@ -20,6 +20,7 @@ export const SET_RESUME_SKILLS = 'SET_RESUME_SKILLS';
 
 export const ADD_USER = 'ADD_USER';
 export const ADD_TOKEN = 'ADD_TOKEN';
+export const SET_IS_USER_LOADED = 'SET_IS_USER_LOADED';
 
 export const ADD_ALERT_MESSAGE = 'ADD_ALERT_MESSAGE'
 

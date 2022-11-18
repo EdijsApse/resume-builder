@@ -1,4 +1,4 @@
-import { ADD_USER, ADD_TOKEN } from '@/store/mutations.js';
+import { ADD_USER, ADD_TOKEN, SET_IS_USER_LOADED } from '@/store/mutations.js';
 import axios from  '@/axios.js';
 
 const LOCAL_STORAGE_TOKEN_KEY = 'user_access_token';
@@ -7,7 +7,8 @@ export default {
     namespaced: true,
     state: {
         user: null,
-        token: null
+        token: null,
+        isUserLoaded:false
     },
     mutations: {
         [ADD_USER](state, user) {
@@ -15,6 +16,9 @@ export default {
         },
         [ADD_TOKEN](state, token) {
             state.token = token;
+        },
+        [SET_IS_USER_LOADED](state) {
+            state.isUserLoaded = true;
         }
     },
     actions: {
@@ -50,7 +54,7 @@ export default {
                 return Promise.reject(error);
             })
         },
-        async loginFromLocalStorage({ dispatch }) {
+        async loginFromLocalStorage({ dispatch, commit }) {
             let token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
             if (!token) {
                 return;
@@ -66,11 +70,24 @@ export default {
             }).catch((err) => {
                 localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
                 delete axios.defaults.headers.common['Authorization'];
+            }).finally(() => {
+                commit(SET_IS_USER_LOADED);
             })
         },
         logout() {
             localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
             location.reload();
+        }
+    },
+    getters: {
+        isSignedIn(state) {
+            return state.user !== null
+        },
+        isAdmin(state) {
+            if (state.user === null) {
+                return false;
+            };
+            return state.user.is_admin;
         }
     }
 }

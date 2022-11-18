@@ -44,6 +44,17 @@ export default {
                 }
             });
         },
+        async addLanguage({ commit, dispatch, state }, payload) {
+            await axios.post('/admin/language', payload).then((response) => {
+                const { success, language } = response.data;
+                if (success === true) {
+                    commit(ADD_LANGUAGES_LIST, [...state.languages, language]);
+                    dispatch('alert/setSuccessAlert', 'Language added!', { root:true });
+                }
+            }).catch(error => {
+                return Promise.reject(error);
+            })
+        }
     },
     getters: {
         languagesForSelect(state) {

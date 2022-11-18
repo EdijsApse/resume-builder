@@ -21,6 +21,10 @@ const userOnlyMeta = {
     userOnly: true
 }
 
+const adminOnlyMeta = {
+    adminOnly: true
+}
+
 const routes = [
     {
         name: 'CreateResume',
@@ -59,11 +63,13 @@ const routes = [
         name: 'AdminLanguages',
         path: '/admin/languages',
         component: AdminLanguagesPage,
+        meta: adminOnlyMeta
     },
     {
         name: 'AdminLanguageLevels',
         path: '/admin/levels',
         component: AdminLanguageLevels,
+        meta: adminOnlyMeta
     }
 ];
 
@@ -72,8 +78,18 @@ const router = new VueRouter({
     routes: routes
 });
 
-router.beforeEach((to, from, next) => {
-    if (to.meta.guestOnly === true && store.state.auth.user !== null) {
+router.beforeEach(async (to, from, next) => {
+    const isUserLoaded = store.state.auth.isUserLoaded;
+
+    if (!isUserLoaded) {
+        await store.dispatch('auth/loginFromLocalStorage');
+    }
+
+    if (to.meta.guestOnly === true && store.getters['auth/isSignedIn']) {
+        return next({ name: 'Home' });
+    } else if (to.meta.userOnly === true && !store.getters['auth/isSignedIn']) {
+        return next({ name: 'Login' });
+    } else if (to.meta.adminOnly === true && !store.getters['auth/isAdmin']) {
         return next({ name: 'Home' });
     }
     return next()
