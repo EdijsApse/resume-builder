@@ -67,6 +67,7 @@
             ...mapActions('lists', ['addLanguage']),
             async saveLanguage(event) {
                 event.preventDefault();
+                this.errors = {};
                 this.isLoading = true;
                 await this.addLanguage({
                     name: this.name,
@@ -74,6 +75,8 @@
                 })
                 .then(() => {
                     this.isModalVisible = false;
+                    this.name = '';
+                    this.code = '';
                 })
                 .catch((error) => {
                     const { response } = error;

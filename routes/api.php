@@ -43,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/skills', 'SkillsController@store');
 
     Route::post('/admin/language', 'AdminController@language');
+    Route::post('/admin/level', 'AdminController@level');
 });
 
 Route::get('/select-lists', 'PublicController@selectLists');

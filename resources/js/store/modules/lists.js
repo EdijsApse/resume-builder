@@ -54,7 +54,18 @@ export default {
             }).catch(error => {
                 return Promise.reject(error);
             })
-        }
+        },
+        async addLevel({ commit, dispatch, state }, payload) {
+            await axios.post('/admin/level', payload).then((response) => {
+                const { success, level } = response.data;
+                if (success === true) {
+                    commit(ADD_LANGUAGE_LEVELS_LIST, [...state.language_levels, level]);
+                    dispatch('alert/setSuccessAlert', 'Language level added!', { root:true });
+                }
+            }).catch(error => {
+                return Promise.reject(error);
+            })
+        },
     },
     getters: {
         languagesForSelect(state) {
