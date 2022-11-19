@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Skills</h2>
+        <h2>{{ $t('resume.skills') }}</h2>
         <ul>
             <li v-for="skill in skillList" :key="skill">- {{ skill }}</li>
         </ul>

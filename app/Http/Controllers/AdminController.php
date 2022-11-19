@@ -23,14 +23,21 @@ class AdminController extends Controller
         if (!Gate::allows('update-lists')) {
             return response()->json([
                 'success' => false,
-                'error' => 'You are not administrator!'
+                'error' => __('messages.alert.not_admin')
             ], 401);
         }
 
-        $validator = Validator::make($request->post(), [
+        $validator = Validator::make($request->post(),
+        [
             'name' => 'required',
             'code' => 'required|unique:languages'
-        ]);
+        ],
+        [
+            'name.required' => __('messages.validation.required'),
+            'code.required' => __('messages.validation.required'),
+            'code.unique' => __('messages.validation.unique')
+        ]
+        );
 
         if ($validator->fails()) {
             return response()->json([
@@ -57,13 +64,19 @@ class AdminController extends Controller
         if (!Gate::allows('update-lists')) {
             return response()->json([
                 'success' => false,
-                'error' => 'You are not administrator!'
+                'error' => __('messages.alert.not_admin')
             ], 401);
         }
 
-        $validator = Validator::make($request->post(), [
+        $validator = Validator::make($request->post(),
+        [
             'name' => 'required',
             'code' => 'required|unique:language_levels'
+        ],
+        [
+            'name.required' => __('messages.validation.required'),
+            'code.required' => __('messages.validation.required'),
+            'code.unique' => __('messages.validation.unique')
         ]);
 
         if ($validator->fails()) {

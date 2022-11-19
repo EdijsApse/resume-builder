@@ -1,5 +1,6 @@
 import { ADD_LANGUAGE_LEVELS_LIST, ADD_LANGUAGES_LIST } from '@/store/mutations.js';
 import axios from '@/axios.js';
+import i18n from '@/i18n/index.js';
 
 /**
  * Returns array of objects which is valid list for v-select components options prop
@@ -49,7 +50,7 @@ export default {
                 const { success, language } = response.data;
                 if (success === true) {
                     commit(ADD_LANGUAGES_LIST, [...state.languages, language]);
-                    dispatch('alert/setSuccessAlert', 'Language added!', { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.$t('alert.lang_item_added'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);
@@ -60,7 +61,7 @@ export default {
                 const { success, level } = response.data;
                 if (success === true) {
                     commit(ADD_LANGUAGE_LEVELS_LIST, [...state.language_levels, level]);
-                    dispatch('alert/setSuccessAlert', 'Language level added!', { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.$t('alert.lang_level_added'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);

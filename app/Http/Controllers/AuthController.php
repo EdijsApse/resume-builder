@@ -11,10 +11,20 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $validatedDate = $request->validate([
+        $validatedDate = $request->validate(
+            [
             'email' => 'required|unique:users|email',
             'password' => 'required|confirmed|min:5',
-        ]);
+            ],
+            [
+                'email.required' => __('messages.validation.required'),
+                'email.unique' => __('messages.validation.unique'),
+                'email.email' => __('messages.validation.email'),
+                'password.required' => __('messages.validation.required'),
+                'password.confirmed' => __('messages.validation.confirmed'),
+                'password.min' => __('messages.validation.min', ['min_length' => 5]),
+            ]
+        );
 
         $user = User::create([
             'email' => $validatedDate['email'],
@@ -32,17 +42,24 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $validatedDate = $request->validate([
+        $validatedDate = $request->validate(
+            [
             'email' => 'required|email',
             'password' => 'required',
-        ]);
+            ],
+            [
+                'email.required' => __('messages.validation.required'),
+                'email.email' => __('messages.validation.email'),
+                'password.required' => __('messages.validation.required'),
+            ]
+        );
 
         $user = User::firstWhere(['email' => $validatedDate['email']]);
 
         if (!$user || !Hash::check($validatedDate['password'], $user->password)) {
             return response()->json([
                 'success' => false,
-                'error' => 'Invalid credentials'
+                'error' => __('messages.alert.invalid_credentials')
             ]);
         }
 

@@ -15,6 +15,8 @@
     import Header from '@components/Header.vue';
     import { mapActions, mapState } from 'vuex';
     import AlertMessage from '@components/AlertMessage.vue'
+    import axios from '@/axios.js';
+
     export default {
         data() {
             return {
@@ -36,10 +38,18 @@
             ...mapActions('lists', ['loadLanguagesWithLevels']),
             async prepareApp() {
                 this.isLoading = true;
-                await this.loadLanguagesWithLevels()
+                await this.loadLanguagesWithLevels().then(() => {
+                    return this.loadTranslations();
+                })
                 .finally(() => {
                     this.isLoading = false;
                 })
+            },
+            async loadTranslations() {
+                await axios.get(`/messages/${this.$i18n.locale}`).then((response) => {
+                    const { messages } = response.data;
+                    this.$i18n.setLocaleMessage(this.$i18n.locale, messages);
+                });
             }
         },
         created() {

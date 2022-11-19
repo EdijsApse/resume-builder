@@ -1,6 +1,6 @@
 @if (count($educations))
     <div class="single-section mt-6">
-        <p class="heading-2 regular">Education</p>
+        <p class="heading-2 regular">{{ __('messages.resume.education') }}</p>
         <ul>
             @foreach ($educations as $edu)
                 <li>

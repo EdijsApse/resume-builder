@@ -1,6 +1,6 @@
 <template>
     <div class="single-section">
-        <h2>Education</h2>
+        <h2>{{ $t('resume.education') }}</h2>
         <ul>
             <li v-for="edu in items" :key="edu.id">
                 <div class="single-list-item">

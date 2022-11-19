@@ -1,6 +1,6 @@
 @if (count($experiences))
     <div class="single-section mt-6">
-        <p class="heading-2 regular">Work experience</p>
+        <p class="heading-2 regular">{{ __('messages.resume.work_experience') }}</p>
         <ul>
             @foreach ($experiences as $exp)
                 <li>

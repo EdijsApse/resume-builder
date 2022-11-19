@@ -1,5 +1,6 @@
 import { SET_RESUME_SKILLS } from '@/store/mutations.js';
 import axios from '@/axios.js';
+import i18n from '@/i18n/index.js';
 
 export default {
     namespaced: true,
@@ -29,10 +30,10 @@ export default {
                 const { success, skills } = response.data;
                 if (success) {
                     commit(SET_RESUME_SKILLS, skills)
-                    dispatch('alert/setSuccessAlert', 'Skills list saved!', { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.$t('alert.skill_list_saved'), { root:true });
                 }
             }).catch(err => {
-                console.log(err);
+                dispatch('alert/setSuccessAlert', i18n.$t('alert.server_error'), { root:true });
             })
         },
     },

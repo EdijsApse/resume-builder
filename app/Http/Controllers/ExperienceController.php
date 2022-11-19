@@ -24,16 +24,23 @@ class ExperienceController extends Controller
             'is_current' => 'boolean',
         ];
 
+        $messages = [
+            'jobtitle.required' => __('messages.validation.required'),
+            'employer.required' => __('messages.validation.required'),
+            'from.required' => __('messages.validation.required'),
+            'from.date' => __('messages.validation.date'),
+            'is_current.boolean' => __('messages.validation.boolean'),
+            'to.required' => __('messages.validation.required'),
+            'to.date' => __('messages.validation.date'),
+            'to.after' => __('messages.validation.date_should_be_greater_than_from_date'),
+            'to.before' => __('messages.validation.date_in_future'),
+        ];
+
         if ($request->post('is_current') != true) {
             $rules['to'] = 'required|date|after:from|before:+1month';
         }
 
-        return Validator::make($request->post(), $rules, [
-            'to.date' => 'Select valid date',
-            'to.after' => 'Date should be greater than from date',
-            'to.before' => "Select date before today's date",
-            'from.date' => 'Select valid date',
-        ]);
+        return Validator::make($request->post(), $rules, $messages);
     }
 
     /**
@@ -96,7 +103,7 @@ class ExperienceController extends Controller
         if (!$experience) {
             return response()->json([
                 'success' => false,
-                'error' => 'Experience record not found!'
+                'error' => __('messages.alert.exp_not_found')
             ], 404);
         }
 
@@ -135,7 +142,7 @@ class ExperienceController extends Controller
         if (!$experience) {
             return response()->json([
                 'success' => false,
-                'error' => 'Experience record not found!'
+                'error' => __('messages.alert.exp_not_found')
             ]);
         }
 

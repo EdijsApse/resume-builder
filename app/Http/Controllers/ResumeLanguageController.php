@@ -23,10 +23,14 @@ class ResumeLanguageController extends Controller
             'level_id' => 'required|exists:language_levels,id',
         ];
 
-        return Validator::make($request->post(), $rules, [
-            'language_id.exists' => 'Language not found!',
-            'level_id.exists' => 'Language level not found!',
-        ]);
+        $messages = [
+            'language_id.required' => __('messages.validation.required'),
+            'level_id.required' => __('messages.validation.required'),
+            'language_id.exists' => __('messages.validation.lang_not_found'),
+            'level_id.exists' =>  __('messages.validation.lang_level_not_found'),
+        ]; 
+
+        return Validator::make($request->post(), $rules, $messages);
     }
 
     /**
@@ -89,7 +93,7 @@ class ResumeLanguageController extends Controller
         if (!$language) {
             return response()->json([
                 'success' => false,
-                'error' => 'Language record not found!'
+                'error' => __('messages.alert.lang_record_not_found')
             ], 404);
         }
 
@@ -128,7 +132,7 @@ class ResumeLanguageController extends Controller
         if (!$language) {
             return response()->json([
                 'success' => false,
-                'error' => 'Language record not found!'
+                'error' => __('messages.alert.lang_record_not_found')
             ]);
         }
 

@@ -7,24 +7,24 @@
             <div class="resume-section-item">
                 <div class="form-group-row">
                     <div class="form-group">
-                        <label for="school">Name of school</label>
+                        <label for="school">{{ $t('forms.name_of_school') }}</label>
                         <input id="school" type="text" class="form-control" v-model="school" />
                         <p v-if="errors['school']" class="form-error">{{ errors['school'] }}</p>
                     </div>
                     <div class="form-group">
-                        <label for="degree">Degree (e.g Bachelor's Degree)</label>
+                        <label for="degree">{{ $t('forms.degree') }}</label>
                         <input id="degree" type="text" class="form-control" v-model="degree" />
                         <p v-if="errors['degree']" class="form-error">{{ errors['degree'] }}</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="field">Field (e.g Computer Science)</label>
+                    <label for="field">{{ $t('forms.field') }}</label>
                     <input id="field" type="text" class="form-control" v-model="field" />
                     <p v-if="errors['field']" class="form-error">{{ errors['field'] }}</p>
                 </div>
                 <div class="form-group-row">
                     <div class="form-group">
-                        <label for="from">Date from</label>
+                        <label for="from">{{ $t('forms.date_from') }}</label>
                         <date-picker
                             id="from"
                             v-model="from"
@@ -39,12 +39,12 @@
                         <p v-if="errors['from']" class="form-error">{{ errors['from'] }}</p>
                     </div>
                     <div class="form-group">
-                        <label for="to">Date to</label>
+                        <label for="to">{{ $t('forms.date_to') }}</label>
                         <date-picker
                             id="to"
                             v-model="to"
                             @change="is_current = 0"
-                            :placeholder="is_current == true ? 'Present' : ''"
+                            :placeholder="is_current == true ? this.$t('forms.present') : ''"
                             type="month"
                             :popup-style="{ top: '100%', left: 0}"
                             :append-to-body="false"
@@ -66,7 +66,7 @@
                                         true-value="1"
                                         false-value="0"
                                     >
-                                    <label class="form-check-label" for="current-school">Currently study here</label>
+                                    <label class="form-check-label" for="current-school">{{ $t('forms.currently_study_here') }}</label>
                                 </div>
                             </template>
                         </date-picker>
@@ -75,12 +75,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="summary">Short summary</label>
+                    <label for="summary">{{ $t('forms.short_summary') }}</label>
                     <textarea class="form-control" v-model="summary"></textarea>
                     <p v-if="errors['summary']" class="form-error">{{ errors['summary'] }}</p>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-6">Save</button>
+            <button type="submit" class="btn btn-primary mt-6">{{ $t('forms.save') }}</button>
         </form>
     </div>
 </template>

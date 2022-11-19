@@ -1,31 +1,31 @@
 @if ($profile)
     <div class="contact-section mt-6">
-        <p class="heading-2 regular">Contact</p>
+        <p class="heading-2 regular">{{ __('messages.resume.contact') }}</p>
         <ul>
             <li>
                 <div class="single-contact">
-                    <p class="contact-type semi-bold text-small ">Mobile</p>
+                    <p class="contact-type semi-bold text-small ">{{ __('messages.resume.mobile') }}</p>
                     <p class="contact-value light text-small ">{{ $profile->phone }}</p>
                 </div>
             </li>
             <li>
                 <div class="single-contact">
-                    <p class="contact-type semi-bold text-small ">Email</p>
+                    <p class="contact-type semi-bold text-small ">{{ __('messages.resume.email') }}</p>
                     <p class="contact-value light text-small ">{{ $user->email }}</p>
                 </div>
             </li>
             @if ($profile->website)
                 <li>
                     <div class="single-contact">
-                        <p class="contact-type semi-bold text-small ">Website</p>
-                        <p class="contact-value light text-small ">Portfolio can be viewed <a href="{{ $profile->website }}">here</a></p>
+                        <p class="contact-type semi-bold text-small ">{{ __('messages.resume.website') }}</p>
+                        <p class="contact-value light text-small ">{{ __('messages.resume.portfolio_can_be_viewed') }} <a href="{{ $profile->website }}">{{ __('messages.resume.here') }}</a></p>
                     </div>
                 </li>
             @endif
             @if ($profile->address)
                 <li>
                     <div class="single-contact">
-                        <p class="contact-type semi-bold text-small ">Address</p>
+                        <p class="contact-type semi-bold text-small ">{{ __('messages.resume.address') }}</p>
                         <p class="contact-value light text-small ">{{ $profile->address }}</p>
                     </div>
                 </li>

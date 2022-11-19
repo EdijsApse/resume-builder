@@ -6,18 +6,18 @@
         <form @submit.prevent="save">
             <div class="resume-section-item">
                 <div class="form-group">
-                    <label for="jobtitle">Jobtitle</label>
+                    <label for="jobtitle">{{ $t('forms.jobtitle') }}</label>
                     <input id="jobtitle" type="text" class="form-control" v-model="jobtitle" />
                     <p v-if="errors['jobtitle']" class="form-error">{{ errors['jobtitle'] }}</p>
                 </div>
                 <div class="form-group">
-                    <label for="employer">Employer</label>
+                    <label for="employer">{{ $t('forms.employer') }}</label>
                     <input id="employer" type="text" class="form-control" v-model="employer" />
                     <p v-if="errors['employer']" class="form-error">{{ errors['employer'] }}</p>
                 </div>
                 <div class="form-group-row">
                     <div class="form-group">
-                        <label for="from">Date from</label>
+                        <label for="from">{{ $t('forms.date_from') }}</label>
                         <date-picker
                             id="from"
                             v-model="from"
@@ -32,12 +32,12 @@
                         <p v-if="errors['from']" class="form-error">{{ errors['from'] }}</p>
                     </div>
                     <div class="form-group">
-                        <label for="to">Date to</label>
+                        <label for="to">{{ $t('forms.date_to') }}</label>
                         <date-picker
                             id="to"
                             v-model="to"
                             @change="is_current = 0"
-                            :placeholder="is_current == true ? 'Present' : ''"
+                            :placeholder="is_current == true ? this.$t('forms.present') : ''"
                             type="month"
                             :popup-style="{ top: '100%', left: 0}"
                             :append-to-body="false"
@@ -59,7 +59,7 @@
                                         true-value="1"
                                         false-value="0"
                                     >
-                                    <label class="form-check-label" for="current-employer">Currently work here</label>
+                                    <label class="form-check-label" for="current-employer">{{ $t('forms.currently_work_here') }}</label>
                                 </div>
                             </template>
                         </date-picker>
@@ -68,12 +68,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="duties">Short list or summary about your duties</label>
+                    <label for="duties">{{ $t('forms.short_list_or_summary_about_your_duties') }}</label>
                     <textarea class="form-control" v-model="duties"></textarea>
                     <p v-if="errors['duties']" class="form-error">{{ errors['duties'] }}</p>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-6">Save</button>
+            <button type="submit" class="btn btn-primary mt-6">{{ $t('forms.save') }}</button>
         </form>
     </div>
 </template>

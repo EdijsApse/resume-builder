@@ -4,7 +4,7 @@
             <h3>{{ experience.jobtitle }} at {{ experience.employer }}</h3>
         </div>
         <div class="single-detail secondary-detail">
-            <h3>{{ experience.from_converted }} - {{ !experience.is_current ? experience.to_converted : 'Present' }}</h3>
+            <h3>{{ experience.from_converted }} - {{ !experience.is_current ? experience.to_converted : this.$t('forms.present') }}</h3>
         </div>
         <div class="description-details" v-if="experience.duties">
             <p class="mb-0">{{ experience.duties }}</p>

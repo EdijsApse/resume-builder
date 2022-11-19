@@ -6,18 +6,18 @@
         <form @submit.prevent="save">
             <div class="resume-section-item">
                 <div class="form-group">
-                    <label for="name">Name of certificate</label>
+                    <label for="name">{{ $t('forms.name_of_certificate') }}</label>
                     <input id="name" type="text" class="form-control" v-model="name" />
                     <p v-if="errors['name']" class="form-error">{{ errors['name'] }}</p>
                 </div>
                 <div class="form-group-row">
                     <div class="form-group">
-                        <label for="organization">Issuing organization</label>
+                        <label for="organization">{{ $t('forms.issuing_organization') }}</label>
                         <input id="organization" type="text" class="form-control" v-model="organization" />
                         <p v-if="errors['organization']" class="form-error">{{ errors['organization'] }}</p>
                     </div>
                     <div class="form-group">
-                        <label for="issued">Issued</label>
+                        <label for="issued">{{ $t('forms.issued') }}</label>
                         <date-picker
                             id="issued"
                             v-model="issued"
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-6">Save</button>
+            <button type="submit" class="btn btn-primary mt-6">{{ $t('forms.save') }}</button>
         </form>
     </div>
 </template>

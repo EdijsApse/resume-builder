@@ -4,25 +4,25 @@
             <div class="icon">
                 <i class="fa-solid fa-pencil"></i>
             </div>
-            <p>Select CV layout which fits you the best</p>
+            <p>{{ $t('general.home_page.feature_1') }}</p>
         </li>
         <li>
             <div class="icon">
                 <i class="fa-solid fa-clipboard-list"></i>
             </div>
-            <p>Add the necessary information to make your CV look great</p>
+            <p>{{ $t('general.home_page.feature_2') }}</p>
         </li>
         <li>
             <div class="icon">
                 <i class="fa-solid fa-eye"></i>
             </div>
-            <p>Preview while you continue adding details</p>
+            <p>{{ $t('general.home_page.feature_3') }}</p>
         </li>
         <li>
             <div class="icon">
                 <i class="fa-solid fa-circle-down"></i>
             </div>
-            <p>Download and send it to your next employer</p>
+            <p>{{ $t('general.home_page.feature_4') }}</p>
         </li>
     </ul>
 </template>

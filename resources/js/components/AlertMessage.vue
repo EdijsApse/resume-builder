@@ -29,7 +29,7 @@
         computed: {
             ...mapState('alert', ['isSuccess', 'message']),
             alertTitle() {
-                return this.isSuccess === true ? 'Successful' : 'Attention'
+                return this.isSuccess === true ? this.$t('alert.successful') : this.$t('alert.attention')
             },
             alertImage() {
                 return this.isSuccess === true ? '/images/success-alert.png' : '/images/error-alert.png'

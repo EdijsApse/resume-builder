@@ -1,6 +1,6 @@
 <template>
     <base-container>
-        <template #header>Login</template>
+        <template #header>{{ $t('general.auth_pages.login') }}</template>
         <template #default>
             <div class="container">
                 <div class="row justify-content-center">
@@ -11,23 +11,23 @@
                                     <LoadingSpinner v-if="isLoading" />
                                 </transition>
                                 <div class="auth-header">
-                                    <h2>Login</h2>
-                                    <p>Sign in to download your resume</p>
+                                    <h2>{{ $t('general.auth_pages.login') }}</h2>
+                                    <p>{{ $t('general.auth_pages.login_info_text') }}</p>
                                 </div>
                                 <form @submit.prevent="signin">
                                     <div class="form-group">
-                                        <label for="email">Email</label>
+                                        <label for="email">{{ $t('resume.email') }}</label>
                                         <input id="email" type="email" class="form-control" v-model="email" />
                                         <p v-if="errors['email']" class="form-error">{{ errors['email'] }}</p>
                                     </div>
                                     <div class="form-group">
-                                        <label for="password">Password</label>
+                                        <label for="password">{{ $t('general.auth_pages.password') }}</label>
                                         <input id="password" type="password" class="form-control" v-model="password" />
                                         <p v-if="errors['password']" class="form-error">{{ errors['password'] }}</p>
                                     </div>
                                     <div class="auth-footer">
-                                        <button class="btn btn-dark btn-sm">Login</button>
-                                        <router-link :to="{ name: 'ForgetPassword' }">Forgot Your Password ?</router-link>
+                                        <button class="btn btn-dark btn-sm">{{ $t('general.auth_pages.login') }}</button>
+                                        <router-link :to="{ name: 'ForgetPassword' }">{{ $t('general.auth_pages.forgot_password') }}</router-link>
                                     </div>
                                 </form>
                             </div>

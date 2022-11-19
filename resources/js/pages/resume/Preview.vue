@@ -6,52 +6,52 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="left-sidebar">
-                            <h3>Sections</h3>
+                            <h3>{{ $t('resume.sections') }}</h3>
                             <ul>
                                 <li @click="$router.push({ name: 'CreateResume', params: {activeComponent: 'Profile'} })">
                                     <i class="fa-solid" :class="{
                                         'created fa-check': hasProfileCreated,
                                         'need-to-create fa-exclamation': !hasProfileCreated
                                     }"></i>
-                                    <span>Basic information</span>
+                                    <span>{{ $t('forms.basic_information') }}</span>
                                 </li>
                                 <li @click="$router.push({ name: 'CreateResume', params: {activeComponent: 'Experience'} })">
                                     <i class="fa-solid" :class="{
                                         'created fa-check': hasExperiences,
                                         'need-to-create fa-exclamation': !hasExperiences
                                     }"></i>
-                                    <span>Work experience</span>
+                                    <span>{{ $t('resume.work_experience') }}</span>
                                 </li>
                                 <li @click="$router.push({ name: 'CreateResume', params: {activeComponent: 'Education'} })">
                                     <i class="fa-solid" :class="{
                                         'created fa-check': hasEducations,
                                         'need-to-create fa-exclamation': !hasEducations
                                     }"></i>
-                                    <span>Education</span>
+                                   <span>{{ $t('resume.education') }}</span>
                                 </li>
                                 <li @click="$router.push({ name: 'CreateResume', params: {activeComponent: 'Certificate'} })">
                                     <i class="fa-solid" :class="{
                                         'created fa-check': hasCertificates,
                                         'need-to-create fa-exclamation': !hasCertificates
                                     }"></i>
-                                    <span>Certificate</span>
+                                    <span>{{ $t('resume.certificate') }}</span>
                                 </li>
                                 <li @click="$router.push({ name: 'CreateResume', params: {activeComponent: 'Language'} })">
                                     <i class="fa-solid" :class="{
                                         'created fa-check': hasLanguages,
                                         'need-to-create fa-exclamation': !hasLanguages
                                     }"></i>
-                                    <span>Languages</span>
+                                    <span>{{ $t('admin.languages') }}</span>
                                 </li>
                                 <li @click="$router.push({ name: 'CreateResume', params: {activeComponent: 'Skill'} })">
                                     <i class="fa-solid" :class="{
                                         'created fa-check': hasSkills,
                                         'need-to-create fa-exclamation': !hasSkills
                                     }"></i>
-                                    <span>Skills</span>
+                                    <span>{{ $t('resume.skills') }}</span>
                                 </li>
                             </ul>
-                            <button class="btn btn-secondary mt-4 w-100" @click="$router.push({ name: 'CreateResume' })">Update Resume</button>
+                            <button class="btn btn-secondary mt-4 w-100" @click="$router.push({ name: 'CreateResume' })">{{ $t('resume.update_resume') }}</button>
                         </div>
                     </div>
                     <div class="col-9">
@@ -66,12 +66,12 @@
                                 </transition>
                                 <Layout1 v-if="hasProfileCreated && !isLoading" />
                                 <div v-else-if="!hasProfileCreated && !isLoading" class="no-resume-box">
-                                    <h3 class="no-resume-text">Please fill "Basic information" in Create page!</h3>
-                                    <router-link :to="{ name: 'CreateResume', params: {activeComponent: 'Profile'} }" class="btn btn-primary mt-2">Add details</router-link>
+                                    <h3 class="no-resume-text">{{ $t('resume.please_fill_basic_information') }}</h3>
+                                    <router-link :to="{ name: 'CreateResume', params: {activeComponent: 'Profile'} }" class="btn btn-primary mt-2">{{ $t('resume.add_details') }}</router-link>
                                 </div>
                             </div>
                             <div v-if="hasProfileCreated && !isLoading" class="mt-6">
-                                <a :href="user.resume_link" target="_BLANK" class="btn btn-primary d-inline">Download resume</a>
+                                <a :href="`${user.resume_link}?lang=${$i18n.locale}`" target="_BLANK" class="btn btn-primary d-inline">{{ $t('resume.download_resume') }}</a>
                             </div>
                         </div>
                     </div>
@@ -128,21 +128,21 @@
             ...mapActions('alert', ['setErrorAlert']),
             async loadResume() {
                 this.isLoading = true;
-                this.loadingText = 'Loading profile!';
+                this.loadingText = this.$t('resume.loading_profile');
                 await this.loadUserProfile().then(() => {
-                    this.loadingText = 'Loading educations!';
+                    this.loadingText = this.$t('resume.loading_educations');
                     return this.loadEducations();
                 }).then(() => {
-                    this.loadingText = 'Loading working experiences!';
+                    this.loadingText = this.$t('resume.loading_experience');
                     return this.loadExperiences();
                 }).then(() => {
-                    this.loadingText = 'Loading languages!';
+                    this.loadingText = this.$t('resume.loading_languages');
                     return this.loadLanguages();
                 }).then(() => {
-                    this.loadingText = 'Loading certificates!';
+                    this.loadingText = this.$t('resume.loading_certificates');
                     return this.loadCertificates();
                 }).then(() => {
-                    this.loadingText = 'Loading skills!';
+                    this.loadingText = this.$t('resume.loading_skills');
                     return this.loadSkills();
                 }).finally(() => {
                     this.loadingText = '';

@@ -3,7 +3,7 @@
         <transition name="fade">
             <LoadingSpinner v-if="isLoading" />
         </transition>
-        <base-resume-section-header @close-form="closeForm" :isCloseButtonVisible="!isListVisible">Languages</base-resume-section-header>
+        <base-resume-section-header @close-form="closeForm" :isCloseButtonVisible="!isListVisible">{{ $t('admin.languages') }}</base-resume-section-header>
         <Transition name="fade" mode="out-in">
             <div v-if="isListVisible" class="mt-8">
                 <LanguageItem
@@ -14,7 +14,7 @@
                     @delete-language="deleteLanguage"
                 />
                 <AddItemPlaceholder @add-item="isListVisible = false" />
-                <button class="btn btn-primary" @click="navigateToNextStep">Next</button>
+                <button class="btn btn-primary" @click="navigateToNextStep">{{ $t('resume.next') }}</button>
             </div>
             <LanguageForm v-else @show-list="isListVisible = true" />
         </Transition>

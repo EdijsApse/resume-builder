@@ -4,7 +4,7 @@
             <h3>{{ education.degree }} / {{ education.school }}{{ education.field ? ` / ${education.field}` : '' }}</h3>
         </div>
         <div class="single-detail secondary-detail">
-            <h3>{{ education.from_converted }} - {{ !education.is_current ? education.to_converted : 'Present' }}</h3>
+            <h3>{{ education.from_converted }} - {{ !education.is_current ? education.to_converted : this.$t('forms.present') }}</h3>
         </div>
         <div class="description-details" v-if="education.summary">
             <p class="mb-0">{{ education.summary }}</p>

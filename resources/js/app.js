@@ -11,6 +11,7 @@ import BaseModal from '@components/ui/BaseModal.vue';
 import LoadingSpinner from '@components/LoadingSpinner.vue';
 import DatePicker from 'vue2-datepicker';
 import vSelect from 'vue-select';
+import i18n from '@/i18n/index.js'
 
 Vue.component('base-container', BaseContainer);
 Vue.component('base-resume-item', BaseResumeItem);
@@ -24,19 +25,10 @@ Vue.component('v-select', vSelect);
 
 Vue.component('LoadingSpinner', LoadingSpinner);
 
-Vue.filter('toHumanReadable', function (date) {
-    const newDate = new Date(date);
-    if (!newDate) return '';
-
-    return newDate.toLocaleString('en-US', {
-        month: 'long',
-        year: 'numeric'
-    });
-})
-
 new Vue({
     store,
     router,
+    i18n,
     render: function (h) {
         return h(App)
     },

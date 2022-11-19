@@ -1,7 +1,7 @@
 <template>
     <div class="add-item-placeholder" @click="$emit('add-item')">
         <i class="fa-solid fa-circle-plus"></i>
-        <p>Add more</p>
+        <p>{{ $t('forms.add_more') }}</p>
     </div>
 </template>
 

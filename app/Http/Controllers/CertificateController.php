@@ -23,9 +23,15 @@ class CertificateController extends Controller
             'issued' => 'required|date|before:+1month',
         ];
 
-        return Validator::make($request->post(), $rules, [
-            'issued.before' => "Select date before today's date"
-        ]);
+        $messages = [
+            'name.required' => __('messages.validation.required'),
+            'organization.required' => __('messages.validation.required'),
+            'issued.required' => __('messages.validation.required'),
+            'issued.before' => __('messages.validation.date_in_future'),
+            'issued.date' => __('messages.validation.date')
+        ];
+
+        return Validator::make($request->post(), $rules, $messages);
     }
 
     /**
@@ -88,7 +94,7 @@ class CertificateController extends Controller
         if (!$certificate) {
             return response()->json([
                 'success' => false,
-                'error' => 'Certificate record not found!'
+                'error' => __('messages.alert.cert_not_found')
             ], 404);
         }
 
@@ -127,7 +133,7 @@ class CertificateController extends Controller
         if (!$certificate) {
             return response()->json([
                 'success' => false,
-                'error' => 'Certificate record not found!'
+                'error' => __('messages.alert.cert_not_found')
             ]);
         }
 

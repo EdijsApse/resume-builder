@@ -30,6 +30,18 @@ class UserProfileController extends Controller
             'professional_summary' => 'required'
         ];
 
+        $messages = [
+            'name.required' => __('messages.validation.required'),
+            'surname.required' => __('messages.validation.required'),
+            'occupation.required' => __('messages.validation.required'),
+            'phone.required' => __('messages.validation.required'),
+            'address.required' => __('messages.validation.required'),
+            'professional_summary.required' => __('messages.validation.required'),
+            'website.url' => __('messages.validation.url'),
+            'image.image' => __('messages.validation.image'),
+            'image.mimes' => __('messages.validation.mimes', ['types' => 'jpeg,png,jpg']),
+        ];
+
         $userProfile = [
             'name' => $request->post('name'),
             'surname' => $request->post('surname'),

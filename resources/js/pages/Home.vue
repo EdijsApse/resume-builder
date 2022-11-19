@@ -2,9 +2,9 @@
     <div class="intro-wrapper">
         <div class="container intro">
             <div class="intro-content">
-                <h1><span class="pink">Create</span> your <br/> <span class="pink">professional</span> resume</h1>
+                <h1><span class="pink">{{ $t('general.home_page.create') }}</span> {{ $t('general.home_page.your') }} <br/> <span class="pink">{{ $t('general.home_page.professional') }}</span> {{ $t('general.home_page.resume') }}</h1>
                 <HomeFeatureList />
-                <router-link to="/create" class="btn btn-primary">Create resume</router-link>
+                <router-link to="/create" class="btn btn-primary">{{ $t('resume.create_resume') }}</router-link>
             </div>
         </div>
     </div>

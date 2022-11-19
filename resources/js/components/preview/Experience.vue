@@ -1,6 +1,6 @@
 <template>
     <div class="single-section">
-        <h2>Work experience</h2>
+        <h2>{{ $t('resume.work_experience') }}</h2>
         <ul>
             <li v-for="exp in items" :key="exp.id">
                 <div class="single-list-item">

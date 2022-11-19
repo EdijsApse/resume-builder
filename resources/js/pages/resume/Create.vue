@@ -1,41 +1,41 @@
 <template>
     <base-container>
-        <template #header>Create resume</template>
+        <template #header>{{ $t('resume.create_resume') }}</template>
         <template #default>
             <div class="container">
                 <div class="row">
                     <div class="col-3">
                         <div class="left-sidebar">
-                            <h3>Sections</h3>
+                            <h3>{{ $t('resume.sections') }}</h3>
                             <ul>
                                 <li @click="activeComponent = 'Profile'" :class="{'selected-section': activeComponent === 'Profile', 'completed': hasProfileCreated}">
                                     <i class="fa-regular fa-square-check"></i>
-                                    <span>Basic information</span>
+                                    <span>{{ $t('forms.basic_information') }}</span>
                                 </li>
                                 <li @click="activeComponent = 'Experience'" :class="{'selected-section': activeComponent === 'Experience', 'completed': hasExperiences}">
                                     <i class="fa-regular fa-square-check"></i>
-                                    <span>Work experience</span>
+                                    <span>{{ $t('resume.work_experience') }}</span>
                                 </li>
                                 <li @click="activeComponent = 'Education'" :class="{'selected-section': activeComponent === 'Education', 'completed': hasEducations}">
                                     <i class="fa-regular fa-square-check"></i>
-                                    <span>Education</span>
+                                    <span>{{ $t('resume.education') }}</span>
                                 </li>
                                 <li @click="activeComponent = 'Certificate'" :class="{'selected-section': activeComponent === 'Certificate', 'completed': hasCertificates}">
                                     <i class="fa-regular fa-square-check"></i>
-                                    <span>Certificate</span>
+                                    <span>{{ $t('resume.certificate') }}</span>
                                 </li>
                                 <li @click="activeComponent = 'Language'" :class="{'selected-section': activeComponent === 'Language', 'completed': hasLanguages}">
                                     <i class="fa-regular fa-square-check"></i>
-                                    <span>Languages</span>
+                                    <span>{{ $t('admin.languages') }}</span>
                                 </li>
                                 <li @click="activeComponent = 'Skill'" :class="{'selected-section': activeComponent === 'Skill', 'completed': hasSkills}">
                                     <i class="fa-regular fa-square-check"></i>
-                                    <span>Skills</span>
+                                    <span>{{ $t('resume.skills') }}</span>
                                 </li>
                             </ul>
-                            <button class="btn btn-secondary mt-4 w-100" @click="$router.push({ name: 'PreviewResume' })">Preview Resume</button>
+                            <button class="btn btn-secondary mt-4 w-100" @click="$router.push({ name: 'PreviewResume' })">{{ $t('resume.preview_resume') }}</button>
                             <div v-if="hasProfileCreated" class="mt-6">
-                                <a :href="user.resume_link" target="_BLANK" class="btn btn-primary">Download resume</a>
+                                <a :href="`${user.resume_link}?lang=${$i18n.locale}`" target="_BLANK" class="btn btn-primary">{{ $t('resume.download_resume') }}</a>
                             </div>
                         </div>
                     </div>

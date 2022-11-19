@@ -6,7 +6,7 @@
         <form @submit.prevent="save">
             <div class="resume-section-item">
                 <div class="form-group">
-                    <label for="language">Language</label>
+                    <label for="language">{{ $t('forms.language') }}</label>
                     <v-select
                         v-model="language_id"
                         id="language"
@@ -16,7 +16,7 @@
                     <p v-if="errors['language_id']" class="form-error">{{ errors['language_id'] }}</p>
                 </div>
                 <div class="form-group">
-                    <label for="level">Level</label>
+                    <label for="level">{{ $t('forms.level') }}</label>
                     <v-select
                         v-model="level_id"
                         id="level"
@@ -26,7 +26,7 @@
                     <p v-if="errors['level_id']" class="form-error">{{ errors['level_id'] }}</p>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-6">Save</button>
+            <button type="submit" class="btn btn-primary mt-6">{{ $t('forms.save') }}</button>
         </form>
     </div>
 </template>

@@ -1,13 +1,13 @@
 <template>
     <base-admin-page>
-        <template #header>Language levels</template>
+        <template #header>{{ $t('admin.language_levels') }}</template>
         <template>
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Code</th>
+                        <th scope="col">{{ $t('general.admin_pages.id') }}</th>
+                        <th scope="col">{{ $t('general.admin_pages.name') }}</th>
+                        <th scope="col">{{ $t('general.admin_pages.code') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -18,26 +18,26 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn btn-primary mt-6" @click="isModalVisible = true">Add level</button>
+            <button class="btn btn-primary mt-6" @click="isModalVisible = true">{{ $t('general.admin_pages.add_level') }}</button>
             <transition name="fade">
                 <base-modal @close-modal="isModalVisible = false" v-if="isModalVisible">
-                    <template #title>Add language level</template>
+                    <template #title>{{ $t('general.admin_pages.add_level') }}</template>
                     <template>
                         <transition name="fade">
                             <LoadingSpinner v-if="isLoading" />
                         </transition>
                         <form @submit="saveLanguageLevel">
                             <div class="form-group">
-                                <label for="name">Name</label>
+                                <label for="name">{{ $t('general.admin_pages.name') }}</label>
                                 <input id="name" type="text" v-model="name" class="form-control" />
                                 <p v-if="errors['name']" class="form-error">{{ errors['name'] }}</p>
                             </div>
                             <div class="form-group">
-                                <label for="code">Code</label>
+                                <label for="code">{{ $t('general.admin_pages.code') }}</label>
                                 <input id="code" type="text" v-model="code" class="form-control" />
                                 <p v-if="errors['code']" class="form-error">{{ errors['code'] }}</p>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-8 modal-action" @click="saveLanguageLevel">Save</button>
+                            <button type="submit" class="btn btn-primary mt-8 modal-action" @click="saveLanguageLevel">{{ $t('forms.save') }}</button>
                         </form>
                     </template>
                 </base-modal>

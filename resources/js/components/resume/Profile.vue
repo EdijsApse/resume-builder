@@ -3,7 +3,7 @@
         <transition name="fade">
             <LoadingSpinner v-if="isLoading" />
         </transition>
-        <base-resume-section-header :isCloseButtonVisible="false">Basic information</base-resume-section-header>
+        <base-resume-section-header :isCloseButtonVisible="false">{{ $t('forms.basic_information') }}</base-resume-section-header>
         <form @submit.prevent="save">
             <div class="profile-image-group form-group">
                 <div class="profile-image-selector">
@@ -19,44 +19,44 @@
             </div>
             <div class="form-group-row">
                 <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name">{{ $t('forms.name') }}</label>
                     <input id="name" type="text" class="form-control" v-model.trim="name" />
                     <p v-if="errors['name']" class="form-error">{{ errors['name'] }}</p>
                 </div>
                 <div class="form-group">
-                    <label for="surname">Surname</label>
+                    <label for="surname">{{ $t('forms.surname') }}</label>
                     <input id="surname" type="text" class="form-control" v-model.trim="surname" />
                     <p v-if="errors['surname']" class="form-error">{{ errors['surname'] }}</p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="occupation">Occupation</label>
+                <label for="occupation">{{ $t('forms.occupation') }}</label>
                 <input id="occupation" type="text" class="form-control" v-model.trim="occupation" />
                 <p v-if="errors['occupation']" class="form-error">{{ errors['occupation'] }}</p>
             </div>
             <div class="form-group">
-                <label for="address">Address (e.g Country and City of your location)</label>
+                <label for="address">{{ $t('forms.address_with_example') }}</label>
                 <input id="address" type="text" class="form-control" v-model.trim="address" />
                 <p v-if="errors['address']" class="form-error">{{ errors['address'] }}</p>
             </div>
             <div class="form-group-row">
                 <div class="form-group">
-                    <label for="phone">Phone</label>
+                    <label for="phone">{{ $t('forms.phone') }}</label>
                     <input id="phone" type="tel" class="form-control" v-model.trim="phone" />
                     <p v-if="errors['phone']" class="form-error">{{ errors['phone'] }}</p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="link">Website (e.g link to LinkedIn profile)</label>
+                <label for="link">{{ $t('forms.website_with_example') }}</label>
                 <input id="link" type="text" class="form-control" v-model.trim="website" />
                 <p v-if="errors['website']" class="form-error">{{ errors['website'] }}</p>
             </div>
             <div class="form-group">
-                <label for="about">Tell your next employer about yourself</label>
+                <label for="about">{{ $t('forms.about') }}</label>
                 <textarea id="about" class="form-control" v-model.trim="professional_summary"></textarea>
                 <p v-if="errors['professional_summary']" class="form-error">{{ errors['professional_summary'] }}</p>
             </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">{{ $t('forms.save') }}</button>
         </form>
     </div>
 </template>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\App;
+use Illuminate\Http\Request;
 
 class ResumeController extends Controller
 {
@@ -12,9 +14,14 @@ class ResumeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($hash)
-    {
+    public function index(Request $request, $hash)
+    {   
+        $locale = $request->query('lang') ?? config('app_default_locale');
+        
+        App::setLocale($locale);
+
         $user = User::where(['hash' => $hash])->first();
+
         $profile = $user->profile;
         if (!$user) {
             return redirect('/');

@@ -3,9 +3,9 @@
         <transition name="fade">
             <LoadingSpinner v-if="isLoading" />
         </transition>
-        <base-resume-section-header :isCloseButtonVisible="false">Skills</base-resume-section-header>
+        <base-resume-section-header :isCloseButtonVisible="false">{{ $t('resume.skills') }}</base-resume-section-header>
         
-        <p class="info-text">Choose predefined skills provided for you or add your own if none of them matches your skillset!</p>
+        <p class="info-text">{{ $t('forms.select_skills_text') }}</p>
         
         <div class="list-items-wrapper predefined-skills" v-if="suggestedSkills.length">
             <base-list-item v-for="skill in suggestedSkills" :key="skill" :canRemove="false" @item-clicked="addPredefiendSkill(skill)">
@@ -15,7 +15,7 @@
 
         <form @submit.prevent="addSkill">
             <div class="form-group">
-                <input type="text" placeholder="Enter skill" class="form-control" v-model.trim="item" />
+                <input type="text" :placeholder="$t('forms.enter_skill')" class="form-control" v-model.trim="item" />
                 <svg width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" @click="addSkill">
                     <path d="M19,6a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H7.41l1.3-1.29A1,1,0,0,0,7.29,9.29l-3,3a1,1,0,0,0-.21.33,1,1,0,0,0,0,.76,1,1,0,0,0,.21.33l3,3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L7.41,14H17a3,3,0,0,0,3-3V7A1,1,0,0,0,19,6Z"/>
                 </svg>
@@ -27,8 +27,8 @@
                 {{ skill }}
             </base-list-item>
         </div>
-        <p class="mb-0 info-text" v-else>No skills added yet.<br />Add your skill or select one of provided!</p>
-        <button type="button" class="btn btn-primary mt-6" @click="saveSkills">Save</button>
+        <p class="mb-0 info-text" v-else>{{ $t('forms.no_skills_added') }}<br />{{ $t('forms.add_your_skill_text') }}</p>
+        <button type="button" class="btn btn-primary mt-6" @click="saveSkills">{{ $t('forms.save') }}</button>
     </div>
 </template>
 
@@ -37,7 +37,7 @@
     export default {
         data() {
             return {
-                predefined_skills: ['Flexibility and Adaptability', 'Hard Working', 'Good Communication', 'Critical Thinking Skills', 'Highly responsible and reliable', 'Interpersonal Communication', 'Leadership and Teamwork', 'Customer Service Skills', 'Communication Skills', 'Analytical Skills'],
+                predefined_skills: [this.$t('resume.skill_1'), this.$t('resume.skill_2'), this.$t('resume.skill_3'), this.$t('resume.skill_4'), this.$t('resume.skill_5'), this.$t('resume.skill_6'), this.$t('resume.skill_7'), this.$t('resume.skill_8'), this.$t('resume.skill_9'), this.$t('resume.skill_10')],
                 item: '',
                 items: [],
                 isLoading: false

@@ -3,7 +3,7 @@
         <transition name="fade">
             <LoadingSpinner v-if="isLoading" />
         </transition>
-        <base-resume-section-header @close-form="closeForm" :isCloseButtonVisible="!isListVisible">Certificates</base-resume-section-header>
+        <base-resume-section-header @close-form="closeForm" :isCloseButtonVisible="!isListVisible">{{ $t('resume.certificates') }}</base-resume-section-header>
         <Transition name="fade" mode="out-in">
             <div v-if="isListVisible" class="mt-8">
                 <CertificateItem
@@ -14,7 +14,7 @@
                     @delete-certificate="deleteCertificate"
                 />
                 <AddItemPlaceholder @add-item="isListVisible = false" />
-                <button class="btn btn-primary" @click="navigateToNextStep">Next</button>
+                <button class="btn btn-primary" @click="navigateToNextStep">{{ $t('resume.next') }}</button>
             </div>
             <CertificateForm v-else @show-list="isListVisible = true" />
         </Transition>

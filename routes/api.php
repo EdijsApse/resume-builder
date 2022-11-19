@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,3 +52,12 @@ Route::get('/select-lists', 'PublicController@selectLists');
 
 Route::post('/signup', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
+
+Route::get('/messages/{locale}', function($locale) {
+    
+    App::setLocale($locale);
+
+    return response()->json([
+        'messages' => Lang::get('messages')
+    ]);
+});

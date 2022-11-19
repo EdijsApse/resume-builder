@@ -1,5 +1,6 @@
 import { ADD_BASIC_INFORMATION } from '@/store/mutations.js';
 import axios from '@/axios.js';
+import i18n from '@/i18n/index.js';
 
 export default {
     namespaced: true,
@@ -40,7 +41,7 @@ export default {
                 const { profile, success } = response.data;
                 if (success === true) {
                     commit(ADD_BASIC_INFORMATION, profile);
-                    dispatch('alert/setSuccessAlert', 'Basic information saved!', { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.$t('alert.basic_info_saved'), { root:true });
                 }
             }).catch(error => Promise.reject(error))
         }
