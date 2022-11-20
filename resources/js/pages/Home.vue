@@ -29,19 +29,25 @@
         min-height: 100vh;
         background-image: url('/images/bg5.png');
         background-size: cover;
-    }
-    .btn {
-        display: inline-block;
-    }
-    .intro {
-        display: grid;
-        grid-template-columns: 70% 30%;
-        width: 100%;
+        @media(max-width: $screen-lg) {
+            padding-top: 66px;
+            padding-bottom: 66px;
+        }
     }
     .intro-content {
         .btn {
+            display: inline-block;
             margin-top: $space-8;
             width: auto;
+            @media (max-width: $screen-lg) {
+                margin-top: $space-2;
+            }
+            @media (max-width: $screen-md) {
+                width: 100%;
+            }
+            @media (max-width: $screen-sm) {
+                margin-top: $space-6;
+            }
         }
     }
     h1 {
@@ -49,6 +55,14 @@
         color: #FFF;
         font-weight: bold;
         margin-bottom: 3rem;
+        @media (max-width: $screen-lg) {
+            font-size: 3.1rem;
+            margin-bottom: $space-6;
+        }
+        @media (max-width: $screen-sm) {
+            font-size: 2.6rem;
+            margin-bottom: $space-8;
+        }
     }
     .pink {
         color: $pink;

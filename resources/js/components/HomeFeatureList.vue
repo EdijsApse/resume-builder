@@ -27,6 +27,8 @@
     </ul>
 </template>
 
+<script></script>
+
 <style scoped lang="scss">
     @import '@style/_variables.scss';
     @import '@style/_mixins.scss';
@@ -39,12 +41,18 @@
         margin: 0;
         color: #FFF;
         max-width: 800px;
+        @media (max-width: $screen-md) {
+            display: block;
+        }
         li {
             padding: 0;
             margin: 0;
             display: flex;
             align-items: center;
             margin-bottom: $space-6;
+            @media (max-width: $screen-sm) {
+                margin-bottom: $space-4;
+            }
             .icon {
                 margin-right: $space-6;
                 background-color: $pink;
@@ -53,10 +61,21 @@
                 align-items: center;
                 justify-content: center;
                 font-size: 1.2rem;
+                @media (max-width: $screen-sm) {
+                    @include fixed-rounded-container(2.5rem);
+                    font-size: 1rem;
+                    margin-right: $space-4;
+                }
             }
             p {
                 margin: 0;
                 font-size: 1.2rem;
+                @media (max-width: $screen-lg) {
+                    font-size: 1rem;
+                }
+                @media (max-width: $screen-sm) {
+                    font-size: 0.9rem;
+                }
             }
         }
     }
