@@ -5,6 +5,11 @@
     padding: $space-4;
     max-width: 650px;
     margin-left: 5rem;
+    @media (max-width: $screen-xl) {
+        width: 100%;
+        max-width: unset;
+        margin-left: 0;
+    }
     textarea {
         min-height: 115px;
     }

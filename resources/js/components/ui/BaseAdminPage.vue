@@ -6,14 +6,20 @@
         <template name="default">
             <div class="container">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3 mobile-fixed-sidebar" ref="sidebar">
+                        <div class="close-icon" @click="$refs.sidebar.classList.remove('visible')">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
                         <AdminSidebar />
                     </div>
-                    <div class="col-9">
+                    <div class="col-12 col-lg-9">
                         <div class="admin-table-wrapper">
                             <slot></slot>
                         </div>
                     </div>
+                </div>
+                <div class="sidebar-toggler" @click="$refs.sidebar.classList.add('visible')">
+                    <i class="fa-solid fa-list"></i>
                 </div>
             </div>
         </template>
@@ -25,6 +31,11 @@
     export default {
         components: {
             AdminSidebar
+        },
+        watch: {
+            '$route': function() {
+                this.$refs.sidebar.classList.remove('visible')
+            }
         }
     }
 </script>

@@ -1,13 +1,55 @@
 @import '@style/_variables.scss';
+@import '@style/_mixins.scss';
 
 .page {
+    .mobile-fixed-sidebar {
+        @media(min-width: $screen-lg) {
+            display: block !important;
+        }
+        @media(max-width: $screen-lg) {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #FFF;
+            z-index: 9999;
+        }
+        &.visible {
+            display: block;
+        }
+    }
+    .sidebar-toggler {
+        display: none;
+        position: fixed;
+        left: 15px;
+        bottom: 15px;
+        @include fixed-rounded-container(3rem);
+        color: #FFF;
+        background-color: $pink;
+        font-size: 1.2rem;
+        @media (max-width: $screen-lg) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
     .left-sidebar {
-        padding-top: $space-4;
-        padding-right: $space-4;
+        position: relative;
+        @media (max-width: $screen-lg) {
+            padding: $space-8;
+        }
+        @media (max-width: $screen-md) {
+            padding: $space-4;
+        }
         h3 {
             font-size: 0.9rem;
             color: $dark-gray;
             margin-bottom: $space-6;
+            @media (max-width: $screen-lg) {
+                font-size: 2rem;
+            }
             &::after {
                 display: block;
                 width: 40px;
@@ -54,6 +96,23 @@
                     color: $pink;
                 }
             }
+        }
+    }
+    .close-icon {
+        display: none;
+        font-size: 2rem;
+        color: $dark-gray;
+        position: absolute;
+        right: 30px;
+        top: 30px;
+        cursor: pointer;
+        @media (max-width: $screen-lg) {
+            display: block;
+            z-index: 1;
+        }
+        @media (max-width: $screen-md) {
+            top: 15px;
+            right: 15px;
         }
     }
 }

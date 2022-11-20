@@ -4,8 +4,11 @@
         <template #default>
             <div class="container resume-preview-container">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3 mobile-fixed-sidebar" ref="sidebar">
                         <div class="left-sidebar">
+                            <div class="close-icon" @click="$refs.sidebar.classList.remove('visible')">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
                             <h3>{{ $t('resume.sections') }}</h3>
                             <ul>
                                 <li @click="$router.push({ name: 'CreateResume', params: {activeComponent: 'Profile'} })">
@@ -54,7 +57,7 @@
                             <button class="btn btn-secondary mt-4 w-100" @click="$router.push({ name: 'CreateResume' })">{{ $t('resume.update_resume') }}</button>
                         </div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-12 col-lg-9">
                         <div class="preview-wrapper relative">
                             <div class="resume-preview">
                                 <transition name="fade">
@@ -75,6 +78,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="sidebar-toggler" @click="$refs.sidebar.classList.add('visible')">
+                    <i class="fa-solid fa-list"></i>
                 </div>
             </div>
         </template>
@@ -152,6 +158,11 @@
         },
         components: {
             Layout1
+        },
+        watch: {
+            '$route': function() {
+                this.$refs.sidebar.classList.remove('visible');
+            }
         }
     }
 </script>
@@ -160,15 +171,18 @@
     @import '@style/_variables.scss';
     .resume-preview-container {
         margin-top: 4rem;
-        margin-bottom: 4rem;
     }
     .preview-wrapper {
         max-width: 800px;
         margin-left: 5rem;
+        @media (max-width: $screen-xl) {
+            width: 100%;
+            max-width: unset;
+            margin-left: 0;
+        }
         .resume-preview {
             border: 1px solid #EEEEEE;
             min-height: 10rem;
-            padding: $space-4;
         }
     }
     .loading-text {

@@ -4,8 +4,11 @@
         <template #default>
             <div class="container">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-12 col-lg-3 mobile-fixed-sidebar" ref="sidebar" >
                         <div class="left-sidebar">
+                            <div class="close-icon" @click="$refs.sidebar.classList.remove('visible')">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
                             <h3>{{ $t('resume.sections') }}</h3>
                             <ul>
                                 <li @click="activeComponent = 'Profile'" :class="{'selected-section': activeComponent === 'Profile', 'completed': hasProfileCreated}">
@@ -39,9 +42,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-12 col-lg-9">
                         <component :is="activeComponent" @next-step="nextStep" />
                     </div>
+                </div>
+                <div class="sidebar-toggler" @click="$refs.sidebar.classList.add('visible')">
+                    <i class="fa-solid fa-list"></i>
                 </div>
             </div>
         </template>
@@ -90,6 +96,14 @@
             Certificate,
             Language,
             Skill
+        },
+        watch: {
+            '$route': function() {
+                this.$refs.sidebar.classList.remove('visible');
+            },
+            'activeComponent': function() {
+                this.$refs.sidebar.classList.remove('visible');
+            }
         }
     }
 </script>
@@ -98,6 +112,5 @@
     @import "@style/_variables.scss";
     .container {
         margin-top: 4rem;
-        margin-bottom: 4rem;
     }
 </style>

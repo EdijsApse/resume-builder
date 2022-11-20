@@ -12,7 +12,9 @@
 </template>
 <style scoped lang="scss">
     @import '@style/_variables.scss';
-
+    .page {
+        padding-bottom: 4rem;
+    }
     .page-header {
         background-image: url('/images/bg5.png');
         background-position: center;
