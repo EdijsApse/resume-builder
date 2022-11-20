@@ -10,6 +10,10 @@
     &.btn-primary {
         background-color: $pink;
         border-color: $pink;
+        &:active {
+            background-color: $pink;
+            border-color: $pink;
+        }
         &:focus {
             box-shadow: none;
             background-color: $pink;

@@ -118,12 +118,12 @@ return [
             'logout' => 'Iziet'
         ],
         'home_page' => [
-            'feature_1' => 'Izvēliteies sev tīkamāko CV izkārtojumu',
+            'feature_1' => 'Izvēlieties sev tīkamāko CV izkārtojumu',
             'feature_2' => 'Pievienojiet pēc iespējas vairāk informāciju',
-            'feature_3' => 'Jebkurā brīdī apskatiet savu rezumē',
-            'feature_4' => 'Lejupielādējat savu CV un nosūtiet to savam nākamajam darba devējam',
+            'feature_3' => 'Jebkurā brīdī apskatiet savu aizpildīto rezumē',
+            'feature_4' => 'Lejupielādējat savu gatavo CV bezmaksas',
             'create' => 'Izveido',
-            'your' => 'save',
+            'your' => 'savu',
             'professional' => 'profesionālo',
             'resume' => 'rezumē',
         ],
