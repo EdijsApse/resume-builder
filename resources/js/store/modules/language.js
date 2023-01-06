@@ -39,7 +39,7 @@ export default {
                 const { success, language } = response.data;
                 if (success === true) {
                     commit(ADD_LANGUAGE, language);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.lang_added'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.lang_added'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);
@@ -50,13 +50,13 @@ export default {
                 const { success, error } = response.data;
                 if (success === true) {
                     const newList = state.items.filter(lang => lang.id != id);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.lang_deleted'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.lang_deleted'), { root:true });
                     commit(SET_LANGUAGE_LIST, newList);
                 } else if (error) {
                     dispatch('alert/setErrorAlert', error, { root:true });
                 }
             }).catch(err => {
-                dispatch('alert/setErrorAlert', i18n.$t('alert.server_error'), { root:true });
+                dispatch('alert/setErrorAlert', i18n.t('alert.server_error'), { root:true });
             });
         },
         async updateItem({ state, commit, dispatch }, language) {
@@ -77,7 +77,7 @@ export default {
                         return lang;
                     });
                     commit(SET_LANGUAGE_LIST, languages);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.lang_updated'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.lang_updated'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);

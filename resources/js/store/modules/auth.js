@@ -28,6 +28,7 @@ export default {
             localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token);
             commit(ADD_TOKEN, token);
             commit(ADD_USER, user);
+            commit(SET_IS_USER_LOADED);
         },
         async register({ dispatch }, payload) {
             const { email, password, password_confirmation } = payload;

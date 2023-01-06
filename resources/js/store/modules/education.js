@@ -45,7 +45,7 @@ export default {
                 const { success, education } = response.data;
                 if (success === true) {
                     commit(ADD_EDUCATION, education);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.edu_added'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.edu_added'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);
@@ -57,13 +57,13 @@ export default {
                 const { success, error } = response.data;
                 if (success === true) {
                     const newList = state.items.filter(edu => edu.id != id);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.edu_deleted'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.edu_deleted'), { root:true });
                     commit(SET_EDUCATION_LIST, newList);
                 } else if (error) {
                     dispatch('alert/setErrorAlert', error, { root:true });
                 }
             }).catch(err => {
-                dispatch('alert/setErrorAlert', i18n.$t('alert.server_error'), { root:true });
+                dispatch('alert/setErrorAlert', i18n.t('alert.server_error'), { root:true });
             });
         },
 
@@ -90,7 +90,7 @@ export default {
                         return edu;
                     });
                     commit(SET_EDUCATION_LIST, educations);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.edu_updated'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.edu_updated'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);

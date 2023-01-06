@@ -30,10 +30,10 @@ export default {
                 const { success, skills } = response.data;
                 if (success) {
                     commit(SET_RESUME_SKILLS, skills)
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.skill_list_saved'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.skill_list_saved'), { root:true });
                 }
             }).catch(err => {
-                dispatch('alert/setSuccessAlert', i18n.$t('alert.server_error'), { root:true });
+                dispatch('alert/setSuccessAlert', i18n.t('alert.server_error'), { root:true });
             })
         },
     },

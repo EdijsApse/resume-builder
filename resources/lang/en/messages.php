@@ -12,7 +12,7 @@ return [
         'contact' => 'Contact',
         'mobile' => 'Mobile',
         'email' => 'Email',
-        'webiste' => 'Website',
+        'website' => 'Website',
         'portfolio_can_be_viewed' => 'Portfolio can be viewed',
         'here' => 'here',
         'address' => 'Address',

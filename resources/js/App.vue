@@ -34,7 +34,6 @@
             AlertMessage
         },
         methods: {
-            ...mapActions('auth', ['loginFromLocalStorage']),
             ...mapActions('lists', ['loadLanguagesWithLevels']),
             async prepareApp() {
                 this.isLoading = true;

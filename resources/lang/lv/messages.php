@@ -12,7 +12,7 @@ return [
         'contact' => 'Kontakti',
         'mobile' => 'Telefona numurs',
         'email' => 'E-pasts',
-        'webiste' => 'Interneta addresse',
+        'website' => 'Interneta addresse',
         'portfolio_can_be_viewed' => 'Portfolio var apskatīt',
         'here' => 'šeit',
         'address' => 'Adrese',

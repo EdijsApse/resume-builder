@@ -50,7 +50,7 @@ export default {
                 const { success, language } = response.data;
                 if (success === true) {
                     commit(ADD_LANGUAGES_LIST, [...state.languages, language]);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.lang_item_added'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.lang_item_added'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);
@@ -61,7 +61,7 @@ export default {
                 const { success, level } = response.data;
                 if (success === true) {
                     commit(ADD_LANGUAGE_LEVELS_LIST, [...state.language_levels, level]);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.lang_level_added'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.lang_level_added'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);

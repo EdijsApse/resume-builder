@@ -41,7 +41,7 @@ export default {
                 const { profile, success } = response.data;
                 if (success === true) {
                     commit(ADD_BASIC_INFORMATION, profile);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.basic_info_saved'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.basic_info_saved'), { root:true });
                 }
             }).catch(error => Promise.reject(error))
         }

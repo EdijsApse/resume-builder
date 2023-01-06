@@ -40,7 +40,7 @@ export default {
                 const { success, certificate } = response.data;
                 if (success === true) {
                     commit(ADD_CERTIFICATE, certificate);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.cert_added'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.cert_added'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);
@@ -51,13 +51,13 @@ export default {
                 const { success, error } = response.data;
                 if (success === true) {
                     const newList = state.items.filter(cert => cert.id != id);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.cert_deleted'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.cert_deleted'), { root:true });
                     commit(SET_CERTIFICATE_LIST, newList);
                 } else if (error) {
                     dispatch('alert/setErrorAlert', error, { root:true });
                 }
             }).catch(err => {
-                dispatch('alert/setErrorAlert', i18n.$t('alert.server_error') , { root:true });
+                dispatch('alert/setErrorAlert', i18n.t('alert.server_error') , { root:true });
             });
         },
         async updateItem({ state, commit, dispatch }, certificate) {
@@ -79,7 +79,7 @@ export default {
                         return cert;
                     });
                     commit(SET_CERTIFICATE_LIST, certificates);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.cert_updated'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.cert_updated'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);

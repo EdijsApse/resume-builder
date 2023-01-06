@@ -45,7 +45,7 @@ export default {
                 const { success, experience } = response.data;
                 if (success === true) {
                     commit(ADD_EXPERIENCE, experience);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.exp_added'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.exp_added'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);
@@ -57,13 +57,13 @@ export default {
                 const { success, error } = response.data;
                 if (success === true) {
                     const newList = state.items.filter(exp => exp.id != id);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.exp_deleted'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.exp_deleted'), { root:true });
                     commit(SET_EXPERIENCE_LIST, newList);
                 } else if (error) {
                     dispatch('alert/setErrorAlert', error, { root:true });
                 }
             }).catch(err => {
-                dispatch('alert/setErrorAlert', i18n.$t('alert.server_error'), { root:true });
+                dispatch('alert/setErrorAlert', i18n.t('alert.server_error'), { root:true });
             });
         },
         
@@ -89,7 +89,7 @@ export default {
                         return exp;
                     });
                     commit(SET_EXPERIENCE_LIST, experiences);
-                    dispatch('alert/setSuccessAlert', i18n.$t('alert.exp_updated'), { root:true });
+                    dispatch('alert/setSuccessAlert', i18n.t('alert.exp_updated'), { root:true });
                 }
             }).catch(error => {
                 return Promise.reject(error);
