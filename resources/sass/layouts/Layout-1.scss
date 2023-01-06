@@ -46,13 +46,19 @@ $layout-color-blue: #2dbabd;
             margin-bottom: $space-4;
         }
     }
+    ul {
+        li {
+            margin-bottom: $space-2;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+    }
     .single-list-item {
-        ul {
+        .duties-list {
             li {
-                margin-bottom: $space-2;
-                &:last-of-type {
-                    margin-bottom: 0;
-                }
+                font-size: 0.8rem;
+                margin-bottom: 0;
             }
         }
         .item-title {
@@ -64,7 +70,7 @@ $layout-color-blue: #2dbabd;
         .item-subtitle {
             font-family: $raleway-bold;
             font-size: 0.8rem;
-            margin-bottom: $space-1;
+            margin-bottom: 0;
             .regular {
                 font-family: $raleway-regular;
             }

@@ -6,7 +6,9 @@
                 <div class="single-list-item">
                     <p class="item-title">{{ exp.jobtitle }}</p>
                     <p class="item-subtitle">{{ exp.employer }} | {{ exp.from_converted }} - {{ exp.to_converted }}</p>
-                    <p class="item-description" v-if="exp.duties">{{ exp.duties }}</p>
+                    <ul v-if="exp.duties && exp.duties" class="duties-list">
+                        <li v-for="duty in exp.duties" :key="duty">- {{ duty }}</li>
+                    </ul>
                 </div>
             </li>
         </ul>

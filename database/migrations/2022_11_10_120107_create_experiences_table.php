@@ -18,7 +18,6 @@ class CreateExperiencesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('employer');
             $table->string('jobtitle');
-            $table->text('duties')->nullable();
             $table->date('from');
             $table->date('to')->nullable();
             $table->boolean('is_current')->default(false);

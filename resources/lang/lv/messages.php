@@ -77,7 +77,9 @@ return [
         'no_skills_added' => 'Tavu prasmju saraksts ir tukšs',
         'add_your_skill_text' => 'Pievieno vai izvēlies kādu no prasmēm',
         'add_more' => 'Pievienot vairāk',
-        'enter_skill' => 'Ievadi prasmi'
+        'enter_skill' => 'Ievadi prasmi',
+        'add_duty' => 'Pievienot darba pienākumu',
+        'count_duties_added' => 'Pievienotie darba pienākumi - {count}'
     ],
     'alert' => [
         'successful' => 'Pabeigts',
@@ -161,6 +163,7 @@ return [
         'boolean' => 'Ievadītā vērtība nav derīga',
         'url' => 'Links nav derīgs',
         'image' => 'Fails nav derīgs',
-        'mimes' => 'Sekojošie faila tipi tiek atbalstīti - :types'
+        'mimes' => 'Sekojošie faila tipi tiek atbalstīti - :types',
+        'duties_must_be_of_type_array' => 'Pienākumu saraksts nav derīgs',
     ]
 ];

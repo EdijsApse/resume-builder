@@ -77,7 +77,9 @@ return [
         'no_skills_added' => 'No skills added yet.',
         'add_your_skill_text' => 'Add your skill or select one of provided!',
         'add_more' => 'Add more',
-        'enter_skill' => 'Enter skill'
+        'enter_skill' => 'Enter skill',
+        'add_duty' => 'Add duty',
+        'count_duties_added' => 'Duties added - {count}'
     ],
     'alert' => [
         'successful' => 'Successful',
@@ -161,6 +163,7 @@ return [
         'boolean' => 'Value is not of expected type',
         'url' => 'Not a valid URL',
         'image' => 'File is not a image',
-        'mimes' => 'Only these types :types are supported'
+        'mimes' => 'Only these types :types are supported',
+        'duties_must_be_of_type_array' => 'Duties list must be of type array'
     ]
 ];

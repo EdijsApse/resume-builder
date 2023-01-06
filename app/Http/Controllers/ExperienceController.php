@@ -22,6 +22,7 @@ class ExperienceController extends Controller
             'employer' => 'required',
             'from' => 'required|date',
             'is_current' => 'boolean',
+            'duties' => 'array'
         ];
 
         $messages = [
@@ -34,6 +35,7 @@ class ExperienceController extends Controller
             'to.date' => __('messages.validation.date'),
             'to.after' => __('messages.validation.date_should_be_greater_than_from_date'),
             'to.before' => __('messages.validation.date_in_future'),
+            'duties.array' => __('messages.validation.duties_must_be_of_type_array')
         ];
 
         if ($request->post('is_current') != true) {
