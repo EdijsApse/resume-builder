@@ -1,9 +1,17 @@
-<h1 align="center">📋 Resume Builder</h1>
+<h1 align="center">📝 Resume Builder</h1>
 
 ## 🚀 About The Project
 
 Resume Builder is a web application that allows you to create your personal resume by adding different sections, such as Work Experience, Education, and more. Data is stored in a database, so you can update your CV whenever you need to. After you have filled out every section, you can download it as a PDF document to share with your future employers.
 This project was created for personal use, but it is available for anyone who finds it useful.
+
+<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_1.png" />
+
+## 📖 Preview
+
+Few examples of UI and features.
+
+<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_2.png" width="334" />&nbsp;<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_3.png" width="334"  />&nbsp;<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_5.png" width="334" />
 
 ## 🛠 Built With
 
