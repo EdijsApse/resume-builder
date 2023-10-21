@@ -11,7 +11,8 @@ This project was created for personal use, but it is available for anyone who fi
 
 Few examples of UI and features.
 
-<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_2.png" width="334" />&nbsp;<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_3.png" width="334"  />&nbsp;<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_5.png" width="334" />
+<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_2.png" width="334" />&nbsp;&nbsp;<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_3.png" width="334" />
+<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_4.png" width="334" />&nbsp;&nbsp;<img src="https://github.com/EdijsApse/resume-builder/blob/master/public/examples/Screen_5.png" width="334" />
 
 ## 🛠 Built With
 
