@@ -58,12 +58,6 @@
         .section-border-bottom {
             border-bottom: 1px solid #313744;
         }
-        .grouped-section {
-            display: block;
-        }
-        .grouped-section .heading-2 {
-            margin-top: 1rem;
-        }
         .border-left {
             padding-left: 20px;
             border-left: 1px solid #313744;
@@ -81,6 +75,12 @@
         .text-small {
             font-size: 0.8rem !important;
         }
+        .skills-group ul li {
+            margin-top: 0 !important;
+        }
+        .mt-3 {
+            margin-top: 13px !important;
+        }
     </style>
 </head>
 <body>
@@ -91,6 +91,8 @@
                 <tr class="align-top">
                     <td class="pdf-col-4">
                         @component('components/contacts', ['profile' => $profile, 'user' => $user])@endcomponent
+                        @component('components/skills', ['skills' => $skills])@endcomponent
+                        @component('components/soft-skills', ['softSkills' => $softSkills])@endcomponent
                     </td>
                     <td class="spacer">
                     </td>
@@ -102,32 +104,13 @@
             </table>
 
             <table>
-                <tr>
-                    <td class="pdf-col-4"></td>
+                <tr class="align-top">
+                    <td class="pdf-col-4">
+                        @component('components/languages', ['languages' => $languages])@endcomponent
+                    </td>
                     <td class="spacer"></td>
                     <td class="pdf-col-8">
                         @component('components/certificates', ['certificates' => $certificates])@endcomponent
-                    </td>
-                </tr>
-            </table>
-
-            <table>
-                <tr>
-                    <td class="pdf-col-4"></td>
-                    <td class="spacer"></td>
-                    <td class="pdf-col-8">
-                        <div class="grouped-section">
-                            <table>
-                                <tr class="align-top">
-                                    <td>
-                                        @component('components/skills', ['skills' => $skills])@endcomponent
-                                    </td>
-                                    <td class="{{ $skills && count($skills->list) ? 'border-left' : '' }}">
-                                        @component('components/languages', ['languages' => $languages])@endcomponent
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
                     </td>
                 </tr>
             </table>

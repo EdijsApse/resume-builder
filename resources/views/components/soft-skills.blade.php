@@ -1,8 +1,8 @@
-@if ($skills && count($skills->list))
+@if ($softSkills && count($softSkills->list))
     <div class="contact-section mt-3 single-group skills-group">
-        <p class="heading-2 regular">{{ __('messages.resume.skills') }}</p>
+        <p class="heading-2 regular">{{ __('messages.resume.soft_skills') }}</p>
         <ul>
-            @foreach ($skills->list as $skill)
+            @foreach ($softSkills->list as $skill)
                 <li class="mt-2 light text-small ">- {{ $skill }}</li>
             @endforeach
         </ul>

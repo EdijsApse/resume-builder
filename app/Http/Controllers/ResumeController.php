@@ -30,10 +30,11 @@ class ResumeController extends Controller
         $pdf = Pdf::loadView('resume-layouts.Layout-1', [
             'user' => $user,
             'profile' => $profile,
-            'experiences' => $user->experiences,
+            'experiences' => $user->experiences->sortBy('to')->reverse(),
             'educations' => $user->educations,
             'certificates' => $user->certificates,
             'skills' => $user->skills,
+            'softSkills' => $user->softSkills,
             'languages' => $user->languages()->with(['language', 'level'])->get()
         ]);
 

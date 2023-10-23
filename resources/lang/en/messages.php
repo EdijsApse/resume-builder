@@ -12,14 +12,15 @@ return [
         'contact' => 'Contact',
         'mobile' => 'Mobile',
         'email' => 'Email',
-        'website' => 'Website',
-        'portfolio_can_be_viewed' => 'Portfolio can be viewed',
+        'website' => 'GitHub Profile',
+        'portfolio_can_be_viewed' => 'GitHub can be viewed',
         'here' => 'here',
         'address' => 'Address',
         'education' => 'Education',
         'work_experience' => 'Work experience',
         'proficiency' => 'Proficiency',
-        'skills' => 'Skills',
+        'skills' => 'Technical Skills',
+        'soft_skills' => 'Soft skills',
         'certificates' => 'Certificates',
         'next' => 'Next',
         'skill_1' => 'Flexibility and Adaptability',
@@ -32,6 +33,16 @@ return [
         'skill_8' => 'Customer Service Skills',
         'skill_9' => 'Creativity',
         'skill_10' => 'Analytical Skills',
+        'soft_skill_1' => 'Time Management',
+        'soft_skill_2' => 'Effective Communication',
+        'soft_skill_3' => 'Collaborative Teamwork',
+        'soft_skill_4' => 'Analytical Problem-Solving',
+        'soft_skill_5' => 'Adaptability and Flexibility',
+        'soft_skill_6' => 'Creative Thinking',
+        'soft_skill_7' => 'Leadership and Teamwork',
+        'soft_skill_8' => 'Critical Thinking',
+        'soft_skill_9' => 'Negotiation Skills',
+        'soft_skill_10' => 'Effective Decision-Making',
         'create_resume' => 'Create resume',
         'sections'=> 'Sections',
         'preview_resume' => 'Preview resume',
@@ -45,8 +56,10 @@ return [
         'loading_languages' => 'Loading languages!',
         'loading_certificates' => 'Loading certificates!',
         'loading_skills' => 'Loading skills!',
+        'loading_soft_skills' => 'Loading soft skills!',
         'linkedin' => 'LinkedIn profile',
-        'linkedin_profile_can_be_viewed' => 'Profile can be viewed'
+        'linkedin_profile_can_be_viewed' => 'LinkedIn can be viewed',
+        'soft_skills' => 'Soft skills'
     ],
     'forms' => [
         'name_of_certificate' => 'Name of certificate',
@@ -109,7 +122,8 @@ return [
         'cert_not_found' => 'Certificate record not found!',
         'edu_not_found' => 'Education record not found!',
         'exp_not_found' => 'Experience record not found!',
-        'lang_record_not_found' => 'Language record not found!'
+        'lang_record_not_found' => 'Language record not found!',
+        'soft_skill_list_saved' => 'Soft skill list saved'
     ],
     'general' => [
         'header' => [

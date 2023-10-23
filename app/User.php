@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Skills::class);
     }
+
+    public function softSkills()
+    {
+        return $this->hasOne(SoftSkills::class);
+    }
 }

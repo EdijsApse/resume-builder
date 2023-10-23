@@ -44,6 +44,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/skills', 'SkillsController@index');
     Route::post('/skills', 'SkillsController@store');
 
+    Route::get('/soft-skills', 'SoftSkillsController@index');
+    Route::post('/soft-skills', 'SoftSkillsController@store');
+
     Route::post('/admin/language', 'AdminController@language');
     Route::post('/admin/level', 'AdminController@level');
 });

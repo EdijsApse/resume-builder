@@ -1,5 +1,5 @@
-@import '@style/_variables.scss';
-@import '@style/_mixins.scss';
+@import "@style/_variables.scss";
+@import "@style/_mixins.scss";
 
 $layout-color-dark-gray: #313744;
 $layout-color-blue: #2dbabd;
@@ -81,22 +81,14 @@ $layout-color-blue: #2dbabd;
             margin-bottom: 0;
         }
     }
-    .grouped-section {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        .single-group {
-            &:nth-child(2) {
-                padding-left: $space-6;
-                border-left: 1px solid $layout-color-dark-gray;
-            }
-            h2 {
-                margin-top: $space-6;
-            }
-            ul {
-                li {
-                    font-size: 0.8rem;
-                    margin-bottom: 0;
-                }
+    .single-group {
+        h2 {
+            margin-top: $space-6;
+        }
+        ul {
+            li {
+                font-size: 0.8rem;
+                margin-top: 0.5rem;
             }
         }
     }

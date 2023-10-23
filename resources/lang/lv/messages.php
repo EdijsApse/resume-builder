@@ -13,13 +13,14 @@ return [
         'mobile' => 'Telefona numurs',
         'email' => 'E-pasts',
         'website' => 'Interneta addresse',
-        'portfolio_can_be_viewed' => 'Portfolio var apskatīt',
+        'portfolio_can_be_viewed' => 'GitHub var apskatīt',
         'here' => 'šeit',
         'address' => 'Adrese',
         'education' => 'Izglītība',
         'work_experience' => 'Darba pieredze',
         'proficiency' => 'Zināšana līmenis',
         'skills' => 'Prasmes',
+        'soft_skills' => 'Soft skills',
         'certificates' => 'Sertifikāti',
         'next' => 'Tālāk',
         'skill_1' => 'Spēja pielāgoties',
@@ -32,6 +33,16 @@ return [
         'skill_8' => 'labas klientu apkalpošanas prasmes',
         'skill_9' => 'Radošs',
         'skill_10' => 'Analītiskā domāšana',
+        'soft_skill_1' => 'Laika plānošana',
+        'soft_skill_2' => 'Efektīva komunikācija',
+        'soft_skill_3' => 'Sadarbības spējas komandā',
+        'soft_skill_4' => 'Analītiskā problēmu risināšana',
+        'soft_skill_5' => 'Pielāgojamība un elastība',
+        'soft_skill_6' => 'Laika plānošana',
+        'soft_skill_7' => 'Vadība un motivācija',
+        'soft_skill_8' => 'Kritiskā domāšana',
+        'soft_skill_9' => 'Sarunu vešana',
+        'soft_skill_10' => 'Efektīvu lēmumu pieņemšana',
         'create_resume' => 'Izveidot rezumē',
         'sections'=> 'Sadaļas',
         'preview_resume' => 'Apskatīt rezumē',
@@ -45,8 +56,10 @@ return [
         'loading_languages' => 'Apstrādā ierakstus par valodu prasmēm!',
         'loading_certificates' => 'Apstrādā ierakstus par sertifikātiem!',
         'loading_skills' => 'Apstrādā ierakstus par papildus prasmēm!',
+        'loading_soft_skills' => 'Loading soft skills!',
         'linkedin' => 'LinkedIn profils',
-        'linkedin_profile_can_be_viewed' => 'Profilu var apskatīt'
+        'linkedin_profile_can_be_viewed' => 'Profilu var apskatīt',
+        'soft_skills' => 'Soft skills'
     ],
     'forms' => [
         'name_of_certificate' => 'Sertifikāta nosaukums',
@@ -109,7 +122,8 @@ return [
         'cert_not_found' => 'Ieraksts par sertifikātu nav atrasts!',
         'edu_not_found' => 'Ieraksts par izglītību nav atrasts!',
         'exp_not_found' => 'Ieraksts par darba pieredzi nav atrasts!',
-        'lang_record_not_found' => 'Ieraksts par valodas prasmi nav atrasts!'
+        'lang_record_not_found' => 'Ieraksts par valodas prasmi nav atrasts!',
+        'soft_skill_list_saved' => 'Soft skill list saved'
     ],
     'general' => [
         'header' => [
