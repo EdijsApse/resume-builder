@@ -22,6 +22,14 @@
                     </div>
                 </li>
             @endif
+            @if ($profile->linkedin_url)
+                <li>
+                    <div class="single-contact">
+                        <p class="contact-type semi-bold text-small ">{{ __('messages.resume.linkedin') }}</p>
+                        <p class="contact-value light text-small ">{{ __('messages.resume.linkedin_profile_can_be_viewed') }} <a href="{{ $profile->linkedin_url }}">{{ __('messages.resume.here') }}</a></p>
+                    </div>
+                </li>
+            @endif
             @if ($profile->address)
                 <li>
                     <div class="single-contact">

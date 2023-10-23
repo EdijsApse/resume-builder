@@ -44,7 +44,9 @@ return [
         'loading_experience' => 'Loading working experiences!',
         'loading_languages' => 'Loading languages!',
         'loading_certificates' => 'Loading certificates!',
-        'loading_skills' => 'Loading skills!'
+        'loading_skills' => 'Loading skills!',
+        'linkedin' => 'LinkedIn profile',
+        'linkedin_profile_can_be_viewed' => 'Profile can be viewed'
     ],
     'forms' => [
         'name_of_certificate' => 'Name of certificate',
@@ -71,7 +73,8 @@ return [
         'occupation' => 'Occupation',
         'address_with_example' => "Address (e.g Country and City of your location)",
         'phone' => 'Phone',
-        'website_with_example' => "Website (e.g link to LinkedIn profile)",
+        'linkedin_url' => 'Link to Your LinkedIn profile',
+        'website_with_example' => "Website (e.g link to GitHub profile)",
         'about' => 'Tell your next employer about yourself',
         'select_skills_text' => 'Choose predefined skills provided for you or add your own if none of them matches your skillset!',
         'no_skills_added' => 'No skills added yet.',

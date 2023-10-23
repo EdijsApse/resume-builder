@@ -44,7 +44,9 @@ return [
         'loading_experience' => 'Apstrādā ierakstus par darba pieredzi!',
         'loading_languages' => 'Apstrādā ierakstus par valodu prasmēm!',
         'loading_certificates' => 'Apstrādā ierakstus par sertifikātiem!',
-        'loading_skills' => 'Apstrādā ierakstus par papildus prasmēm!'
+        'loading_skills' => 'Apstrādā ierakstus par papildus prasmēm!',
+        'linkedin' => 'LinkedIn profils',
+        'linkedin_profile_can_be_viewed' => 'Profilu var apskatīt'
     ],
     'forms' => [
         'name_of_certificate' => 'Sertifikāta nosaukums',
@@ -71,7 +73,8 @@ return [
         'occupation' => 'Profesija',
         'address_with_example' => "Adrese (piem. Pilsētas un Valsts nosaukums)",
         'phone' => 'Telefona numurs',
-        'website_with_example' => "Interneta adrese (piem. Saite uz LinkedIn profilu)",
+        'website_with_example' => "Interneta adrese (piem. Saite uz GitHub profilu)",
+        'linkedin_url' => 'Saite uz Jūsu LinkedIn profilu',
         'about' => 'Pastāsti dažos vārdos par sevi',
         'select_skills_text' => 'Izvēlies kādu prasmi no saraksta, vai ievadi savu, ja nevari atrast prasmi kas apraksta Tevi!',
         'no_skills_added' => 'Tavu prasmju saraksts ir tukšs',

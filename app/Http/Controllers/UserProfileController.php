@@ -56,6 +56,11 @@ class UserProfileController extends Controller
             $userProfile['website'] = $request->post('website');
         }
 
+        if ($request->post('linkedin_url')) {
+            $validationRules['linkedin_url'] = 'url';
+            $userProfile['linkedin_url'] = $request->post('linkedin_url');
+        }
+
         if (!$hasProfile || $request->file('image')) {
             $validationRules['image'] = 'image|mimes:jpeg,png,jpg';
         }

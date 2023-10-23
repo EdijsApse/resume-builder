@@ -1,6 +1,6 @@
-import { ADD_BASIC_INFORMATION } from '@/store/mutations.js';
-import axios from '@/axios.js';
-import i18n from '@/i18n/index.js';
+import { ADD_BASIC_INFORMATION } from "@/store/mutations.js";
+import axios from "@/axios.js";
+import i18n from "@/i18n/index.js";
 
 export default {
     namespaced: true,
@@ -10,45 +10,58 @@ export default {
     mutations: {
         [ADD_BASIC_INFORMATION](state, profile) {
             state.profile = profile;
-        }
+        },
     },
     actions: {
         async loadUserProfile({ commit, getters }) {
             if (!getters.hasProfileCreated) {
-                await axios.get('/profile').then((response) => {
+                await axios.get("/profile").then((response) => {
                     const { profile } = response.data;
-                    commit(ADD_BASIC_INFORMATION, profile)
-                })
+                    commit(ADD_BASIC_INFORMATION, profile);
+                });
             }
         },
         async saveUserProfile({ commit, dispatch }, payload) {
             const formData = new FormData();
 
-            formData.append('name', payload.name);
-            formData.append('surname', payload.surname);
-            formData.append('phone', payload.phone);
-            formData.append('occupation', payload.occupation);
-            formData.append('professional_summary', payload.professional_summary);
-            formData.append('address', payload.address);
-            formData.append('image', payload.file);
+            formData.append("name", payload.name);
+            formData.append("surname", payload.surname);
+            formData.append("phone", payload.phone);
+            formData.append("occupation", payload.occupation);
+            formData.append(
+                "professional_summary",
+                payload.professional_summary
+            );
+            formData.append("address", payload.address);
+            formData.append("image", payload.file);
 
             if (payload.website) {
-                formData.append('website', payload.website);
+                formData.append("website", payload.website);
             }
 
-            await axios.post('/profile', formData)
-            .then((response) => {
-                const { profile, success } = response.data;
-                if (success === true) {
-                    commit(ADD_BASIC_INFORMATION, profile);
-                    dispatch('alert/setSuccessAlert', i18n.t('alert.basic_info_saved'), { root:true });
-                }
-            }).catch(error => Promise.reject(error))
-        }
+            if (payload.linkedin_url) {
+                formData.append("linkedin_url", payload.linkedin_url);
+            }
+
+            await axios
+                .post("/profile", formData)
+                .then((response) => {
+                    const { profile, success } = response.data;
+                    if (success === true) {
+                        commit(ADD_BASIC_INFORMATION, profile);
+                        dispatch(
+                            "alert/setSuccessAlert",
+                            i18n.t("alert.basic_info_saved"),
+                            { root: true }
+                        );
+                    }
+                })
+                .catch((error) => Promise.reject(error));
+        },
     },
     getters: {
         hasProfileCreated(state) {
-            return state.profile !== null
-        }
-    }
-}
+            return state.profile !== null;
+        },
+    },
+};
