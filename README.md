@@ -36,8 +36,9 @@ Follow the instructions to setup this project locally!
 2. Run `composer install` and install any necessary PHP extensions
 3. Run `npm install` to install node packages.
 4. Create a copy from example.env and rename it to .env
-5. Run `php artisan key:generate` to generate encryption key
-6. Run `php artisan storage:link` to generate storage link
-7. Create a database and change DB_DATABASE, DB_USER and DB_PASSWORD values in .env file
-8. Run `php artisan:migrate` to create database
-9. Run `npm run dev` to build assets
+5. Create folder name **fonts** under **storage** folder
+6. Run `php artisan key:generate` to generate encryption key
+7. Run `php artisan storage:link` to generate storage link
+8. Create a database and change **DB_DATABASE**, **DB_USER** and **DB_PASSWORD** values in .env file
+9. Run `php artisan:migrate` to create database
+10. Run `npm run dev` to build assets
